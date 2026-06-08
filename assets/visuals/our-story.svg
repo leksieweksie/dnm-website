@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="480" viewBox="0 0 600 480" role="img" aria-label="DNM story">
+  <rect width="600" height="480" fill="#E8F5EC"/>
+  <circle cx="105" cy="110" r="115" fill="#3FAE5A" opacity=".22"/>
+  <circle cx="505" cy="390" r="145" fill="#1F6B3A" opacity=".18"/>
+  <path d="M120 330c90-120 192-150 306-90 38 20 68 47 92 80" fill="none" stroke="#1F6B3A" stroke-width="12" stroke-linecap="round"/>
+  <path d="M270 185c-55 15-88 47-98 96 58-1 96-31 114-90" fill="#3FAE5A"/>
+  <path d="M316 165c62 17 98 55 110 112-66-4-109-39-130-105" fill="#0F2E1A"/>
+  <text x="300" y="405" text-anchor="middle" fill="#1F6B3A" font-family="Arial, sans-serif" font-size="42" font-weight="700">Our Story</text>
+</svg>

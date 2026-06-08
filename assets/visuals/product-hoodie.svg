@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" role="img" aria-label="DNM Hoodie">
+  <rect width="400" height="300" fill="#0F2E1A"/>
+  <path d="M139 84c16-29 106-29 122 0l54 52-38 43-21-19v86H144v-86l-21 19-38-43z" fill="#3FAE5A"/>
+  <path d="M170 82c7 29 53 29 60 0" fill="none" stroke="#0F2E1A" stroke-width="12" stroke-linecap="round"/>
+  <text x="200" y="181" text-anchor="middle" fill="#0F2E1A" font-family="Arial, sans-serif" font-size="34" font-weight="700">DNM</text>
+  <text x="200" y="264" text-anchor="middle" fill="#3FAE5A" font-family="Arial, sans-serif" font-size="26" font-weight="700">DNM Hoodie</text>
+</svg>

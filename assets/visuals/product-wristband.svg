@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" role="img" aria-label="DNM Wristband">
+  <rect width="400" height="300" fill="#1F6B3A"/>
+  <ellipse cx="200" cy="145" rx="128" ry="62" fill="none" stroke="#E8F5EC" stroke-width="26"/>
+  <ellipse cx="200" cy="145" rx="90" ry="34" fill="#1F6B3A"/>
+  <text x="200" y="154" text-anchor="middle" fill="#E8F5EC" font-family="Arial, sans-serif" font-size="28" font-weight="700">DNM</text>
+  <text x="200" y="264" text-anchor="middle" fill="#E8F5EC" font-family="Arial, sans-serif" font-size="26" font-weight="700">DNM Wristband</text>
+</svg>

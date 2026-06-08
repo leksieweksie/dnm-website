@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" role="img" aria-label="DNM Tote Bag">
+  <rect width="400" height="300" fill="#3FAE5A"/>
+  <path d="M133 92h134l19 150H114z" fill="#0F2E1A"/>
+  <path d="M165 100c2-42 68-42 70 0" fill="none" stroke="#E8F5EC" stroke-width="12" stroke-linecap="round"/>
+  <text x="200" y="180" text-anchor="middle" fill="#E8F5EC" font-family="Arial, sans-serif" font-size="35" font-weight="700">DNM</text>
+  <text x="200" y="264" text-anchor="middle" fill="#0F2E1A" font-family="Arial, sans-serif" font-size="26" font-weight="700">DNM Tote Bag</text>
+</svg>
