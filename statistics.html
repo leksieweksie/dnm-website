@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Statistics — DNM Drugs No More | Phuket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { forest:'#0F2E1A', primary:'#1F6B3A', accent:'#3FAE5A', light:'#E8F5EC', darktext:'#102418', muted:'#A7B3AA' },
+          fontFamily: { display:['Playfair Display','Georgia','serif'], body:['Roboto','sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Roboto',sans-serif;color:#102418;background:#f9fafb;}
+    .noise::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:200px;pointer-events:none;z-index:1;}
+    .navbar{position:sticky;top:0;z-index:100;background:#0F2E1A;border-bottom:1px solid rgba(63,174,90,0.15);transition:background 0.3s ease,box-shadow 0.3s ease;}
+    .navbar.scrolled{background:rgba(15,46,26,0.97);box-shadow:0 4px 24px rgba(15,46,26,0.4);backdrop-filter:blur(12px);}
+    .nav-link{color:rgba(255,255,255,0.75);font-family:'Roboto',sans-serif;font-size:0.875rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;padding:0.25rem 0;border-bottom:2px solid transparent;transition:color 0.2s ease,border-color 0.2s ease;}
+    .nav-link:hover,.nav-link.active{color:#3FAE5A;border-bottom-color:#3FAE5A;}
+    .nav-cta{background:#1F6B3A;color:#fff;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.6rem 1.4rem;border-radius:4px;text-decoration:none;border:1px solid #3FAE5A;transition:background 0.2s ease,transform 0.15s ease;}
+    .nav-cta:hover{background:#3FAE5A;transform:translateY(-1px);}
+    .mobile-menu{display:none;}
+    .mobile-menu.open{display:flex;}
+    .chart-card{background:#fff;border-radius:14px;padding:1.75rem;box-shadow:0 2px 4px rgba(15,46,26,0.06),0 8px 24px rgba(15,46,26,0.08),0 0 0 1px rgba(15,46,26,0.04);}
+    .fade-in{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s cubic-bezier(0.34,1.56,0.64,1);}
+    .fade-in.visible{opacity:1;transform:translateY(0);}
+    .leaf-divider{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
+    .leaf-divider::before,.leaf-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#3FAE5A,transparent);}
+    .stat-pill{display:inline-flex;align-items:center;gap:0.4rem;background:#E8F5EC;color:#1F6B3A;font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.35rem 0.85rem;border-radius:50px;}
+    footer{background:#0F2E1A;}
+    .footer-link{color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.875rem;transition:color 0.2s ease;}
+    .footer-link:hover{color:#3FAE5A;}
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:44px;width:44px;object-fit:contain;" />
+      <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#fff;letter-spacing:-0.01em;">Drugs No More</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="statistics.html" class="nav-link active">Statistics</a>
+      <a href="drugs-effects.html" class="nav-link">Drugs & Effects</a>
+      <a href="products.html" class="nav-link">Shop</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div class="hidden md:flex"><a href="join.html" class="nav-cta">Join Us</a></div>
+    <button class="md:hidden text-white p-2" onclick="toggleMenu()">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu md:hidden flex-col px-6 pb-4 gap-3 border-t border-white/10">
+    <a href="index.html" class="nav-link py-2">Home</a>
+    <a href="about.html" class="nav-link py-2">About</a>
+    <a href="statistics.html" class="nav-link active py-2">Statistics</a>
+    <a href="drugs-effects.html" class="nav-link py-2">Drugs & Effects</a>
+    <a href="products.html" class="nav-link py-2">Shop</a>
+    <a href="contact.html" class="nav-link py-2">Contact</a>
+    <a href="join.html" class="nav-cta self-start mt-2">Join Us</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:#0F2E1A;padding:5rem 0 4rem;position:relative;overflow:hidden;" class="noise">
+  <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(31,107,58,0.35) 0%,transparent 70%);top:-150px;right:-100px;filter:blur(60px);pointer-events:none;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
+      <span style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">Data & Research</span>
+    </div>
+    <h1 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,5vw,4rem);color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:1rem;">Statistics</h1>
+    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;max-width:580px;line-height:1.75;">Transparent, evidence-based data on drug use patterns in Phuket and the measurable impact of DNM programs. All data is representative of surveys and provincial health records.</p>
+    <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1.5rem;">
+      <span class="stat-pill">Survey-based</span>
+      <span class="stat-pill">Updated 2025</span>
+      <span class="stat-pill">Phuket Province</span>
+    </div>
+  </div>
+</section>
+
+<!-- KEY NUMBERS -->
+<section style="background:#1F6B3A;padding:2.5rem 0;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:2.25rem;color:#fff;line-height:1;">8.2%</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Youth Use Rate 2025</div>
+      </div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:2.25rem;color:#fff;line-height:1;">56%</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Reduction Since 2018</div>
+      </div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:2.25rem;color:#fff;line-height:1;">1,200+</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Students Reached</div>
+      </div>
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:2.25rem;color:#fff;line-height:1;">94%</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Program Completion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHARTS GRID -->
+<section style="padding:5rem 0;">
+  <div class="max-w-7xl mx-auto px-6">
+
+    <!-- Row 1: Two charts -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
+      <!-- Chart 1: Youth Drug Use Trend -->
+      <div class="chart-card fade-in">
+        <div style="margin-bottom:1.25rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;">Youth Drug Use Rate — Phuket (2018–2025)</h3>
+          <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">% of surveyed youth (ages 13–24) reporting drug use in past 12 months</p>
+        </div>
+        <canvas id="chart1" height="260"></canvas>
+        <p style="color:#A7B3AA;font-size:0.72rem;margin-top:1rem;">Source: Phuket Provincial Health Office & DNM Annual Survey, 2025</p>
+      </div>
+
+      <!-- Chart 2: Substances -->
+      <div class="chart-card fade-in" style="transition-delay:0.1s;">
+        <div style="margin-bottom:1.25rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;">Most Commonly Used Substances — Phuket Youth</h3>
+          <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">% of reported drug-related incidents by substance type, 2024</p>
+        </div>
+        <canvas id="chart2" height="260"></canvas>
+        <p style="color:#A7B3AA;font-size:0.72rem;margin-top:1rem;">Source: Phuket Police & ONCB Regional Data, 2024</p>
+      </div>
+    </div>
+
+    <!-- Row 2: Three charts -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+
+      <!-- Chart 3: Age Distribution -->
+      <div class="chart-card fade-in">
+        <div style="margin-bottom:1.25rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#0F2E1A;">Age Group Breakdown</h3>
+          <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Drug-related incidents by age group, 2024</p>
+        </div>
+        <canvas id="chart3" height="260"></canvas>
+        <p style="color:#A7B3AA;font-size:0.72rem;margin-top:1rem;">Source: DNM & ONCB Survey, 2024</p>
+      </div>
+
+      <!-- Chart 4: DNM Reach by Year -->
+      <div class="chart-card fade-in" style="transition-delay:0.1s;">
+        <div style="margin-bottom:1.25rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#0F2E1A;">DNM Program Reach</h3>
+          <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Students reached per year by DNM programs</p>
+        </div>
+        <canvas id="chart4" height="260"></canvas>
+        <p style="color:#A7B3AA;font-size:0.72rem;margin-top:1rem;">Source: DNM Internal Records, 2025</p>
+      </div>
+
+      <!-- Chart 5: Gender split -->
+      <div class="chart-card fade-in" style="transition-delay:0.2s;">
+        <div style="margin-bottom:1.25rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#0F2E1A;">Gender Distribution</h3>
+          <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Drug use incidents by reported gender, 2024</p>
+        </div>
+        <canvas id="chart5" height="260"></canvas>
+        <p style="color:#A7B3AA;font-size:0.72rem;margin-top:1rem;">Source: Phuket Health Office, 2024</p>
+      </div>
+    </div>
+
+    <!-- Row 3: Wide charts -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
+      <!-- Chart 6: School programs by district -->
+      <div class="chart-card fade-in">
+        <div style="margin-bottom:1.25rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;">School Programs by District</h3>
+          <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Number of active DNM programs per district, 2025</p>
+        </div>
+        <canvas id="chart6" height="220"></canvas>
+        <p style="color:#A7B3AA;font-size:0.72rem;margin-top:1rem;">Source: DNM Internal Records, 2025</p>
+      </div>
+
+      <!-- Chart 7: Follow-up engagement -->
+      <div class="chart-card fade-in" style="transition-delay:0.1s;">
+        <div style="margin-bottom:1.25rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;">Post-Program Engagement Rate</h3>
+          <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">% of program participants engaging in follow-up sessions (2019–2025)</p>
+        </div>
+        <canvas id="chart7" height="220"></canvas>
+        <p style="color:#A7B3AA;font-size:0.72rem;margin-top:1rem;">Source: DNM Follow-up Survey, 2025</p>
+      </div>
+    </div>
+
+    <!-- Row 4: Full-width stacked -->
+    <div class="chart-card fade-in mb-4">
+      <div style="margin-bottom:1.25rem;">
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;">Drug Use by Category — Year on Year Comparison</h3>
+        <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Incident count by drug category across three survey years</p>
+      </div>
+      <canvas id="chart8" height="140"></canvas>
+      <p style="color:#A7B3AA;font-size:0.72rem;margin-top:1rem;">Source: ONCB Regional Report & DNM Survey, 2025</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-14">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <a href="index.html" class="flex items-center gap-3 mb-4">
+          <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:48px;width:48px;object-fit:contain;" />
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;">Drugs No More</div>
+            <div style="color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;">Phuket, Thailand</div>
+          </div>
+        </a>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:320px;">Prevention through education and understanding. Building healthier communities across Phuket since 2016.</p>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Pages</h4>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <a href="about.html" class="footer-link">About DNM</a>
+          <a href="statistics.html" class="footer-link">Statistics</a>
+          <a href="drugs-effects.html" class="footer-link">Drugs & Effects</a>
+          <a href="join.html" class="footer-link">Join Us</a>
+          <a href="products.html" class="footer-link">Shop</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Contact</h4>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">Phuket, Thailand</span>
+          <a href="mailto:info@drugsnomore.org" class="footer-link">info@drugsnomore.org</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1.5rem;">
+      <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">© 2025 Drugs No More (DNM). All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  const G = {
+    forest: '#0F2E1A', primary: '#1F6B3A', accent: '#3FAE5A',
+    mid: '#2a8a4a', pale: '#a8d8b5', muted: '#A7B3AA', light: '#E8F5EC'
+  };
+  const tooltip = {
+    backgroundColor: '#0F2E1A', titleColor: '#3FAE5A',
+    bodyColor: '#fff', borderColor: '#1F6B3A', borderWidth: 1, cornerRadius: 8
+  };
+
+  // Chart 1 — Line: Youth Drug Use Rate
+  new Chart(document.getElementById('chart1'), {
+    type: 'line',
+    data: {
+      labels: ['2018','2019','2020','2021','2022','2023','2024','2025'],
+      datasets: [{
+        label: 'Drug Use Rate (%)',
+        data: [18.4, 17.1, 16.8, 14.2, 12.9, 11.3, 9.8, 8.2],
+        borderColor: G.primary, backgroundColor: 'rgba(31,107,58,0.08)',
+        borderWidth: 3, fill: true, tension: 0.4,
+        pointBackgroundColor: G.accent, pointBorderColor: '#fff', pointBorderWidth: 2, pointRadius: 5, pointHoverRadius: 7
+      }]
+    },
+    options: {
+      responsive: true, plugins: { legend: { display: false }, tooltip },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: G.muted, font: { family: 'Roboto', size: 11 } } },
+        y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: G.muted, font: { family: 'Roboto', size: 11 }, callback: v => v + '%' }, min: 0, max: 25 }
+      }
+    }
+  });
+
+  // Chart 2 — Horizontal Bar: Substances
+  new Chart(document.getElementById('chart2'), {
+    type: 'bar',
+    data: {
+      labels: ['Methamphetamine','Cannabis','Kratom','Alcohol (underage)','Inhalants','MDMA','Benzodiazepines'],
+      datasets: [{
+        label: '% of incidents',
+        data: [34, 28, 18, 9, 5, 4, 2],
+        backgroundColor: [G.forest, G.primary, G.mid, G.accent, G.pale, G.muted, '#d1e8d8'],
+        borderRadius: 6, borderSkipped: false
+      }]
+    },
+    options: {
+      indexAxis: 'y', responsive: true,
+      plugins: { legend: { display: false }, tooltip },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: G.muted, font: { family: 'Roboto', size: 11 }, callback: v => v + '%' } },
+        y: { grid: { display: false }, ticks: { color: '#102418', font: { family: 'Roboto', size: 11 } } }
+      }
+    }
+  });
+
+  // Chart 3 — Doughnut: Age
+  new Chart(document.getElementById('chart3'), {
+    type: 'doughnut',
+    data: {
+      labels: ['13–15 yrs','16–18 yrs','19–21 yrs','22–24 yrs','25+ yrs'],
+      datasets: [{ data: [12, 28, 32, 18, 10], backgroundColor: [G.pale, G.accent, G.mid, G.primary, G.forest], borderWidth: 3, borderColor: '#fff', hoverOffset: 8 }]
+    },
+    options: {
+      responsive: true, cutout: '60%',
+      plugins: { legend: { position: 'bottom', labels: { font: { family: 'Roboto', size: 11 }, color: '#102418', padding: 14 } }, tooltip }
+    }
+  });
+
+  // Chart 4 — Bar: DNM Reach by Year
+  new Chart(document.getElementById('chart4'), {
+    type: 'bar',
+    data: {
+      labels: ['2018','2019','2020','2021','2022','2023','2024','2025'],
+      datasets: [{
+        label: 'Students Reached',
+        data: [80, 145, 98, 130, 175, 220, 280, 320],
+        backgroundColor: G.accent, borderRadius: 8, borderSkipped: false
+      }]
+    },
+    options: {
+      responsive: true, plugins: { legend: { display: false }, tooltip },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: G.muted, font: { family: 'Roboto', size: 11 } } },
+        y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: G.muted, font: { family: 'Roboto', size: 11 } } }
+      }
+    }
+  });
+
+  // Chart 5 — Pie: Gender
+  new Chart(document.getElementById('chart5'), {
+    type: 'pie',
+    data: {
+      labels: ['Male','Female','Other / Unreported'],
+      datasets: [{ data: [61, 34, 5], backgroundColor: [G.forest, G.accent, G.muted], borderWidth: 3, borderColor: '#fff', hoverOffset: 8 }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom', labels: { font: { family: 'Roboto', size: 11 }, color: '#102418', padding: 14 } }, tooltip }
+    }
+  });
+
+  // Chart 6 — Bar: School programs by district
+  new Chart(document.getElementById('chart6'), {
+    type: 'bar',
+    data: {
+      labels: ['Mueang Phuket','Kathu','Thalang'],
+      datasets: [
+        { label: '2023', data: [12, 7, 9], backgroundColor: G.pale, borderRadius: 6 },
+        { label: '2024', data: [15, 9, 12], backgroundColor: G.accent, borderRadius: 6 },
+        { label: '2025', data: [18, 12, 15], backgroundColor: G.primary, borderRadius: 6 },
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top', labels: { font: { family: 'Roboto', size: 11 }, color: '#102418' } }, tooltip },
+      scales: {
+        x: { grid: { display: false }, ticks: { color: '#102418', font: { family: 'Roboto', size: 12 } } },
+        y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: G.muted, font: { family: 'Roboto', size: 11 } } }
+      }
+    }
+  });
+
+  // Chart 7 — Line: Follow-up engagement
+  new Chart(document.getElementById('chart7'), {
+    type: 'line',
+    data: {
+      labels: ['2019','2020','2021','2022','2023','2024','2025'],
+      datasets: [
+        {
+          label: 'Engagement Rate (%)',
+          data: [52, 58, 61, 70, 78, 88, 94],
+          borderColor: G.accent, backgroundColor: 'rgba(63,174,90,0.08)',
+          borderWidth: 3, fill: true, tension: 0.4,
+          pointBackgroundColor: G.primary, pointBorderColor: '#fff', pointBorderWidth: 2, pointRadius: 5
+        }
+      ]
+    },
+    options: {
+      responsive: true, plugins: { legend: { display: false }, tooltip },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: G.muted, font: { family: 'Roboto', size: 11 } } },
+        y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: G.muted, font: { family: 'Roboto', size: 11 }, callback: v => v + '%' }, min: 30, max: 100 }
+      }
+    }
+  });
+
+  // Chart 8 — Stacked bar: Year on Year
+  new Chart(document.getElementById('chart8'), {
+    type: 'bar',
+    data: {
+      labels: ['2021','2022','2023','2024','2025'],
+      datasets: [
+        { label: 'Stimulants (Meth)', data: [180, 162, 140, 118, 95], backgroundColor: G.forest, borderRadius: 4 },
+        { label: 'Cannabis', data: [140, 130, 110, 90, 72], backgroundColor: G.primary, borderRadius: 4 },
+        { label: 'Kratom', data: [90, 82, 70, 58, 45], backgroundColor: G.mid, borderRadius: 4 },
+        { label: 'Inhalants', data: [30, 26, 22, 18, 12], backgroundColor: G.accent, borderRadius: 4 },
+        { label: 'Other', data: [20, 18, 15, 12, 8], backgroundColor: G.pale, borderRadius: 4 },
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top', labels: { font: { family: 'Roboto', size: 11 }, color: '#102418' } }, tooltip },
+      scales: {
+        x: { stacked: true, grid: { display: false }, ticks: { color: '#102418', font: { family: 'Roboto', size: 12 } } },
+        y: { stacked: true, grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: G.muted, font: { family: 'Roboto', size: 11 } } }
+      }
+    }
+  });
+</script>
+</body>
+</html>

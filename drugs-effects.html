@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Drugs & Effects — DNM Drugs No More | Phuket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Roboto',sans-serif;color:#102418;background:#f9fafb;}
+    .noise::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:200px;pointer-events:none;z-index:1;}
+    .navbar{position:sticky;top:0;z-index:100;background:#0F2E1A;border-bottom:1px solid rgba(63,174,90,0.15);}
+    .nav-link{color:rgba(255,255,255,0.75);font-family:'Roboto',sans-serif;font-size:0.875rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;padding:0.25rem 0;border-bottom:2px solid transparent;transition:color 0.2s ease,border-color 0.2s ease;}
+    .nav-link:hover,.nav-link.active{color:#3FAE5A;border-bottom-color:#3FAE5A;}
+    .nav-cta{background:#1F6B3A;color:#fff;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.6rem 1.4rem;border-radius:4px;text-decoration:none;border:1px solid #3FAE5A;transition:background 0.2s ease,transform 0.15s ease;}
+    .nav-cta:hover{background:#3FAE5A;transform:translateY(-1px);}
+    .mobile-menu{display:none;}
+    .mobile-menu.open{display:flex;}
+    .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s cubic-bezier(0.34,1.56,0.64,1);}
+    .fade-in.visible{opacity:1;transform:translateY(0);}
+    .drug-card{background:#fff;border-radius:14px;box-shadow:0 2px 4px rgba(15,46,26,0.05),0 8px 24px rgba(15,46,26,0.08),0 0 0 1px rgba(15,46,26,0.04);overflow:hidden;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.25s ease;}
+    .drug-card:hover{transform:translateY(-5px);box-shadow:0 8px 16px rgba(15,46,26,0.1),0 24px 48px rgba(15,46,26,0.14);}
+    .category-badge{display:inline-block;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.7rem;border-radius:50px;}
+    .dep-bar-bg{height:6px;border-radius:50px;background:#E8F5EC;overflow:hidden;}
+    .dep-bar-fill{height:100%;border-radius:50px;background:linear-gradient(90deg,#3FAE5A,#1F6B3A);}
+    footer{background:#0F2E1A;}
+    .footer-link{color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.875rem;transition:color 0.2s ease;}
+    .footer-link:hover{color:#3FAE5A;}
+    .leaf-divider{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
+    .leaf-divider::before,.leaf-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#3FAE5A,transparent);}
+    .warning-banner{background:linear-gradient(135deg,#fffbeb,#fef3c7);border:1px solid #f59e0b;border-radius:12px;padding:1.25rem 1.5rem;}
+  </style>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:44px;width:44px;object-fit:contain;" />
+      <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#fff;">Drugs No More</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="statistics.html" class="nav-link">Statistics</a>
+      <a href="drugs-effects.html" class="nav-link active">Drugs & Effects</a>
+      <a href="products.html" class="nav-link">Shop</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div class="hidden md:flex"><a href="join.html" class="nav-cta">Join Us</a></div>
+    <button class="md:hidden text-white p-2" onclick="toggleMenu()">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu md:hidden flex-col px-6 pb-4 gap-3 border-t border-white/10">
+    <a href="index.html" class="nav-link py-2">Home</a>
+    <a href="about.html" class="nav-link py-2">About</a>
+    <a href="statistics.html" class="nav-link py-2">Statistics</a>
+    <a href="drugs-effects.html" class="nav-link active py-2">Drugs & Effects</a>
+    <a href="products.html" class="nav-link py-2">Shop</a>
+    <a href="contact.html" class="nav-link py-2">Contact</a>
+    <a href="join.html" class="nav-cta self-start mt-2">Join Us</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:#0F2E1A;padding:5rem 0 4rem;position:relative;overflow:hidden;" class="noise">
+  <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(31,107,58,0.35) 0%,transparent 70%);top:-150px;right:-100px;filter:blur(60px);pointer-events:none;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
+      <span style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">Education</span>
+    </div>
+    <h1 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,5vw,4rem);color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:1rem;">Drugs & Their Effects</h1>
+    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;max-width:600px;line-height:1.75;">Understanding what substances do to the body and mind is one of the most powerful tools for prevention. This page provides honest, evidence-based information — free of judgment.</p>
+  </div>
+</section>
+
+<!-- WARNING BANNER -->
+<section style="background:#fff;padding:2rem 0 0;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="warning-banner fade-in">
+      <div style="display:flex;align-items:flex-start;gap:1rem;">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2" style="flex-shrink:0;margin-top:0.1rem;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <div>
+          <div style="font-weight:700;color:#92400e;font-size:0.9rem;margin-bottom:0.25rem;">Educational Content Only</div>
+          <p style="color:#78350f;font-size:0.85rem;line-height:1.65;">This page presents factual information about substances for educational and prevention purposes. If you or someone you know is struggling with drug use, please <a href="contact.html" style="color:#1F6B3A;font-weight:600;">contact us</a> for support.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DRUG CARDS -->
+<section style="padding:4rem 0 6rem;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7">
+
+      <!-- Methamphetamine -->
+      <div class="drug-card fade-in">
+        <div style="background:linear-gradient(135deg,#0F2E1A,#1F6B3A);padding:1.5rem;">
+          <span class="category-badge" style="background:rgba(63,174,90,0.2);color:#3FAE5A;margin-bottom:0.75rem;">Stimulant</span>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#fff;">Methamphetamine</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.8rem;margin-top:0.25rem;">Yaba / Ice / Crystal Meth</p>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1F6B3A;margin-bottom:0.5rem;">Short-term Effects</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Increased energy and alertness</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Elevated heart rate and blood pressure</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Decreased appetite and sleep</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Euphoria followed by intense crash</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#b91c1c;margin-bottom:0.5rem;">Long-term Risks</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Severe cognitive impairment</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Psychosis and paranoia</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Cardiovascular damage</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Extreme physical deterioration</li>
+            </ul>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:0.75rem;font-weight:600;margin-bottom:0.4rem;">
+              <span style="color:#102418;">Dependency Risk</span>
+              <span style="color:#1F6B3A;">Very High</span>
+            </div>
+            <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:95%;background:linear-gradient(90deg,#ef4444,#b91c1c);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cannabis -->
+      <div class="drug-card fade-in" style="transition-delay:0.08s;">
+        <div style="background:linear-gradient(135deg,#1F6B3A,#2a8a4a);padding:1.5rem;">
+          <span class="category-badge" style="background:rgba(255,255,255,0.15);color:#fff;margin-bottom:0.75rem;">Cannabis</span>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#fff;">Cannabis</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.8rem;margin-top:0.25rem;">Marijuana / Weed / Ganja</p>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1F6B3A;margin-bottom:0.5rem;">Short-term Effects</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Altered perception and mood</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Impaired memory and coordination</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Increased appetite</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Anxiety or paranoia (high doses)</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#b91c1c;margin-bottom:0.5rem;">Long-term Risks</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Mental health issues in youth</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Lung damage (if smoked)</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Impaired brain development</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Reduced motivation and academic performance</li>
+            </ul>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:0.75rem;font-weight:600;margin-bottom:0.4rem;">
+              <span style="color:#102418;">Dependency Risk</span>
+              <span style="color:#1F6B3A;">Moderate</span>
+            </div>
+            <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:50%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Heroin -->
+      <div class="drug-card fade-in" style="transition-delay:0.16s;">
+        <div style="background:linear-gradient(135deg,#1a0a0a,#4a1515);padding:1.5rem;">
+          <span class="category-badge" style="background:rgba(239,68,68,0.2);color:#fca5a5;margin-bottom:0.75rem;">Opioid</span>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#fff;">Heroin</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.8rem;margin-top:0.25rem;">Smack / H / Horse</p>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1F6B3A;margin-bottom:0.5rem;">Short-term Effects</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Intense euphoria</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Slowed breathing and heart rate</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Pain relief</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Nausea and vomiting</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#b91c1c;margin-bottom:0.5rem;">Long-term Risks</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Fatal overdose risk</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Organ failure</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> HIV/hepatitis risk (injection)</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Severe physical dependence</li>
+            </ul>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:0.75rem;font-weight:600;margin-bottom:0.4rem;">
+              <span style="color:#102418;">Dependency Risk</span>
+              <span style="color:#b91c1c;">Extreme</span>
+            </div>
+            <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:100%;background:linear-gradient(90deg,#ef4444,#7f1d1d);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kratom -->
+      <div class="drug-card fade-in" style="transition-delay:0.24s;">
+        <div style="background:linear-gradient(135deg,#2d4a1e,#3a6428);padding:1.5rem;">
+          <span class="category-badge" style="background:rgba(163,230,53,0.2);color:#a3e635;margin-bottom:0.75rem;">Plant-based</span>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#fff;">Kratom</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.8rem;margin-top:0.25rem;">Mitragyna speciosa / Bai Kratum</p>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1F6B3A;margin-bottom:0.5rem;">Short-term Effects</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Stimulant at low doses</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Sedative / opioid-like at high doses</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Pain relief and mood elevation</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Nausea and sweating</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#b91c1c;margin-bottom:0.5rem;">Long-term Risks</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Physical dependence</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Withdrawal symptoms</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Liver damage (heavy use)</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Mental health impact</li>
+            </ul>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:0.75rem;font-weight:600;margin-bottom:0.4rem;">
+              <span style="color:#102418;">Dependency Risk</span>
+              <span style="color:#d97706;">Moderate–High</span>
+            </div>
+            <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:65%;background:linear-gradient(90deg,#3FAE5A,#d97706);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Alcohol -->
+      <div class="drug-card fade-in" style="transition-delay:0.32s;">
+        <div style="background:linear-gradient(135deg,#1e293b,#334155);padding:1.5rem;">
+          <span class="category-badge" style="background:rgba(148,163,184,0.2);color:#cbd5e1;margin-bottom:0.75rem;">Depressant</span>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#fff;">Alcohol</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.8rem;margin-top:0.25rem;">Underage & heavy use</p>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1F6B3A;margin-bottom:0.5rem;">Short-term Effects</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Impaired judgment and coordination</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Slurred speech</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Lowered inhibitions</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Risk of alcohol poisoning</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#b91c1c;margin-bottom:0.5rem;">Long-term Risks</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Liver cirrhosis</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Brain damage (youth especially)</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Addiction</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Increased accident risk</li>
+            </ul>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:0.75rem;font-weight:600;margin-bottom:0.4rem;">
+              <span style="color:#102418;">Dependency Risk</span>
+              <span style="color:#d97706;">Moderate–High</span>
+            </div>
+            <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:65%;background:linear-gradient(90deg,#3FAE5A,#d97706);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inhalants -->
+      <div class="drug-card fade-in" style="transition-delay:0.4s;">
+        <div style="background:linear-gradient(135deg,#1a1a2e,#16213e);padding:1.5rem;">
+          <span class="category-badge" style="background:rgba(99,102,241,0.2);color:#a5b4fc;margin-bottom:0.75rem;">Inhalant</span>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#fff;">Inhalants</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.8rem;margin-top:0.25rem;">Glue / Petrol / Aerosols</p>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1F6B3A;margin-bottom:0.5rem;">Short-term Effects</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Brief euphoria and dizziness</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Hallucinations</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Loss of coordination</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Sudden Sniffing Death possible</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#b91c1c;margin-bottom:0.5rem;">Long-term Risks</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Brain and nerve damage</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Hearing and vision loss</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Liver and kidney damage</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Cardiac arrest</li>
+            </ul>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:0.75rem;font-weight:600;margin-bottom:0.4rem;">
+              <span style="color:#102418;">Dependency Risk</span>
+              <span style="color:#1F6B3A;">Moderate</span>
+            </div>
+            <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:45%;"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MDMA -->
+      <div class="drug-card fade-in" style="transition-delay:0.48s;">
+        <div style="background:linear-gradient(135deg,#3b1f5e,#5b2d8e);padding:1.5rem;">
+          <span class="category-badge" style="background:rgba(192,132,252,0.2);color:#d8b4fe;margin-bottom:0.75rem;">Empathogen</span>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#fff;">MDMA / Ecstasy</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.8rem;margin-top:0.25rem;">E / Molly / Pills</p>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1F6B3A;margin-bottom:0.5rem;">Short-term Effects</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Intense euphoria and empathy</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Elevated temperature</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Increased energy</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Dehydration risk</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#b91c1c;margin-bottom:0.5rem;">Long-term Risks</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Serotonin damage</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Depression and anxiety</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Memory and cognition problems</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Risk of heatstroke death</li>
+            </ul>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:0.75rem;font-weight:600;margin-bottom:0.4rem;">
+              <span style="color:#102418;">Dependency Risk</span>
+              <span style="color:#d97706;">Moderate</span>
+            </div>
+            <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:55%;background:linear-gradient(90deg,#3FAE5A,#d97706);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cocaine -->
+      <div class="drug-card fade-in" style="transition-delay:0.56s;">
+        <div style="background:linear-gradient(135deg,#292524,#44403c);padding:1.5rem;">
+          <span class="category-badge" style="background:rgba(255,255,255,0.12);color:#e7e5e4;margin-bottom:0.75rem;">Stimulant</span>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#fff;">Cocaine</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.8rem;margin-top:0.25rem;">Coke / Snow / Powder</p>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1F6B3A;margin-bottom:0.5rem;">Short-term Effects</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Short burst of euphoria</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Increased heart rate</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Overconfidence and aggression</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Constricted blood vessels</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#b91c1c;margin-bottom:0.5rem;">Long-term Risks</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Heart attack and stroke</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Nasal tissue destruction</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Severe depression</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Strong psychological dependency</li>
+            </ul>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:0.75rem;font-weight:600;margin-bottom:0.4rem;">
+              <span style="color:#102418;">Dependency Risk</span>
+              <span style="color:#b91c1c;">High</span>
+            </div>
+            <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:82%;background:linear-gradient(90deg,#ef4444,#b91c1c);"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Benzodiazepines -->
+      <div class="drug-card fade-in" style="transition-delay:0.64s;">
+        <div style="background:linear-gradient(135deg,#0c4a6e,#0369a1);padding:1.5rem;">
+          <span class="category-badge" style="background:rgba(186,230,253,0.2);color:#bae6fd;margin-bottom:0.75rem;">Depressant</span>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#fff;">Benzodiazepines</h3>
+          <p style="color:rgba(255,255,255,0.6);font-size:0.8rem;margin-top:0.25rem;">Valium / Xanax / Diazepam</p>
+        </div>
+        <div style="padding:1.5rem;">
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#1F6B3A;margin-bottom:0.5rem;">Short-term Effects</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Sedation and anxiety reduction</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Muscle relaxation</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Drowsiness and confusion</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#3FAE5A;">•</span> Memory gaps</li>
+            </ul>
+          </div>
+          <div style="margin-bottom:1.1rem;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#b91c1c;margin-bottom:0.5rem;">Long-term Risks</div>
+            <ul style="color:#4a6b55;font-size:0.875rem;line-height:1.7;list-style:none;display:flex;flex-direction:column;gap:0.25rem;">
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Physical and psychological dependence</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Dangerous withdrawal syndrome</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Cognitive impairment</li>
+              <li style="display:flex;gap:0.5rem;"><span style="color:#ef4444;">•</span> Overdose when combined with opioids</li>
+            </ul>
+          </div>
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:0.75rem;font-weight:600;margin-bottom:0.4rem;">
+              <span style="color:#102418;">Dependency Risk</span>
+              <span style="color:#b91c1c;">High</span>
+            </div>
+            <div class="dep-bar-bg"><div class="dep-bar-fill" style="width:78%;background:linear-gradient(90deg,#ef4444,#b91c1c);"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HELP CTA -->
+<section style="background:#0F2E1A;padding:5rem 0;position:relative;overflow:hidden;" class="noise">
+  <div style="position:absolute;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(63,174,90,0.2) 0%,transparent 70%);top:-100px;left:50%;transform:translateX(-50%);filter:blur(60px);pointer-events:none;"></div>
+  <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+    <h2 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(1.8rem,3.5vw,2.75rem);color:#fff;letter-spacing:-0.03em;margin-bottom:1rem;">Need Help or Support?</h2>
+    <p style="color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.75;max-width:480px;margin:0 auto 2.5rem;">You don't have to face this alone. DNM connects people in Phuket with confidential, compassionate support.</p>
+    <a href="contact.html" style="display:inline-flex;align-items:center;gap:0.5rem;background:#3FAE5A;color:#0F2E1A;font-weight:700;font-size:0.9rem;letter-spacing:0.04em;text-transform:uppercase;padding:0.875rem 2.25rem;border-radius:6px;text-decoration:none;transition:background 0.2s ease,transform 0.15s ease;" onmouseover="this.style.background='#4dcc6e';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#3FAE5A';this.style.transform='translateY(0)'">
+      Contact Us
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-14">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <a href="index.html" class="flex items-center gap-3 mb-4">
+          <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:48px;width:48px;object-fit:contain;" />
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;">Drugs No More</div>
+            <div style="color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;">Phuket, Thailand</div>
+          </div>
+        </a>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:320px;">Prevention through education and understanding. Building healthier communities across Phuket since 2016.</p>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Pages</h4>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <a href="about.html" class="footer-link">About DNM</a>
+          <a href="statistics.html" class="footer-link">Statistics</a>
+          <a href="drugs-effects.html" class="footer-link">Drugs & Effects</a>
+          <a href="join.html" class="footer-link">Join Us</a>
+          <a href="products.html" class="footer-link">Shop</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Contact</h4>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">Phuket, Thailand</span>
+          <a href="mailto:info@drugsnomore.org" class="footer-link">info@drugsnomore.org</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1.5rem;">
+      <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">© 2025 Drugs No More (DNM). All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40), { passive: true });
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

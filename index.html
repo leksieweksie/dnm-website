@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNM — Drugs No More | Phuket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forest: '#0F2E1A',
+            primary: '#1F6B3A',
+            accent: '#3FAE5A',
+            light: '#E8F5EC',
+            darktext: '#102418',
+            muted: '#A7B3AA',
+          },
+          fontFamily: {
+            display: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Roboto', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Roboto', sans-serif; color: #102418; background: #fff; }
+
+    /* Noise texture overlay */
+    .noise::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 200px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #0F2E1A;
+      border-bottom: 1px solid rgba(63,174,90,0.15);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    .navbar.scrolled {
+      background: rgba(15,46,26,0.97);
+      box-shadow: 0 4px 24px rgba(15,46,26,0.4);
+      backdrop-filter: blur(12px);
+    }
+    .nav-link {
+      color: rgba(255,255,255,0.75);
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.25rem 0;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .nav-link:hover { color: #3FAE5A; border-bottom-color: #3FAE5A; }
+    .nav-link.active { color: #3FAE5A; border-bottom-color: #3FAE5A; }
+    .nav-cta {
+      background: #1F6B3A;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      border-radius: 4px;
+      text-decoration: none;
+      border: 1px solid #3FAE5A;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+    .nav-cta:hover { background: #3FAE5A; transform: translateY(-1px); }
+    .nav-cta:active { transform: translateY(0); }
+
+    /* Mobile menu */
+    .mobile-menu { display: none; }
+    .mobile-menu.open { display: flex; }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background: #0F2E1A;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+    .hero-glow {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .hero-glow-1 {
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(31,107,58,0.4) 0%, transparent 70%);
+      top: -100px; left: -100px;
+    }
+    .hero-glow-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(63,174,90,0.2) 0%, transparent 70%);
+      bottom: 50px; right: 100px;
+    }
+
+    /* Animated leaf particles */
+    .leaf-particle {
+      position: absolute;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+
+    /* Counters */
+    .stat-bar {
+      background: #1F6B3A;
+      border-top: 1px solid rgba(63,174,90,0.25);
+      border-bottom: 1px solid rgba(63,174,90,0.25);
+    }
+
+    /* Cards */
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow:
+        0 2px 4px rgba(15,46,26,0.06),
+        0 8px 24px rgba(15,46,26,0.08),
+        0 0 0 1px rgba(15,46,26,0.04);
+      transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow:
+        0 4px 8px rgba(15,46,26,0.08),
+        0 16px 40px rgba(15,46,26,0.14),
+        0 0 0 1px rgba(15,46,26,0.06);
+    }
+
+    /* Program icon */
+    .program-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      background: #E8F5EC;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    /* Section fade-in */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* CTA Banner */
+    .cta-banner {
+      background: linear-gradient(135deg, #0F2E1A 0%, #1F6B3A 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #3FAE5A;
+      color: #0F2E1A;
+      font-weight: 700;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.875rem 2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.15s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .btn-primary:hover { background: #4dcc6e; transform: translateY(-2px); }
+    .btn-primary:active { transform: translateY(0); }
+    .btn-primary:focus-visible { outline: 3px solid #3FAE5A; outline-offset: 3px; }
+
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.875rem 2rem;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.4);
+      cursor: pointer;
+      transition: border-color 0.2s ease, background 0.2s ease, transform 0.15s ease;
+    }
+    .btn-outline:hover { border-color: #3FAE5A; background: rgba(63,174,90,0.1); transform: translateY(-2px); }
+    .btn-outline:active { transform: translateY(0); }
+    .btn-outline:focus-visible { outline: 3px solid #3FAE5A; outline-offset: 3px; }
+
+    /* Footer */
+    footer { background: #0F2E1A; }
+    .footer-link {
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: color 0.2s ease;
+    }
+    .footer-link:hover { color: #3FAE5A; }
+
+    /* Divider leaf */
+    .leaf-divider {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .leaf-divider::before, .leaf-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #3FAE5A, transparent);
+    }
+
+    /* Counter number */
+    .counter-num {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: 2.5rem;
+      color: #fff;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:44px;width:44px;object-fit:contain;" />
+      <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#fff;letter-spacing:-0.01em;">Drugs No More</span>
+    </a>
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="statistics.html" class="nav-link">Statistics</a>
+      <a href="drugs-effects.html" class="nav-link">Drugs & Effects</a>
+      <a href="products.html" class="nav-link">Shop</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div class="hidden md:flex items-center gap-4">
+      <a href="join.html" class="nav-cta">Join Us</a>
+    </div>
+    <!-- Mobile hamburger -->
+    <button id="menuBtn" class="md:hidden text-white p-2" aria-label="Open menu" onclick="toggleMenu()">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path id="menuIcon" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </div>
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="mobile-menu md:hidden flex-col px-6 pb-4 gap-3 border-t border-white/10">
+    <a href="index.html" class="nav-link active py-2">Home</a>
+    <a href="about.html" class="nav-link py-2">About</a>
+    <a href="statistics.html" class="nav-link py-2">Statistics</a>
+    <a href="drugs-effects.html" class="nav-link py-2">Drugs & Effects</a>
+    <a href="products.html" class="nav-link py-2">Shop</a>
+    <a href="contact.html" class="nav-link py-2">Contact</a>
+    <a href="join.html" class="nav-cta self-start mt-2">Join Us</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero noise">
+  <!-- Glows -->
+  <div class="hero-glow hero-glow-1"></div>
+  <div class="hero-glow hero-glow-2"></div>
+  <!-- Decorative leaves -->
+  <svg class="leaf-particle" style="width:320px;top:10%;right:5%;transform:rotate(25deg);" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 180C100 180 20 140 20 80C20 40 60 10 100 10C140 10 180 40 180 80C180 140 100 180 100 180Z" fill="#3FAE5A"/>
+    <path d="M100 180L100 10" stroke="#1F6B3A" stroke-width="2"/>
+    <path d="M100 80L60 40M100 80L140 40M100 120L70 90M100 120L130 90" stroke="#1F6B3A" stroke-width="1.5"/>
+  </svg>
+  <svg class="leaf-particle" style="width:180px;bottom:15%;left:3%;transform:rotate(-15deg);" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 180C100 180 20 140 20 80C20 40 60 10 100 10C140 10 180 40 180 80C180 140 100 180 100 180Z" fill="#3FAE5A"/>
+    <path d="M100 180L100 10" stroke="#1F6B3A" stroke-width="2"/>
+  </svg>
+
+  <div class="max-w-7xl mx-auto px-6 relative z-10 py-24">
+    <div class="max-w-3xl">
+      <div class="leaf-divider mb-8">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/>
+          <path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/>
+        </svg>
+        <span style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">Phuket's Drug Prevention Initiative</span>
+      </div>
+      <h1 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.8rem,6vw,5rem);color:#fff;line-height:1.08;letter-spacing:-0.03em;margin-bottom:1.5rem;">
+        Prevention<br />
+        <span style="color:#3FAE5A;font-style:italic;">Through</span><br />
+        Education
+      </h1>
+      <p style="color:rgba(255,255,255,0.72);font-size:1.125rem;line-height:1.75;max-width:560px;margin-bottom:2.5rem;">
+        DNM is Phuket's leading drug prevention initiative — building healthier communities through awareness, education, and genuine human connection.
+      </p>
+      <div class="flex flex-wrap gap-4">
+        <a href="statistics.html" class="btn-primary">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          See the Data
+        </a>
+        <a href="join.html" class="btn-outline">
+          Join the Movement
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+  <!-- Scroll indicator -->
+  <div style="position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:0.5rem;">
+    <span style="color:rgba(255,255,255,0.4);font-size:0.7rem;letter-spacing:0.12em;text-transform:uppercase;">Scroll</span>
+    <div style="width:1px;height:40px;background:linear-gradient(to bottom,rgba(63,174,90,0.8),transparent);"></div>
+  </div>
+</section>
+
+<!-- STATS BAR -->
+<section class="stat-bar py-10">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      <div class="fade-in">
+        <div class="counter-num" data-target="1200">0</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Youth Reached</div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.1s;">
+        <div class="counter-num" data-target="45">0</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">School Programs</div>
+      </div>
+      <div class="fade-in" style="transition-delay:0.2s;">
+        <div class="counter-num" data-target="8">0</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Years Active in Phuket</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION SECTION -->
+<section style="background:#fff;padding:6rem 0;" class="fade-in">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div>
+        <div class="leaf-divider" style="justify-content:flex-start;max-width:200px;">
+          <span style="color:#1F6B3A;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">Our Mission</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(2rem,4vw,3rem);color:#0F2E1A;line-height:1.15;letter-spacing:-0.03em;margin-bottom:1.5rem;">
+          Building a<br /><em style="color:#1F6B3A;">drug-free future</em><br />for Phuket
+        </h2>
+        <p style="color:#4a6b55;font-size:1rem;line-height:1.8;margin-bottom:1rem;">
+          Founded in the heart of Phuket, DNM (Drugs No More) works alongside schools, families, and community leaders to prevent drug use before it begins.
+        </p>
+        <p style="color:#4a6b55;font-size:1rem;line-height:1.8;margin-bottom:2rem;">
+          Our approach is rooted in education, empathy, and evidence — not fear. We believe that when young people are given the right information and genuine support, they make better choices.
+        </p>
+        <a href="about.html" class="btn-primary" style="background:#1F6B3A;color:#fff;">
+          Our Story
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div style="position:relative;">
+        <div style="border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(15,46,26,0.18),0 4px 12px rgba(15,46,26,0.1);">
+          <img src="https://placehold.co/600x450/0F2E1A/3FAE5A?text=Community+in+Action" alt="DNM community" style="width:100%;height:auto;display:block;" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(15,46,26,0.5) 0%, transparent 50%);"></div>
+        </div>
+        <!-- Accent card -->
+        <div class="card" style="position:absolute;bottom:-2rem;left:-2rem;padding:1.25rem 1.5rem;max-width:220px;">
+          <div style="display:flex;align-items:center;gap:0.75rem;">
+            <div style="width:40px;height:40px;border-radius:10px;background:#E8F5EC;display:flex;align-items:center;justify-content:center;">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
+            </div>
+            <div>
+              <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;line-height:1;">94%</div>
+              <div style="font-size:0.75rem;color:#A7B3AA;margin-top:0.15rem;">Program completion rate</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section style="background:#E8F5EC;padding:6rem 0;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-14 fade-in">
+      <div class="leaf-divider" style="justify-content:center;">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
+      </div>
+      <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.75rem);color:#0F2E1A;letter-spacing:-0.03em;">How We Work</h2>
+      <p style="color:#4a6b55;margin-top:0.75rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7;">Three pillars that drive everything we do in Phuket communities.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="card fade-in p-8">
+        <div class="program-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F6B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#0F2E1A;margin-bottom:0.75rem;">Education</h3>
+        <p style="color:#4a6b55;line-height:1.75;font-size:0.95rem;">Evidence-based curriculum delivered in Phuket schools, giving students the knowledge and confidence to make safe choices.</p>
+        <a href="drugs-effects.html" style="display:inline-flex;align-items:center;gap:0.4rem;color:#1F6B3A;font-weight:600;font-size:0.875rem;text-decoration:none;margin-top:1.25rem;transition:gap 0.2s ease;" onmouseover="this.style.gap='0.7rem'" onmouseout="this.style.gap='0.4rem'">
+          Learn More <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="card fade-in p-8" style="transition-delay:0.1s;">
+        <div class="program-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F6B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#0F2E1A;margin-bottom:0.75rem;">Community Outreach</h3>
+        <p style="color:#4a6b55;line-height:1.75;font-size:0.95rem;">Working directly with families, local leaders, and at-risk youth to build networks of support across all of Phuket's districts.</p>
+        <a href="about.html" style="display:inline-flex;align-items:center;gap:0.4rem;color:#1F6B3A;font-weight:600;font-size:0.875rem;text-decoration:none;margin-top:1.25rem;transition:gap 0.2s ease;" onmouseover="this.style.gap='0.7rem'" onmouseout="this.style.gap='0.4rem'">
+          Learn More <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+      <div class="card fade-in p-8" style="transition-delay:0.2s;">
+        <div class="program-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F6B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#0F2E1A;margin-bottom:0.75rem;">Support & Recovery</h3>
+        <p style="color:#4a6b55;line-height:1.75;font-size:0.95rem;">Connecting individuals and families with the resources, counselling, and peer support they need to rebuild healthy lives.</p>
+        <a href="contact.html" style="display:inline-flex;align-items:center;gap:0.4rem;color:#1F6B3A;font-weight:600;font-size:0.875rem;text-decoration:none;margin-top:1.25rem;transition:gap 0.2s ease;" onmouseover="this.style.gap='0.7rem'" onmouseout="this.style.gap='0.4rem'">
+          Get Help <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS PREVIEW CHART -->
+<section style="background:#fff;padding:6rem 0;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+      <div class="fade-in">
+        <div class="leaf-divider" style="justify-content:flex-start;max-width:200px;">
+          <span style="color:#1F6B3A;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">By The Numbers</span>
+        </div>
+        <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.75rem);color:#0F2E1A;letter-spacing:-0.03em;margin-bottom:1.25rem;">
+          The data tells<br /><em style="color:#1F6B3A;">a clear story</em>
+        </h2>
+        <p style="color:#4a6b55;line-height:1.8;margin-bottom:1rem;">Drug use among Phuket youth has measurably declined in communities where DNM programs are active. We track, report, and publish our impact.</p>
+        <p style="color:#4a6b55;line-height:1.8;margin-bottom:2rem;">Transparency is part of our commitment — to our community, our donors, and the young people we serve.</p>
+        <a href="statistics.html" class="btn-primary" style="background:#1F6B3A;color:#fff;">
+          View Full Statistics
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </a>
+      </div>
+      <div class="card fade-in p-8" style="transition-delay:0.15s;">
+        <div style="margin-bottom:1rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-weight:600;font-size:1rem;color:#0F2E1A;">Youth Drug Use Rate — Phuket (2018–2025)</h3>
+          <p style="font-size:0.8rem;color:#A7B3AA;margin-top:0.25rem;">% of surveyed youth reporting drug use in past 12 months</p>
+        </div>
+        <canvas id="homeChart" height="220"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner noise py-20">
+  <div class="hero-glow" style="width:500px;height:500px;background:radial-gradient(circle,rgba(63,174,90,0.15) 0%,transparent 70%);top:-100px;right:-50px;position:absolute;filter:blur(60px);border-radius:50%;pointer-events:none;"></div>
+  <div class="max-w-7xl mx-auto px-6 text-center relative z-10 fade-in">
+    <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="margin:0 auto 1.5rem;">
+      <path d="M20 36C20 36 4 28 4 16C4 8 11 2 20 2C29 2 36 8 36 16C36 28 20 36 20 36Z" fill="#3FAE5A" opacity="0.9"/>
+      <path d="M20 36L20 2" stroke="#0F2E1A" stroke-width="2.5"/>
+      <path d="M20 16L12 8M20 16L28 8M20 24L14 18M20 24L26 18" stroke="#0F2E1A" stroke-width="1.5"/>
+    </svg>
+    <h2 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2rem,4vw,3.5rem);color:#fff;letter-spacing:-0.03em;margin-bottom:1rem;">Be Part of the Change</h2>
+    <p style="color:rgba(255,255,255,0.7);font-size:1.1rem;max-width:500px;margin:0 auto 2.5rem;line-height:1.7;">Every volunteer, every donation, every shared post makes Phuket's communities safer.</p>
+    <div class="flex flex-wrap gap-4 justify-center">
+      <a href="join.html" class="btn-primary">Join Us Today</a>
+      <a href="contact.html" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-14">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <a href="index.html" class="flex items-center gap-3 mb-4">
+          <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:48px;width:48px;object-fit:contain;" />
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;">Drugs No More</div>
+            <div style="color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;">Phuket, Thailand</div>
+          </div>
+        </a>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:320px;">Prevention through education and understanding. Building healthier communities across Phuket since 2016.</p>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Pages</h4>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <a href="about.html" class="footer-link">About DNM</a>
+          <a href="statistics.html" class="footer-link">Statistics</a>
+          <a href="drugs-effects.html" class="footer-link">Drugs & Effects</a>
+          <a href="join.html" class="footer-link">Join Us</a>
+          <a href="products.html" class="footer-link">Shop</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Contact</h4>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">Phuket, Thailand</span>
+          <a href="mailto:info@drugsnomore.org" class="footer-link">info@drugsnomore.org</a>
+          <a href="tel:+6676000000" class="footer-link">+66 76 000 000</a>
+        </div>
+        <div style="display:flex;gap:0.75rem;margin-top:1.25rem;">
+          <a href="#" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;transition:background 0.2s ease;" onmouseover="this.style.background='rgba(63,174,90,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'" aria-label="Facebook">
+            <svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          </a>
+          <a href="#" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;transition:background 0.2s ease;" onmouseover="this.style.background='rgba(63,174,90,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'" aria-label="Instagram">
+            <svg width="16" height="16" fill="none" stroke="#fff" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" style="width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:center;transition:background 0.2s ease;" onmouseover="this.style.background='rgba(63,174,90,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'" aria-label="Line">
+            <svg width="16" height="16" fill="#fff" viewBox="0 0 24 24"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1.5rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;">
+      <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">© 2025 Drugs No More (DNM). All rights reserved. Phuket, Thailand.</p>
+      <div style="display:flex;gap:1.5rem;">
+        <a href="#" class="footer-link" style="font-size:0.8rem;">Privacy Policy</a>
+        <a href="#" class="footer-link" style="font-size:0.8rem;">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  }, { passive: true });
+
+  // Mobile menu toggle
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+
+  // Intersection Observer fade-in
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Counter animation
+  function animateCounter(el, target, duration = 1800) {
+    let start = 0;
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = Math.min((timestamp - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = Math.floor(eased * target).toLocaleString() + (target >= 100 ? '+' : '');
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const target = parseInt(e.target.dataset.target);
+        animateCounter(e.target, target);
+        counterObserver.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
+
+  // Home chart
+  const ctx = document.getElementById('homeChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+      datasets: [{
+        label: 'Drug Use Rate (%)',
+        data: [18.4, 17.1, 16.8, 14.2, 12.9, 11.3, 9.8, 8.2],
+        borderColor: '#1F6B3A',
+        backgroundColor: 'rgba(31,107,58,0.08)',
+        borderWidth: 3,
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: '#3FAE5A',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 2,
+        pointRadius: 5,
+        pointHoverRadius: 7,
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: '#0F2E1A',
+          titleColor: '#3FAE5A',
+          bodyColor: '#fff',
+          borderColor: '#1F6B3A',
+          borderWidth: 1,
+          callbacks: { label: ctx => ` ${ctx.raw}% of youth surveyed` }
+        }
+      },
+      scales: {
+        x: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: '#A7B3AA', font: { family: 'Roboto', size: 11 } } },
+        y: {
+          grid: { color: 'rgba(0,0,0,0.04)' },
+          ticks: { color: '#A7B3AA', font: { family: 'Roboto', size: 11 }, callback: v => v + '%' },
+          min: 0, max: 25
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>

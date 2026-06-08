@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Us — DNM Drugs No More | Phuket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Roboto',sans-serif;color:#102418;background:#fff;}
+    .noise::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:200px;pointer-events:none;z-index:1;}
+    .navbar{position:sticky;top:0;z-index:100;background:#0F2E1A;border-bottom:1px solid rgba(63,174,90,0.15);}
+    .nav-link{color:rgba(255,255,255,0.75);font-family:'Roboto',sans-serif;font-size:0.875rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;padding:0.25rem 0;border-bottom:2px solid transparent;transition:color 0.2s ease,border-color 0.2s ease;}
+    .nav-link:hover,.nav-link.active{color:#3FAE5A;border-bottom-color:#3FAE5A;}
+    .nav-cta{background:#1F6B3A;color:#fff;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.6rem 1.4rem;border-radius:4px;text-decoration:none;border:1px solid #3FAE5A;transition:background 0.2s ease,transform 0.15s ease;}
+    .nav-cta:hover{background:#3FAE5A;transform:translateY(-1px);}
+    .mobile-menu{display:none;}
+    .mobile-menu.open{display:flex;}
+    .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s cubic-bezier(0.34,1.56,0.64,1);}
+    .fade-in.visible{opacity:1;transform:translateY(0);}
+    .card{background:#fff;border-radius:14px;box-shadow:0 2px 4px rgba(15,46,26,0.06),0 8px 24px rgba(15,46,26,0.08),0 0 0 1px rgba(15,46,26,0.04);}
+    .track-card{border-radius:14px;overflow:hidden;box-shadow:0 2px 4px rgba(15,46,26,0.06),0 12px 32px rgba(15,46,26,0.1),0 0 0 1px rgba(15,46,26,0.04);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.25s ease;}
+    .track-card:hover{transform:translateY(-5px);box-shadow:0 8px 16px rgba(15,46,26,0.1),0 24px 48px rgba(15,46,26,0.15);}
+    .form-label{display:block;font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#102418;margin-bottom:0.5rem;}
+    .form-input{width:100%;padding:0.75rem 1rem;border:1.5px solid #d1e8d8;border-radius:8px;font-family:'Roboto',sans-serif;font-size:0.95rem;color:#102418;background:#fff;transition:border-color 0.2s ease,box-shadow 0.2s ease;outline:none;}
+    .form-input:focus{border-color:#1F6B3A;box-shadow:0 0 0 3px rgba(31,107,58,0.12);}
+    .form-input:focus-visible{outline:none;}
+    .form-select{width:100%;padding:0.75rem 1rem;border:1.5px solid #d1e8d8;border-radius:8px;font-family:'Roboto',sans-serif;font-size:0.95rem;color:#102418;background:#fff;transition:border-color 0.2s ease,box-shadow 0.2s ease;outline:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg width='12' height='7' viewBox='0 0 12 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%231F6B3A' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center;}
+    .form-select:focus{border-color:#1F6B3A;box-shadow:0 0 0 3px rgba(31,107,58,0.12);}
+    .form-textarea{width:100%;padding:0.75rem 1rem;border:1.5px solid #d1e8d8;border-radius:8px;font-family:'Roboto',sans-serif;font-size:0.95rem;color:#102418;background:#fff;transition:border-color 0.2s ease,box-shadow 0.2s ease;outline:none;resize:vertical;min-height:120px;}
+    .form-textarea:focus{border-color:#1F6B3A;box-shadow:0 0 0 3px rgba(31,107,58,0.12);}
+    .btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:#1F6B3A;color:#fff;font-weight:700;font-size:0.9rem;letter-spacing:0.04em;text-transform:uppercase;padding:0.875rem 2rem;border-radius:6px;border:none;cursor:pointer;transition:background 0.2s ease,transform 0.15s cubic-bezier(0.34,1.56,0.64,1);}
+    .btn-primary:hover{background:#3FAE5A;color:#0F2E1A;transform:translateY(-2px);}
+    .btn-primary:active{transform:translateY(0);}
+    .btn-primary:focus-visible{outline:3px solid #3FAE5A;outline-offset:3px;}
+    .leaf-divider{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
+    .leaf-divider::before,.leaf-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#3FAE5A,transparent);}
+    footer{background:#0F2E1A;}
+    .footer-link{color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.875rem;transition:color 0.2s ease;}
+    .footer-link:hover{color:#3FAE5A;}
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+    <a href="index.html" class="flex items-center gap-3">
+      <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:44px;width:44px;object-fit:contain;" />
+      <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#fff;">Drugs No More</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="statistics.html" class="nav-link">Statistics</a>
+      <a href="drugs-effects.html" class="nav-link">Drugs & Effects</a>
+      <a href="products.html" class="nav-link">Shop</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div class="hidden md:flex"><a href="join.html" class="nav-cta active" style="background:#3FAE5A;color:#0F2E1A;">Join Us</a></div>
+    <button class="md:hidden text-white p-2" onclick="toggleMenu()">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu md:hidden flex-col px-6 pb-4 gap-3 border-t border-white/10">
+    <a href="index.html" class="nav-link py-2">Home</a>
+    <a href="about.html" class="nav-link py-2">About</a>
+    <a href="statistics.html" class="nav-link py-2">Statistics</a>
+    <a href="drugs-effects.html" class="nav-link py-2">Drugs & Effects</a>
+    <a href="products.html" class="nav-link py-2">Shop</a>
+    <a href="contact.html" class="nav-link py-2">Contact</a>
+    <a href="join.html" class="nav-cta self-start mt-2">Join Us</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section style="background:#0F2E1A;padding:5rem 0 4rem;position:relative;overflow:hidden;" class="noise">
+  <div style="position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(31,107,58,0.35) 0%,transparent 70%);top:-150px;right:-100px;filter:blur(60px);pointer-events:none;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10 text-center">
+    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" style="margin:0 auto 1.5rem;">
+      <path d="M26 46C26 46 6 36 6 20C6 10 15 3 26 3C37 3 46 10 46 20C46 36 26 46 26 46Z" fill="#3FAE5A" opacity="0.85"/>
+      <path d="M26 46L26 3" stroke="#0F2E1A" stroke-width="2.5"/>
+      <path d="M26 22L16 12M26 22L36 12M26 32L19 25M26 32L33 25" stroke="#0F2E1A" stroke-width="2"/>
+    </svg>
+    <div style="display:inline-flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+      <span style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">Get Involved</span>
+    </div>
+    <h1 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,5vw,4.5rem);color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:1rem;">Be Part of the<br /><em style="color:#3FAE5A;">Movement</em></h1>
+    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;max-width:560px;margin:0 auto;line-height:1.75;">Every person who joins DNM makes Phuket safer for the next generation. Find the way that's right for you.</p>
+  </div>
+</section>
+
+<!-- THREE TRACKS -->
+<section style="background:#E8F5EC;padding:5rem 0;">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+      <!-- Volunteer -->
+      <div class="track-card fade-in" style="background:#fff;">
+        <div style="background:linear-gradient(135deg,#0F2E1A,#1F6B3A);padding:2rem;text-align:center;">
+          <div style="width:64px;height:64px;border-radius:50%;background:rgba(63,174,90,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#3FAE5A" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:#fff;margin-bottom:0.5rem;">Volunteer</h3>
+          <p style="color:rgba(255,255,255,0.65);font-size:0.875rem;line-height:1.6;">Give your time and skills to make a direct impact in Phuket schools and communities.</p>
+        </div>
+        <div style="padding:2rem;">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem;">
+            <li style="display:flex;align-items:flex-start;gap:0.75rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3FAE5A" stroke-width="2.5" style="flex-shrink:0;margin-top:0.15rem;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="color:#4a6b55;font-size:0.875rem;">School education sessions</span>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:0.75rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3FAE5A" stroke-width="2.5" style="flex-shrink:0;margin-top:0.15rem;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="color:#4a6b55;font-size:0.875rem;">Community outreach events</span>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:0.75rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3FAE5A" stroke-width="2.5" style="flex-shrink:0;margin-top:0.15rem;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="color:#4a6b55;font-size:0.875rem;">Translation & multilingual support</span>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:0.75rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3FAE5A" stroke-width="2.5" style="flex-shrink:0;margin-top:0.15rem;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="color:#4a6b55;font-size:0.875rem;">Creative, design & digital skills</span>
+            </li>
+          </ul>
+          <a href="#volunteer-form" style="display:block;text-align:center;background:#1F6B3A;color:#fff;font-weight:700;font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.875rem;border-radius:6px;text-decoration:none;transition:background 0.2s ease,transform 0.15s ease;" onmouseover="this.style.background='#3FAE5A';this.style.color='#0F2E1A';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#1F6B3A';this.style.color='#fff';this.style.transform='translateY(0)'">Apply to Volunteer</a>
+        </div>
+      </div>
+
+      <!-- Partner -->
+      <div class="track-card fade-in" style="background:#fff;transition-delay:0.1s;">
+        <div style="background:linear-gradient(135deg,#1F6B3A,#3FAE5A);padding:2rem;text-align:center;">
+          <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M16 6l4 14M12 6v14M8 6l-4 14"/><path d="M2 17h20"/></svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:#fff;margin-bottom:0.5rem;">Partner Organization</h3>
+          <p style="color:rgba(255,255,255,0.85);font-size:0.875rem;line-height:1.6;">Schools, businesses, and NGOs can partner with DNM to bring prevention programs to your community.</p>
+        </div>
+        <div style="padding:2rem;">
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:0.75rem;margin-bottom:2rem;">
+            <li style="display:flex;align-items:flex-start;gap:0.75rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3FAE5A" stroke-width="2.5" style="flex-shrink:0;margin-top:0.15rem;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="color:#4a6b55;font-size:0.875rem;">Co-branded school programs</span>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:0.75rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3FAE5A" stroke-width="2.5" style="flex-shrink:0;margin-top:0.15rem;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="color:#4a6b55;font-size:0.875rem;">Workplace prevention workshops</span>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:0.75rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3FAE5A" stroke-width="2.5" style="flex-shrink:0;margin-top:0.15rem;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="color:#4a6b55;font-size:0.875rem;">Joint community events</span>
+            </li>
+            <li style="display:flex;align-items:flex-start;gap:0.75rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3FAE5A" stroke-width="2.5" style="flex-shrink:0;margin-top:0.15rem;"><polyline points="20 6 9 17 4 12"/></svg>
+              <span style="color:#4a6b55;font-size:0.875rem;">Annual partner recognition</span>
+            </li>
+          </ul>
+          <a href="contact.html" style="display:block;text-align:center;background:#1F6B3A;color:#fff;font-weight:700;font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.875rem;border-radius:6px;text-decoration:none;transition:background 0.2s ease,transform 0.15s ease;" onmouseover="this.style.background='#3FAE5A';this.style.color='#0F2E1A';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#1F6B3A';this.style.color='#fff';this.style.transform='translateY(0)'">Become a Partner</a>
+        </div>
+      </div>
+
+      <!-- Donate -->
+      <div class="track-card fade-in" style="background:#fff;transition-delay:0.2s;">
+        <div style="background:linear-gradient(135deg,#3FAE5A,#5dcc74);padding:2rem;text-align:center;">
+          <div style="width:64px;height:64px;border-radius:50%;background:rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0F2E1A" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          </div>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:#0F2E1A;margin-bottom:0.5rem;">Donate</h3>
+          <p style="color:rgba(15,46,26,0.75);font-size:0.875rem;line-height:1.6;">Every contribution directly funds school programs, community events, and support resources.</p>
+        </div>
+        <div style="padding:2rem;">
+          <div style="display:flex;flex-wrap:wrap;gap:0.6rem;margin-bottom:1.5rem;">
+            <button onclick="selectAmount(this,'500')" style="flex:1;min-width:80px;padding:0.6rem;border:1.5px solid #d1e8d8;border-radius:8px;font-family:'Roboto',sans-serif;font-size:0.875rem;font-weight:600;color:#1F6B3A;background:#fff;cursor:pointer;transition:all 0.2s ease;">฿500</button>
+            <button onclick="selectAmount(this,'1000')" style="flex:1;min-width:80px;padding:0.6rem;border:1.5px solid #1F6B3A;border-radius:8px;font-family:'Roboto',sans-serif;font-size:0.875rem;font-weight:600;color:#fff;background:#1F6B3A;cursor:pointer;transition:all 0.2s ease;">฿1,000</button>
+            <button onclick="selectAmount(this,'2500')" style="flex:1;min-width:80px;padding:0.6rem;border:1.5px solid #d1e8d8;border-radius:8px;font-family:'Roboto',sans-serif;font-size:0.875rem;font-weight:600;color:#1F6B3A;background:#fff;cursor:pointer;transition:all 0.2s ease;">฿2,500</button>
+            <button onclick="selectAmount(this,'custom')" id="customBtn" style="flex:1;min-width:80px;padding:0.6rem;border:1.5px solid #d1e8d8;border-radius:8px;font-family:'Roboto',sans-serif;font-size:0.875rem;font-weight:600;color:#1F6B3A;background:#fff;cursor:pointer;transition:all 0.2s ease;">Custom</button>
+          </div>
+          <p style="color:#A7B3AA;font-size:0.8rem;line-height:1.5;margin-bottom:1.5rem;">Secure payment processing. All donations support DNM programs in Phuket directly.</p>
+          <button style="display:block;width:100%;text-align:center;background:#3FAE5A;color:#0F2E1A;font-weight:700;font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.875rem;border-radius:6px;border:none;cursor:pointer;transition:background 0.2s ease,transform 0.15s ease;" onmouseover="this.style.background='#4dcc6e';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#3FAE5A';this.style.transform='translateY(0)'">Donate Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOLUNTEER FORM -->
+<section id="volunteer-form" style="background:#fff;padding:6rem 0;">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="text-center mb-12 fade-in">
+      <div class="leaf-divider" style="justify-content:center;">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
+      </div>
+      <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.75rem);color:#0F2E1A;letter-spacing:-0.03em;">Volunteer Sign-Up</h2>
+      <p style="color:#4a6b55;margin-top:0.75rem;line-height:1.7;">Fill in the form below and our team will be in touch within 3 working days.</p>
+    </div>
+    <div class="card fade-in" style="padding:2.5rem;">
+      <form onsubmit="handleSubmit(event)">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label class="form-label">First Name *</label>
+            <input type="text" class="form-input" placeholder="e.g. Sunisa" required />
+          </div>
+          <div>
+            <label class="form-label">Last Name *</label>
+            <input type="text" class="form-input" placeholder="e.g. Thonglor" required />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div>
+            <label class="form-label">Email Address *</label>
+            <input type="email" class="form-input" placeholder="you@email.com" required />
+          </div>
+          <div>
+            <label class="form-label">Phone Number</label>
+            <input type="tel" class="form-input" placeholder="+66 00 000 0000" />
+          </div>
+        </div>
+        <div class="mb-6">
+          <label class="form-label">Area of Interest *</label>
+          <select class="form-select" required>
+            <option value="">Select an area...</option>
+            <option>School Education Programs</option>
+            <option>Community Outreach</option>
+            <option>Family Support</option>
+            <option>Translation / Multilingual</option>
+            <option>Creative / Design / Digital</option>
+            <option>Events & Coordination</option>
+            <option>Fundraising</option>
+            <option>Open to Any Role</option>
+          </select>
+        </div>
+        <div class="mb-6">
+          <label class="form-label">Availability</label>
+          <select class="form-select">
+            <option value="">Select availability...</option>
+            <option>Weekday mornings</option>
+            <option>Weekday afternoons</option>
+            <option>Weekends</option>
+            <option>Flexible / Remote only</option>
+          </select>
+        </div>
+        <div class="mb-6">
+          <label class="form-label">Languages Spoken</label>
+          <input type="text" class="form-input" placeholder="e.g. Thai, English, Mandarin" />
+        </div>
+        <div class="mb-8">
+          <label class="form-label">Tell us about yourself</label>
+          <textarea class="form-textarea" placeholder="Briefly share your background, motivation, or any relevant experience..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary w-full justify-center">
+          Submit Application
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </form>
+      <div id="formSuccess" style="display:none;text-align:center;padding:2rem;background:#E8F5EC;border-radius:10px;margin-top:1.5rem;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#1F6B3A" stroke-width="2" style="margin:0 auto 1rem;"><circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/></svg>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;color:#0F2E1A;margin-bottom:0.5rem;">Application Received!</h3>
+        <p style="color:#4a6b55;font-size:0.9rem;">Thank you for wanting to make a difference. We'll be in touch within 3 working days.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="py-14">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <a href="index.html" class="flex items-center gap-3 mb-4">
+          <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:48px;width:48px;object-fit:contain;" />
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;">Drugs No More</div>
+            <div style="color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;">Phuket, Thailand</div>
+          </div>
+        </a>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:320px;">Prevention through education and understanding. Building healthier communities across Phuket since 2016.</p>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Pages</h4>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <a href="about.html" class="footer-link">About DNM</a>
+          <a href="statistics.html" class="footer-link">Statistics</a>
+          <a href="drugs-effects.html" class="footer-link">Drugs & Effects</a>
+          <a href="join.html" class="footer-link">Join Us</a>
+          <a href="products.html" class="footer-link">Shop</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Contact</h4>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">Phuket, Thailand</span>
+          <a href="mailto:info@drugsnomore.org" class="footer-link">info@drugsnomore.org</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1.5rem;">
+      <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">© 2025 Drugs No More (DNM). All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  function selectAmount(btn, val) {
+    document.querySelectorAll('[onclick^="selectAmount"]').forEach(b => {
+      b.style.background = '#fff'; b.style.color = '#1F6B3A'; b.style.borderColor = '#d1e8d8';
+    });
+    btn.style.background = '#1F6B3A'; btn.style.color = '#fff'; btn.style.borderColor = '#1F6B3A';
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    e.target.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+</script>
+</body>
+</html>
