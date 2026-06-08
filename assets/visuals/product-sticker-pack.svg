@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" role="img" aria-label="DNM Sticker Pack">
+  <rect width="400" height="300" fill="#E8F5EC"/>
+  <circle cx="144" cy="126" r="58" fill="#1F6B3A"/>
+  <rect x="188" y="75" width="92" height="92" rx="20" fill="#3FAE5A"/>
+  <path d="M134 213h134l-14-66H148z" fill="#0F2E1A" opacity=".9"/>
+  <text x="144" y="137" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="26" font-weight="700">DNM</text>
+  <text x="200" y="264" text-anchor="middle" fill="#1F6B3A" font-family="Arial, sans-serif" font-size="26" font-weight="700">Sticker Pack</text>
+</svg>

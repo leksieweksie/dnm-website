@@ -1,0 +1,77 @@
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pageOut {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(8px); }
+}
+
+@keyframes glowDrift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(28px, 18px, 0) scale(1.08); }
+}
+
+@keyframes leafFloatWide {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(25deg); }
+  50% { transform: translate3d(-16px, 18px, 0) rotate(31deg); }
+}
+
+@keyframes leafFloatSmall {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(-15deg); }
+  50% { transform: translate3d(18px, -14px, 0) rotate(-22deg); }
+}
+
+@keyframes spotlightSweep {
+  0%, 100% { transform: translate3d(-8%, -4%, 0) rotate(-8deg); opacity: 0.22; }
+  50% { transform: translate3d(8%, 5%, 0) rotate(7deg); opacity: 0.34; }
+}
+
+body {
+  animation: pageIn 260ms ease both;
+}
+
+body.page-leave {
+  animation: pageOut 180ms ease forwards;
+}
+
+.hero-glow-1 {
+  animation: glowDrift 12s ease-in-out infinite;
+}
+
+.hero-glow-2 {
+  animation: glowDrift 16s ease-in-out infinite reverse;
+}
+
+.leaf-particle,
+.leaf-particle-large {
+  animation: leafFloatWide 11s ease-in-out infinite;
+}
+
+.leaf-particle-small {
+  animation: leafFloatSmall 13s ease-in-out infinite;
+}
+
+.hero-spotlight {
+  position: absolute;
+  inset: -20%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 38% 42%, rgba(63, 174, 90, 0.18) 0%, rgba(63, 174, 90, 0.08) 24%, transparent 52%),
+    linear-gradient(112deg, transparent 0%, rgba(255, 255, 255, 0.045) 42%, transparent 68%);
+  filter: blur(10px);
+  animation: spotlightSweep 14s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
+  }
+}

@@ -7,28 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            forest: '#0F2E1A',
-            primary: '#1F6B3A',
-            accent: '#3FAE5A',
-            light: '#E8F5EC',
-            darktext: '#102418',
-            muted: '#A7B3AA',
-          },
-          fontFamily: {
-            display: ['Playfair Display', 'Georgia', 'serif'],
-            body: ['Roboto', 'sans-serif'],
-          },
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="assets/tailwind.css" />
+  <link rel="stylesheet" href="assets/site.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -263,7 +243,7 @@
 <nav class="navbar" id="navbar">
   <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
     <a href="index.html" class="flex items-center gap-3">
-      <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:44px;width:44px;object-fit:contain;" />
+      <img src="assets/dnmlogo.png" alt="DNM Logo" width="44" height="44" decoding="async" fetchpriority="high" style="height:44px;width:44px;object-fit:contain;" />
       <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#fff;letter-spacing:-0.01em;">Drugs No More</span>
     </a>
     <!-- Desktop nav -->
@@ -300,15 +280,16 @@
 <!-- HERO -->
 <section class="hero noise">
   <!-- Glows -->
+  <div class="hero-spotlight"></div>
   <div class="hero-glow hero-glow-1"></div>
   <div class="hero-glow hero-glow-2"></div>
   <!-- Decorative leaves -->
-  <svg class="leaf-particle" style="width:320px;top:10%;right:5%;transform:rotate(25deg);" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="leaf-particle leaf-particle-large" style="width:320px;top:10%;right:5%;transform:rotate(25deg);" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M100 180C100 180 20 140 20 80C20 40 60 10 100 10C140 10 180 40 180 80C180 140 100 180 100 180Z" fill="#3FAE5A"/>
     <path d="M100 180L100 10" stroke="#1F6B3A" stroke-width="2"/>
     <path d="M100 80L60 40M100 80L140 40M100 120L70 90M100 120L130 90" stroke="#1F6B3A" stroke-width="1.5"/>
   </svg>
-  <svg class="leaf-particle" style="width:180px;bottom:15%;left:3%;transform:rotate(-15deg);" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <svg class="leaf-particle leaf-particle-small" style="width:180px;bottom:15%;left:3%;transform:rotate(-15deg);" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M100 180C100 180 20 140 20 80C20 40 60 10 100 10C140 10 180 40 180 80C180 140 100 180 100 180Z" fill="#3FAE5A"/>
     <path d="M100 180L100 10" stroke="#1F6B3A" stroke-width="2"/>
   </svg>
@@ -359,11 +340,11 @@
       </div>
       <div class="fade-in" style="transition-delay:0.1s;">
         <div class="counter-num" data-target="4">0</div>
-        <div style="color:rgba(255,255,255,0.6);font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Founding Team Members</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Founding team members</div>
       </div>
       <div class="fade-in" style="transition-delay:0.2s;">
         <div class="counter-num" data-target="1">0</div>
-        <div style="color:rgba(255,255,255,0.6);font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Island, 1 Community</div>
+        <div style="color:rgba(255,255,255,0.6);font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Island, 1 community</div>
       </div>
     </div>
   </div>
@@ -381,10 +362,10 @@
           Building a<br /><em style="color:#1F6B3A;">drug-free future</em><br />for Phuket
         </h2>
         <p style="color:#4a6b55;font-size:1rem;line-height:1.8;margin-bottom:1rem;">
-          Founded in Phuket, DNM (Drugs No More) works alongside schools, families, and the community to prevent drug use before it even begins.
+          DNM is a non-profit organisation founded by a group of students learning at British International School Phuket. We aim to reduce drug use and make Phuket a safer place for everyone!
         </p>
         <p style="color:#4a6b55;font-size:1rem;line-height:1.8;margin-bottom:2rem;">
-          Our approach is rooted in education, empathy, and evidence, not fear. We believe that when young people are given the right information and genuine support, they make better choices.
+          We are just getting started, so our current focus is building clear education resources, growing a founding team, and preparing ways to support the local community.
         </p>
         <a href="about.html" class="btn-primary" style="background:#1F6B3A;color:#fff;">
           Our Story
@@ -393,7 +374,7 @@
       </div>
       <div style="position:relative;">
         <div style="border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(15,46,26,0.18),0 4px 12px rgba(15,46,26,0.1);">
-          <img src="https://placehold.co/600x450/0F2E1A/3FAE5A?text=Community+in+Action" alt="DNM community" style="width:100%;height:auto;display:block;" />
+          <img loading="lazy" decoding="async" src="assets/visuals/community-action.svg" width="600" height="450" alt="DNM community" style="width:100%;height:auto;display:block;" />
           <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(15,46,26,0.5) 0%, transparent 50%);"></div>
         </div>
         <!-- Accent card -->
@@ -403,7 +384,7 @@
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
             </div>
             <div>
-              <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;line-height:1;">Coming soon</div>
+              <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;line-height:1;">Coming Soon</div>
               <div style="font-size:0.75rem;color:#A7B3AA;margin-top:0.15rem;">to your community</div>
             </div>
           </div>
@@ -421,7 +402,7 @@
         <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
       </div>
       <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.75rem);color:#0F2E1A;letter-spacing:-0.03em;">How We Work</h2>
-      <p style="color:#4a6b55;margin-top:0.75rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7;">Three pillars that drive everything we do in Phuket communities.</p>
+      <p style="color:#4a6b55;margin-top:0.75rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7;">Three areas we are building as DNM begins in Phuket.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <div class="card fade-in p-8">
@@ -429,7 +410,7 @@
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F6B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
         </div>
         <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#0F2E1A;margin-bottom:0.75rem;">Education</h3>
-        <p style="color:#4a6b55;line-height:1.75;font-size:0.95rem;">Evidence-based curriculum delivered in Phuket schools, giving students the knowledge and confidence to make safe choices.</p>
+        <p style="color:#4a6b55;line-height:1.75;font-size:0.95rem;">Clear, student-friendly drug education resources designed to help young people understand risks and make safer choices.</p>
         <a href="drugs-effects.html" style="display:inline-flex;align-items:center;gap:0.4rem;color:#1F6B3A;font-weight:600;font-size:0.875rem;text-decoration:none;margin-top:1.25rem;transition:gap 0.2s ease;" onmouseover="this.style.gap='0.7rem'" onmouseout="this.style.gap='0.4rem'">
           Learn More <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -439,7 +420,7 @@
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F6B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#0F2E1A;margin-bottom:0.75rem;">Community Outreach</h3>
-        <p style="color:#4a6b55;line-height:1.75;font-size:0.95rem;">Working directly with families, local leaders, and at-risk youth to build networks of support across all of Phuket's districts.</p>
+        <p style="color:#4a6b55;line-height:1.75;font-size:0.95rem;">A starting point for future awareness projects, school conversations, and community support across Phuket.</p>
         <a href="about.html" style="display:inline-flex;align-items:center;gap:0.4rem;color:#1F6B3A;font-weight:600;font-size:0.875rem;text-decoration:none;margin-top:1.25rem;transition:gap 0.2s ease;" onmouseover="this.style.gap='0.7rem'" onmouseout="this.style.gap='0.4rem'">
           Learn More <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -449,7 +430,7 @@
           <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F6B3A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
         </div>
         <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.3rem;color:#0F2E1A;margin-bottom:0.75rem;">Support & Recovery</h3>
-        <p style="color:#4a6b55;line-height:1.75;font-size:0.95rem;">Connecting individuals and families with the resources, counselling, and peer support they need to rebuild healthy lives.</p>
+        <p style="color:#4a6b55;line-height:1.75;font-size:0.95rem;">Simple information and guidance that can help people find support as the organisation grows.</p>
         <a href="contact.html" style="display:inline-flex;align-items:center;gap:0.4rem;color:#1F6B3A;font-weight:600;font-size:0.875rem;text-decoration:none;margin-top:1.25rem;transition:gap 0.2s ease;" onmouseover="this.style.gap='0.7rem'" onmouseout="this.style.gap='0.4rem'">
           Get Help <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -469,32 +450,20 @@
         <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.75rem);color:#0F2E1A;letter-spacing:-0.03em;margin-bottom:1.25rem;">
           The data tells<br /><em style="color:#1F6B3A;">a clear story</em>
         </h2>
-        <p style="color:#4a6b55;line-height:1.8;margin-bottom:1rem;">Drug use among Phuket youth has measurably declined in communities where DNM programs are active. We track, report, and publish our impact.</p>
-        <p style="color:#4a6b55;line-height:1.8;margin-bottom:2rem;">Transparency is part of our commitment — to our community, our donors, and the young people we serve.</p>
+        <p style="color:#4a6b55;line-height:1.8;margin-bottom:1rem;">ASEAN's drug monitoring report and Thai school research show why prevention education matters.</p>
+        <p style="color:#4a6b55;line-height:1.8;margin-bottom:2rem;">DNM uses source-backed data to focus education, outreach, and prevention where they matter most.</p>
         <a href="statistics.html" class="btn-primary" style="background:#1F6B3A;color:#fff;">
           View Full Statistics
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </a>
       </div>
       <div class="card fade-in p-8" style="transition-delay:0.15s;">
-        <div style="margin-bottom:1.25rem;">
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;">Drug Cases in Phuket — Official Records</h3>
-          <p style="font-size:0.78rem;color:#A7B3AA;margin-top:0.25rem;">Source: Phuket Provincial Narcotics Prevention &amp; Suppression Center / The Phuket News</p>
-        </div>
-        <!-- Legend -->
-        <div style="display:flex;gap:1.25rem;margin-bottom:1rem;flex-wrap:wrap;">
-          <span style="font-size:0.72rem;color:#4a6b55;display:flex;align-items:center;gap:0.35rem;">
-            <span style="display:inline-block;width:12px;height:12px;background:#1F6B3A;border-radius:2px;"></span> Verified
-          </span>
-          <span style="font-size:0.72rem;color:#4a6b55;display:flex;align-items:center;gap:0.35rem;">
-            <span style="display:inline-block;width:12px;height:12px;background:rgba(31,107,58,0.35);border:1.5px dashed #1F6B3A;border-radius:2px;"></span> Estimated
-          </span>
-          <span style="font-size:0.72rem;color:#4a6b55;display:flex;align-items:center;gap:0.35rem;">
-            <span style="display:inline-block;width:12px;height:12px;background:#e8ede9;border:1.5px solid #c5d4c8;border-radius:2px;"></span> No data
-          </span>
+        <div style="margin-bottom:1rem;">
+          <h3 style="font-family:'Playfair Display',serif;font-weight:600;font-size:1rem;color:#0F2E1A;">Student Substance Data</h3>
+          <p style="font-size:0.8rem;color:#A7B3AA;margin-top:0.25rem;">Prevalence by substance from the JMAT school study</p>
         </div>
         <canvas id="homeChart" height="220"></canvas>
-        <p style="font-size:0.72rem;color:#A7B3AA;margin-top:1rem;line-height:1.6;font-style:italic;">Arrest figures reflect enforcement activity and may not represent total drug use. Data gaps exist for 2020–2021. Sources: Phuket Provincial Narcotics Prevention &amp; Suppression Center reports via The Phuket News.</p>
+        <p style="font-size:0.72rem;color:#A7B3AA;margin-top:0.85rem;">Source: J Med Assoc Thai, 2018</p>
       </div>
     </div>
   </div>
@@ -524,13 +493,13 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
       <div class="md:col-span-2">
         <a href="index.html" class="flex items-center gap-3 mb-4">
-          <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:48px;width:48px;object-fit:contain;" />
+          <img loading="lazy" decoding="async" src="assets/dnmlogo.png" alt="DNM Logo" width="48" height="48" style="height:48px;width:48px;object-fit:contain;" />
           <div>
             <div style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;">Drugs No More</div>
             <div style="color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;">Phuket, Thailand</div>
           </div>
         </a>
-        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:320px;">Prevention through education and understanding. Building healthier communities across Phuket since 2016.</p>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:320px;">DNM is a non-profit organisation founded by a group of students learning at British International School Phuket. We aim to reduce drug use and make Phuket a safer place for everyone!</p>
       </div>
       <div>
         <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Pages</h4>
@@ -564,11 +533,16 @@
       </div>
     </div>
     <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1.5rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;">
-      <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">© 2026 Drugs No More (DNM). All rights reserved.</p>
+      <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">© 2026 Drugs No More (DNM). All rights reserved. Phuket, Thailand.</p>
+      <div style="display:flex;gap:1.5rem;">
+        <a href="#" class="footer-link" style="font-size:0.8rem;">Privacy Policy</a>
+        <a href="#" class="footer-link" style="font-size:0.8rem;">Terms of Use</a>
+      </div>
     </div>
   </div>
 </footer>
 
+<script src="assets/chart.umd.min.js"></script>
 <script>
   // Navbar scroll effect
   const navbar = document.getElementById('navbar');
@@ -600,7 +574,8 @@
       if (!start) start = timestamp;
       const progress = Math.min((timestamp - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
-      el.textContent = Math.floor(eased * target).toLocaleString() + (target >= 100 && !el.dataset.noSuffix ? '+' : '');
+      const value = Math.floor(eased * target);
+      el.textContent = (el.dataset.noSuffix ? String(value) : value.toLocaleString()) + (el.dataset.suffix || '');
       if (progress < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
@@ -617,107 +592,68 @@
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-target]').forEach(el => counterObserver.observe(el));
 
-  // Home chart — Drug Cases in Phuket (official records)
-  const rawData = [
-    { year: "2019", cases: 6697,  note: "Jan–Oct only (Phuket Provincial Court)", verified: true },
-    { year: "2020", cases: null,  verified: false },
-    { year: "2021", cases: null,  verified: false },
-    { year: "2022", cases: 1971,  note: "Full year arrests", verified: true },
-    { year: "2023", cases: 2500,  note: "2,209 by Sept; full year est.", verified: false },
-    { year: "2024", cases: 2076,  note: "Oct 2023–Sept 2024, +4.34% on prior year", verified: true },
-    { year: "2025", cases: null,  note: "Partial data only (rising trend confirmed)", verified: false },
-  ];
+  function loadChartScript(callback) {
+    if (window.Chart) {
+      callback();
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'assets/chart.umd.min.js';
+    script.onload = callback;
+    document.head.appendChild(script);
+  }
 
-  const labels = rawData.map(d => d.year);
-  const values = rawData.map(d => d.cases !== null ? d.cases : 0);
-
-  // Per-bar colours and border styles
-  const bgColors = rawData.map(d => {
-    if (d.cases === null) return '#e8ede9';
-    if (d.verified)       return '#1F6B3A';
-    return 'rgba(31,107,58,0.38)';
-  });
-  const borderColors = rawData.map(d => {
-    if (d.cases === null) return '#c5d4c8';
-    if (d.verified)       return '#1F6B3A';
-    return '#1F6B3A';
-  });
-  const borderWidths = rawData.map(d => (d.cases === null || d.verified) ? 0 : 1.5);
-  const borderDash = rawData.map(d => (!d.verified && d.cases !== null) ? [4, 3] : []);
-
-  const ctx = document.getElementById('homeChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [{
-        label: 'Drug cases',
-        data: values,
-        backgroundColor: bgColors,
-        borderColor: borderColors,
-        borderWidth: borderWidths,
-        borderRadius: 4,
-        borderSkipped: false,
-      }]
-    },
-    options: {
-      responsive: true,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#0F2E1A',
-          titleColor: '#3FAE5A',
-          bodyColor: '#fff',
-          borderColor: '#1F6B3A',
-          borderWidth: 1,
-          callbacks: {
-            label: function(ctx) {
-              const d = rawData[ctx.dataIndex];
-              if (d.cases === null) return ' Data unavailable';
-              const tag = d.verified ? ' ✓ Verified' : ' ~ Estimated';
-              return [` ${d.cases.toLocaleString()} cases`, tag, d.note ? ` ${d.note}` : ''].filter(Boolean);
-            }
-          }
-        }
+  function initHomeChart() {
+    const ctx = document.getElementById('homeChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Alcohol', 'Tobacco', 'Cannabis', 'Inhalants', 'Opium', 'ATS', 'Sedatives', 'Hallucinogens'],
+        datasets: [{
+          label: 'Lifetime prevalence (%)',
+          data: [30.10, 16.81, 3.89, 3.60, 2.85, 2.19, 1.53, 1.41],
+          backgroundColor: ['#1F6B3A', '#0F2E1A', '#3FAE5A', '#6FAA75', '#8A4F2A', '#2F7C8F', '#6A4FA3', '#3D6FA8'],
+          borderRadius: 7,
+          borderSkipped: false,
+        }]
       },
-      scales: {
-        x: {
-          grid: { display: false },
-          ticks: { color: '#A7B3AA', font: { family: 'Roboto', size: 11 } }
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            backgroundColor: '#0F2E1A',
+            titleColor: '#3FAE5A',
+            bodyColor: '#fff',
+            borderColor: '#1F6B3A',
+            borderWidth: 1,
+            callbacks: { label: ctx => ` ${ctx.raw}% lifetime prevalence` }
+          }
         },
-        y: {
-          grid: { color: 'rgba(0,0,0,0.04)' },
-          ticks: { color: '#A7B3AA', font: { family: 'Roboto', size: 11 }, callback: v => v.toLocaleString() },
-          min: 0
+        scales: {
+          x: { grid: { display: false }, ticks: { color: '#A7B3AA', font: { family: 'Roboto', size: 10 }, maxRotation: 45, minRotation: 0 } },
+          y: {
+            grid: { color: 'rgba(0,0,0,0.04)' },
+            ticks: { color: '#A7B3AA', font: { family: 'Roboto', size: 11 }, callback: v => v + '%' },
+            beginAtZero: true
+          }
         }
       }
-    },
-    plugins: [{
-      // Draw "Data unavailable" and "Estimated" labels inside/above bars
-      afterDatasetsDraw(chart) {
-        const { ctx, data } = chart;
-        ctx.save();
-        data.datasets[0].data.forEach((val, i) => {
-          const d = rawData[i];
-          const bar = chart.getDatasetMeta(0).data[i];
-          if (!bar) return;
-          const x = bar.x;
-          if (d.cases === null) {
-            ctx.fillStyle = '#A7B3AA';
-            ctx.font = '10px Roboto, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('No data', x, bar.y - 6);
-          } else if (!d.verified) {
-            ctx.fillStyle = '#1F6B3A';
-            ctx.font = '10px Roboto, sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText('Est.', x, bar.y - 6);
-          }
-        });
-        ctx.restore();
-      }
-    }]
-  });
+    });
+  }
+
+  const chartCanvas = document.getElementById('homeChart');
+  if ('IntersectionObserver' in window) {
+    const chartObserver = new IntersectionObserver((entries) => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      chartObserver.disconnect();
+      loadChartScript(initHomeChart);
+    }, { rootMargin: '240px' });
+    chartObserver.observe(chartCanvas);
+  } else {
+    loadChartScript(initHomeChart);
+  }
 </script>
+<script src="assets/site.js"></script>
 </body>
 </html>

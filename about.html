@@ -7,20 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            forest: '#0F2E1A', primary: '#1F6B3A', accent: '#3FAE5A',
-            light: '#E8F5EC', darktext: '#102418', muted: '#A7B3AA',
-          },
-          fontFamily: { display: ['Playfair Display','Georgia','serif'], body: ['Roboto','sans-serif'] }
-        }
-      }
-    }
-  </script>
+  <link rel="stylesheet" href="assets/tailwind.css" />
+  <link rel="stylesheet" href="assets/site.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -55,7 +43,7 @@
 <nav class="navbar" id="navbar">
   <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
     <a href="index.html" class="flex items-center gap-3">
-      <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:44px;width:44px;object-fit:contain;" />
+      <img src="assets/dnmlogo.png" alt="DNM Logo" width="44" height="44" decoding="async" fetchpriority="high" style="height:44px;width:44px;object-fit:contain;" />
       <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#fff;letter-spacing:-0.01em;">Drugs No More</span>
     </a>
     <div class="hidden md:flex items-center gap-8">
@@ -93,7 +81,7 @@
       <span style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">Who We Are</span>
     </div>
     <h1 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,5vw,4rem);color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:1rem;">About DNM</h1>
-    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;max-width:560px;line-height:1.75;">We are Phuket's community-rooted drug prevention initiative — working every day to protect young people through education, empathy, and action.</p>
+    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;max-width:620px;line-height:1.75;">DNM is a student-founded non-profit organisation starting in Phuket with a simple goal: reduce drug use and make the community safer through education and awareness.</p>
   </div>
 </section>
 
@@ -103,22 +91,22 @@
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
       <div style="position:relative;">
         <div style="border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(15,46,26,0.18);">
-          <img src="https://placehold.co/600x480/E8F5EC/1F6B3A?text=Our+Story" alt="DNM story" style="width:100%;height:auto;display:block;" />
+          <img loading="lazy" decoding="async" src="assets/visuals/our-story.svg" width="600" height="480" alt="DNM story" style="width:100%;height:auto;display:block;" />
           <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,46,26,0.4) 0%,transparent 60%);"></div>
         </div>
         <div style="position:absolute;top:-1.5rem;right:-1.5rem;background:#3FAE5A;border-radius:12px;padding:1.25rem;box-shadow:0 8px 24px rgba(63,174,90,0.3);">
-          <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;color:#0F2E1A;line-height:1;">2016</div>
-          <div style="font-size:0.75rem;color:#0F2E1A;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.2rem;">Founded</div>
+          <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:2rem;color:#0F2E1A;line-height:1;">2026</div>
+          <div style="font-size:0.75rem;color:#0F2E1A;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.2rem;">Starting</div>
         </div>
       </div>
       <div class="fade-in">
         <div class="leaf-divider" style="justify-content:flex-start;max-width:180px;">
           <span style="color:#1F6B3A;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">Our Story</span>
         </div>
-        <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.75rem);color:#0F2E1A;letter-spacing:-0.03em;margin-bottom:1.5rem;">Born from <em style="color:#1F6B3A;">community need</em></h2>
-        <p style="color:#4a6b55;line-height:1.85;margin-bottom:1rem;font-size:0.975rem;">DNM was founded in 2016 by a group of Phuket educators, parents, and community leaders who saw a growing drug problem affecting young people across the island — and decided not to wait for someone else to act.</p>
-        <p style="color:#4a6b55;line-height:1.85;margin-bottom:1rem;font-size:0.975rem;">What began as informal school talks in Kathu quickly grew into a structured prevention program operating across all three of Phuket's districts. Today DNM works with over 30 partner schools, community health centres, and local government bodies.</p>
-        <p style="color:#4a6b55;line-height:1.85;font-size:0.975rem;">We believe prevention is more powerful — and more humane — than punishment. Our work is grounded in evidence, driven by compassion, and accountable to the communities we serve.</p>
+        <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.75rem);color:#0F2E1A;letter-spacing:-0.03em;margin-bottom:1.5rem;">Starting with <em style="color:#1F6B3A;">student action</em></h2>
+        <p style="color:#4a6b55;line-height:1.85;margin-bottom:1rem;font-size:0.975rem;">DNM was founded in 2026 by a group of students learning at British International School Phuket.</p>
+        <p style="color:#4a6b55;line-height:1.85;margin-bottom:1rem;font-size:0.975rem;">We are still at the beginning. We have not launched large programs yet, so our current work is focused on building the website, creating education resources, and preparing ways to reach the Phuket community.</p>
+        <p style="color:#4a6b55;line-height:1.85;font-size:0.975rem;">Our aim is to reduce drug use, encourage safer choices, and make Phuket a safer place for everyone.</p>
       </div>
     </div>
   </div>
@@ -131,7 +119,7 @@
       <div class="leaf-divider" style="justify-content:center;">
         <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
       </div>
-      <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.5rem);color:#0F2E1A;letter-spacing:-0.03em;">Our Journey</h2>
+      <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.5rem);color:#0F2E1A;letter-spacing:-0.03em;">Where We Are Now</h2>
     </div>
     <div style="position:relative;padding-left:2.5rem;">
       <div style="position:absolute;left:0.35rem;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,#3FAE5A,rgba(63,174,90,0.1));"></div>
@@ -139,41 +127,41 @@
         <div class="fade-in" style="display:flex;gap:1.5rem;align-items:flex-start;">
           <div class="timeline-dot" style="margin-top:0.35rem;"></div>
           <div>
-            <div style="font-size:0.75rem;color:#3FAE5A;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;">2016</div>
-            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Founded</h3>
-            <p style="color:#4a6b55;font-size:0.9rem;line-height:1.7;">First prevention workshops delivered to three schools in Kathu district. Twelve founding volunteers.</p>
+            <div style="font-size:0.75rem;color:#3FAE5A;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;">2026</div>
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Established</h3>
+            <p style="color:#4a6b55;font-size:0.9rem;line-height:1.7;">A four-person founding team of students began building DNM at British International School Phuket.</p>
           </div>
         </div>
         <div class="fade-in" style="display:flex;gap:1.5rem;align-items:flex-start;transition-delay:0.1s;">
           <div class="timeline-dot" style="margin-top:0.35rem;"></div>
           <div>
-            <div style="font-size:0.75rem;color:#3FAE5A;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;">2018</div>
-            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.5rem;">Island-Wide Expansion</h3>
-            <p style="color:#4a6b55;font-size:0.9rem;line-height:1.7;">Programs rolled out across all three districts — Mueang, Kathu, and Thalang. Official partnership with Phuket Provincial Education Office.</p>
+            <div style="font-size:0.75rem;color:#3FAE5A;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;">Now</div>
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.5rem;">Building the Foundation</h3>
+            <p style="color:#4a6b55;font-size:0.9rem;line-height:1.7;">We are creating the website, collecting reliable information, and shaping DNM's first education materials.</p>
           </div>
         </div>
         <div class="fade-in" style="display:flex;gap:1.5rem;align-items:flex-start;transition-delay:0.2s;">
           <div class="timeline-dot" style="margin-top:0.35rem;"></div>
           <div>
-            <div style="font-size:0.75rem;color:#3FAE5A;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;">2020</div>
-            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.5rem;">Digital & Pandemic Response</h3>
-            <p style="color:#4a6b55;font-size:0.9rem;line-height:1.7;">Online education platform launched during COVID-19. Reached over 400 students digitally when in-person programs paused.</p>
+            <div style="font-size:0.75rem;color:#3FAE5A;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;">Next</div>
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.5rem;">Preparing Awareness Work</h3>
+            <p style="color:#4a6b55;font-size:0.9rem;line-height:1.7;">Our next step is to turn the research and resources into clear awareness content for the local community.</p>
           </div>
         </div>
         <div class="fade-in" style="display:flex;gap:1.5rem;align-items:flex-start;transition-delay:0.3s;">
           <div class="timeline-dot" style="margin-top:0.35rem;"></div>
           <div>
-            <div style="font-size:0.75rem;color:#3FAE5A;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;">2023</div>
-            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.5rem;">1,000 Youth Milestone</h3>
-            <p style="color:#4a6b55;font-size:0.9rem;line-height:1.7;">DNM reached its 1,000th young person through active programs. Launched parent and family support workshops.</p>
+            <div style="font-size:0.75rem;color:#3FAE5A;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;">Coming Soon</div>
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.5rem;">Community Outreach</h3>
+            <p style="color:#4a6b55;font-size:0.9rem;line-height:1.7;">DNM plans to grow from a student project into something that can help more people across Phuket.</p>
           </div>
         </div>
         <div class="fade-in" style="display:flex;gap:1.5rem;align-items:flex-start;transition-delay:0.4s;">
           <div class="timeline-dot" style="margin-top:0.35rem;background:#1F6B3A;box-shadow:0 0 0 3px #3FAE5A;"></div>
           <div>
-            <div style="font-size:0.75rem;color:#3FAE5A;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;">2025 — Today</div>
-            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.5rem;">Growing Stronger</h3>
-            <p style="color:#4a6b55;font-size:0.9rem;line-height:1.7;">1,200+ youth reached, 45 active school programs, and our first merchandise line to fund the mission. The work continues.</p>
+            <div style="font-size:0.75rem;color:#3FAE5A;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.25rem;">Goal</div>
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.5rem;">A Safer Phuket</h3>
+            <p style="color:#4a6b55;font-size:0.9rem;line-height:1.7;">The long-term goal is simple: reduce drug use and make Phuket safer through education, awareness, and community support.</p>
           </div>
         </div>
       </div>
@@ -189,7 +177,7 @@
         <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
       </div>
       <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.75rem);color:#0F2E1A;letter-spacing:-0.03em;">Our Values</h2>
-      <p style="color:#4a6b55;margin-top:0.75rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7;">These principles guide every decision, every program, and every interaction we have in the community.</p>
+      <p style="color:#4a6b55;margin-top:0.75rem;max-width:520px;margin-left:auto;margin-right:auto;line-height:1.7;">These principles guide how we are building DNM from the start.</p>
     </div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       <div class="card fade-in p-7">
@@ -197,14 +185,14 @@
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F6B3A" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.6rem;">Trust</h3>
-        <p style="color:#4a6b55;font-size:0.875rem;line-height:1.75;">We earn trust through transparency, consistency, and accountability — to students, families, and funders alike.</p>
+        <p style="color:#4a6b55;font-size:0.875rem;line-height:1.75;">We want DNM to be honest about what it is, what it is building, and what it still needs to improve.</p>
       </div>
       <div class="card fade-in p-7" style="transition-delay:0.1s;">
         <div class="value-icon" style="background:#E8F5EC;">
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F6B3A" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
         </div>
         <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.6rem;">Evidence</h3>
-        <p style="color:#4a6b55;font-size:0.875rem;line-height:1.75;">Every program is built on data and research. We track outcomes, publish results, and continuously improve what we do.</p>
+        <p style="color:#4a6b55;font-size:0.875rem;line-height:1.75;">Our educational content should be based on real research and reliable sources, not fear or exaggeration.</p>
       </div>
       <div class="card fade-in p-7" style="transition-delay:0.2s;">
         <div class="value-icon" style="background:#E8F5EC;">
@@ -218,7 +206,7 @@
           <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1F6B3A" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;margin-bottom:0.6rem;">Community</h3>
-        <p style="color:#4a6b55;font-size:0.875rem;line-height:1.75;">Prevention is a community effort. We work with — not for — the people of Phuket at every level of our programs.</p>
+        <p style="color:#4a6b55;font-size:0.875rem;line-height:1.75;">DNM is starting with one island and one community: Phuket.</p>
       </div>
     </div>
   </div>
@@ -231,41 +219,41 @@
       <div class="leaf-divider" style="justify-content:center;">
         <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
       </div>
-      <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.75rem);color:#0F2E1A;letter-spacing:-0.03em;">Our Team</h2>
-      <p style="color:#4a6b55;margin-top:0.75rem;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;">Dedicated professionals and volunteers committed to building safer communities across Phuket.</p>
+      <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.8rem,3.5vw,2.75rem);color:#0F2E1A;letter-spacing:-0.03em;">Founding Team</h2>
+      <p style="color:#4a6b55;margin-top:0.75rem;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.7;">DNM is currently being built by four student founders.</p>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <div class="card fade-in text-center p-6">
         <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;margin:0 auto 1rem;border:3px solid #E8F5EC;box-shadow:0 4px 16px rgba(15,46,26,0.12);">
-          <img src="https://placehold.co/80x80/1F6B3A/fff?text=P" alt="Director" style="width:100%;height:100%;object-fit:cover;" />
+          <img loading="lazy" decoding="async" src="assets/visuals/avatar-p.svg" width="80" height="80" alt="Director" style="width:100%;height:100%;object-fit:cover;" />
         </div>
-        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;">Preecha Kittipong</h3>
-        <div style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.25rem;">Executive Director</div>
-        <p style="color:#4a6b55;font-size:0.825rem;line-height:1.6;margin-top:0.75rem;">Former educator of 15 years, co-founder and driving force behind DNM's community programs.</p>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;">Founding Member</h3>
+        <div style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.25rem;">Education</div>
+        <p style="color:#4a6b55;font-size:0.825rem;line-height:1.6;margin-top:0.75rem;">Helps shape student-friendly information and prevention messages.</p>
       </div>
       <div class="card fade-in text-center p-6" style="transition-delay:0.1s;">
         <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;margin:0 auto 1rem;border:3px solid #E8F5EC;box-shadow:0 4px 16px rgba(15,46,26,0.12);">
-          <img src="https://placehold.co/80x80/3FAE5A/fff?text=S" alt="Programs" style="width:100%;height:100%;object-fit:cover;" />
+          <img loading="lazy" decoding="async" src="assets/visuals/avatar-s.svg" width="80" height="80" alt="Programs" style="width:100%;height:100%;object-fit:cover;" />
         </div>
-        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;">Sunisa Thonglor</h3>
-        <div style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.25rem;">Programs Director</div>
-        <p style="color:#4a6b55;font-size:0.825rem;line-height:1.6;margin-top:0.75rem;">Public health specialist overseeing curriculum design and school partnerships across all districts.</p>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;">Founding Member</h3>
+        <div style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.25rem;">Research</div>
+        <p style="color:#4a6b55;font-size:0.825rem;line-height:1.6;margin-top:0.75rem;">Looks for reliable sources and keeps the information grounded in real data.</p>
       </div>
       <div class="card fade-in text-center p-6" style="transition-delay:0.2s;">
         <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;margin:0 auto 1rem;border:3px solid #E8F5EC;box-shadow:0 4px 16px rgba(15,46,26,0.12);">
-          <img src="https://placehold.co/80x80/0F2E1A/fff?text=A" alt="Outreach" style="width:100%;height:100%;object-fit:cover;" />
+          <img loading="lazy" decoding="async" src="assets/visuals/avatar-a.svg" width="80" height="80" alt="Outreach" style="width:100%;height:100%;object-fit:cover;" />
         </div>
-        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;">Arthit Wongchai</h3>
-        <div style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.25rem;">Community Outreach</div>
-        <p style="color:#4a6b55;font-size:0.825rem;line-height:1.6;margin-top:0.75rem;">Leads family support programs and coordinates volunteer networks across Phuket.</p>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;">Founding Member</h3>
+        <div style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.25rem;">Outreach</div>
+        <p style="color:#4a6b55;font-size:0.825rem;line-height:1.6;margin-top:0.75rem;">Focuses on how DNM can connect with people in Phuket as it grows.</p>
       </div>
       <div class="card fade-in text-center p-6" style="transition-delay:0.3s;">
         <div style="width:80px;height:80px;border-radius:50%;overflow:hidden;margin:0 auto 1rem;border:3px solid #E8F5EC;box-shadow:0 4px 16px rgba(15,46,26,0.12);">
-          <img src="https://placehold.co/80x80/1F6B3A/fff?text=N" alt="Research" style="width:100%;height:100%;object-fit:cover;" />
+          <img loading="lazy" decoding="async" src="assets/visuals/avatar-n.svg" width="80" height="80" alt="Research" style="width:100%;height:100%;object-fit:cover;" />
         </div>
-        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;">Natcha Ruengrat</h3>
-        <div style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.25rem;">Research & Data</div>
-        <p style="color:#4a6b55;font-size:0.825rem;line-height:1.6;margin-top:0.75rem;">Manages impact measurement, publishes annual reports, and ensures evidence-based program design.</p>
+        <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;">Founding Member</h3>
+        <div style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-top:0.25rem;">Design</div>
+        <p style="color:#4a6b55;font-size:0.825rem;line-height:1.6;margin-top:0.75rem;">Helps build the website, visuals, and public-facing materials for DNM.</p>
       </div>
     </div>
   </div>
@@ -274,13 +262,13 @@
 <!-- PARTNERS -->
 <section style="background:#fff;padding:4rem 0;">
   <div class="max-w-7xl mx-auto px-6">
-    <p class="fade-in" style="text-align:center;color:#A7B3AA;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:2.5rem;">Community Partners & Supporters</p>
+    <p class="fade-in" style="text-align:center;color:#A7B3AA;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:2.5rem;">Current Focus</p>
     <div class="fade-in" style="display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:2.5rem;">
-      <div style="padding:1rem 2rem;border-radius:8px;border:1px solid #E8F5EC;color:#A7B3AA;font-size:0.85rem;font-weight:600;letter-spacing:0.04em;">Phuket Provincial Education Office</div>
-      <div style="padding:1rem 2rem;border-radius:8px;border:1px solid #E8F5EC;color:#A7B3AA;font-size:0.85rem;font-weight:600;letter-spacing:0.04em;">Phuket City Municipality</div>
-      <div style="padding:1rem 2rem;border-radius:8px;border:1px solid #E8F5EC;color:#A7B3AA;font-size:0.85rem;font-weight:600;letter-spacing:0.04em;">ONCB Thailand</div>
-      <div style="padding:1rem 2rem;border-radius:8px;border:1px solid #E8F5EC;color:#A7B3AA;font-size:0.85rem;font-weight:600;letter-spacing:0.04em;">Phuket Public Health Office</div>
-      <div style="padding:1rem 2rem;border-radius:8px;border:1px solid #E8F5EC;color:#A7B3AA;font-size:0.85rem;font-weight:600;letter-spacing:0.04em;">30+ Partner Schools</div>
+      <div style="padding:1rem 2rem;border-radius:8px;border:1px solid #E8F5EC;color:#A7B3AA;font-size:0.85rem;font-weight:600;letter-spacing:0.04em;">British International School Phuket</div>
+      <div style="padding:1rem 2rem;border-radius:8px;border:1px solid #E8F5EC;color:#A7B3AA;font-size:0.85rem;font-weight:600;letter-spacing:0.04em;">Student-Led Team</div>
+      <div style="padding:1rem 2rem;border-radius:8px;border:1px solid #E8F5EC;color:#A7B3AA;font-size:0.85rem;font-weight:600;letter-spacing:0.04em;">Education Resources</div>
+      <div style="padding:1rem 2rem;border-radius:8px;border:1px solid #E8F5EC;color:#A7B3AA;font-size:0.85rem;font-weight:600;letter-spacing:0.04em;">Phuket Community</div>
+      <div style="padding:1rem 2rem;border-radius:8px;border:1px solid #E8F5EC;color:#A7B3AA;font-size:0.85rem;font-weight:600;letter-spacing:0.04em;">Outreach Coming Soon</div>
     </div>
   </div>
 </section>
@@ -291,13 +279,13 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
       <div class="md:col-span-2">
         <a href="index.html" class="flex items-center gap-3 mb-4">
-          <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:48px;width:48px;object-fit:contain;" />
+          <img loading="lazy" decoding="async" src="assets/dnmlogo.png" alt="DNM Logo" width="48" height="48" style="height:48px;width:48px;object-fit:contain;" />
           <div>
             <div style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;">Drugs No More</div>
             <div style="color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;">Phuket, Thailand</div>
           </div>
         </a>
-        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:320px;">Prevention through education and understanding. Building healthier communities across Phuket since 2016.</p>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:320px;">DNM is a non-profit organisation founded by a group of students learning at British International School Phuket. We aim to reduce drug use and make Phuket a safer place for everyone!</p>
       </div>
       <div>
         <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Pages</h4>
@@ -320,7 +308,7 @@
       </div>
     </div>
     <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1.5rem;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:1rem;">
-      <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">© 2025 Drugs No More (DNM). All rights reserved. Phuket, Thailand.</p>
+      <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">© 2026 Drugs No More (DNM). All rights reserved. Phuket, Thailand.</p>
     </div>
   </div>
 </footer>
@@ -334,5 +322,6 @@
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
+<script src="assets/site.js"></script>
 </body>
 </html>

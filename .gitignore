@@ -1,5 +1,6 @@
 node_modules/
 temporary screenshots/
 *.png
+!assets/dnmlogo.png
 .DS_Store
 Thumbs.db

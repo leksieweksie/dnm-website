@@ -7,7 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="assets/tailwind.css" />
+  <link rel="stylesheet" href="assets/site.css" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
@@ -48,7 +49,7 @@
 <nav class="navbar">
   <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
     <a href="index.html" class="flex items-center gap-3">
-      <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:44px;width:44px;object-fit:contain;" />
+      <img src="assets/dnmlogo.png" alt="DNM Logo" width="44" height="44" decoding="async" fetchpriority="high" style="height:44px;width:44px;object-fit:contain;" />
       <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#fff;">Drugs No More</span>
     </a>
     <div class="hidden md:flex items-center gap-8">
@@ -116,7 +117,7 @@
       <!-- Product 1: T-Shirt -->
       <div class="product-card fade-in" data-cat="clothing">
         <div class="product-img-wrap">
-          <img src="https://placehold.co/400x300/0F2E1A/3FAE5A?text=DNM+T-Shirt" alt="DNM T-Shirt" />
+          <img loading="lazy" decoding="async" src="assets/visuals/product-tshirt.svg" width="400" height="300" alt="DNM T-Shirt" />
           <div class="overlay"></div>
           <div style="position:absolute;top:0.75rem;left:0.75rem;">
             <span class="badge" style="background:#3FAE5A;color:#0F2E1A;">Bestseller</span>
@@ -143,7 +144,7 @@
       <!-- Product 2: Wristband -->
       <div class="product-card fade-in" data-cat="accessories" style="transition-delay:0.06s;">
         <div class="product-img-wrap">
-          <img src="https://placehold.co/400x300/1F6B3A/E8F5EC?text=DNM+Wristband" alt="DNM Wristband" />
+          <img loading="lazy" decoding="async" src="assets/visuals/product-wristband.svg" width="400" height="300" alt="DNM Wristband" />
           <div class="overlay"></div>
         </div>
         <div style="padding:1.25rem;">
@@ -164,7 +165,7 @@
       <!-- Product 3: Tote Bag -->
       <div class="product-card fade-in" data-cat="accessories" style="transition-delay:0.12s;">
         <div class="product-img-wrap">
-          <img src="https://placehold.co/400x300/3FAE5A/0F2E1A?text=DNM+Tote+Bag" alt="DNM Tote Bag" />
+          <img loading="lazy" decoding="async" src="assets/visuals/product-tote-bag.svg" width="400" height="300" alt="DNM Tote Bag" />
           <div class="overlay"></div>
         </div>
         <div style="padding:1.25rem;">
@@ -185,7 +186,7 @@
       <!-- Product 4: Cap -->
       <div class="product-card fade-in" data-cat="clothing" style="transition-delay:0.18s;">
         <div class="product-img-wrap">
-          <img src="https://placehold.co/400x300/0F2E1A/A7B3AA?text=DNM+Cap" alt="DNM Cap" />
+          <img loading="lazy" decoding="async" src="assets/visuals/product-cap.svg" width="400" height="300" alt="DNM Cap" />
           <div class="overlay"></div>
         </div>
         <div style="padding:1.25rem;">
@@ -209,7 +210,7 @@
       <!-- Product 5: Sticker Pack -->
       <div class="product-card fade-in" data-cat="stationery" style="transition-delay:0.24s;">
         <div class="product-img-wrap">
-          <img src="https://placehold.co/400x300/E8F5EC/1F6B3A?text=Sticker+Pack" alt="DNM Sticker Pack" />
+          <img loading="lazy" decoding="async" src="assets/visuals/product-sticker-pack.svg" width="400" height="300" alt="DNM Sticker Pack" />
           <div class="overlay"></div>
           <div style="position:absolute;top:0.75rem;left:0.75rem;">
             <span class="badge" style="background:#0F2E1A;color:#3FAE5A;">New</span>
@@ -233,7 +234,7 @@
       <!-- Product 6: Water Bottle -->
       <div class="product-card fade-in" data-cat="accessories" style="transition-delay:0.3s;">
         <div class="product-img-wrap">
-          <img src="https://placehold.co/400x300/1F6B3A/fff?text=Water+Bottle" alt="DNM Water Bottle" />
+          <img loading="lazy" decoding="async" src="assets/visuals/product-water-bottle.svg" width="400" height="300" alt="DNM Water Bottle" />
           <div class="overlay"></div>
         </div>
         <div style="padding:1.25rem;">
@@ -254,7 +255,7 @@
       <!-- Product 7: Hoodie -->
       <div class="product-card fade-in" data-cat="clothing" style="transition-delay:0.36s;">
         <div class="product-img-wrap">
-          <img src="https://placehold.co/400x300/0F2E1A/3FAE5A?text=DNM+Hoodie" alt="DNM Hoodie" />
+          <img loading="lazy" decoding="async" src="assets/visuals/product-hoodie.svg" width="400" height="300" alt="DNM Hoodie" />
           <div class="overlay"></div>
           <div style="position:absolute;top:0.75rem;left:0.75rem;">
             <span class="badge" style="background:#3FAE5A;color:#0F2E1A;">Popular</span>
@@ -280,7 +281,7 @@
       <!-- Product 8: Notebook -->
       <div class="product-card fade-in" data-cat="stationery" style="transition-delay:0.42s;">
         <div class="product-img-wrap">
-          <img src="https://placehold.co/400x300/E8F5EC/0F2E1A?text=DNM+Notebook" alt="DNM Notebook" />
+          <img loading="lazy" decoding="async" src="assets/visuals/product-notebook.svg" width="400" height="300" alt="DNM Notebook" />
           <div class="overlay"></div>
         </div>
         <div style="padding:1.25rem;">
@@ -326,13 +327,13 @@
     <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
       <div class="md:col-span-2">
         <a href="index.html" class="flex items-center gap-3 mb-4">
-          <img src=".claude/brand_assets/Untitled_design-removebg-preview.png" alt="DNM Logo" style="height:48px;width:48px;object-fit:contain;" />
+          <img loading="lazy" decoding="async" src="assets/dnmlogo.png" alt="DNM Logo" width="48" height="48" style="height:48px;width:48px;object-fit:contain;" />
           <div>
             <div style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;">Drugs No More</div>
             <div style="color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;">Phuket, Thailand</div>
           </div>
         </a>
-        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:320px;">Prevention through education and understanding. Building healthier communities across Phuket since 2016.</p>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:320px;">DNM is a non-profit organisation founded by a group of students learning at British International School Phuket. We aim to reduce drug use and make Phuket a safer place for everyone!</p>
       </div>
       <div>
         <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Pages</h4>
@@ -354,7 +355,7 @@
       </div>
     </div>
     <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1.5rem;">
-      <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">© 2025 Drugs No More (DNM). All rights reserved.</p>
+      <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">© 2026 Drugs No More (DNM). All rights reserved.</p>
     </div>
   </div>
 </footer>
@@ -390,5 +391,6 @@
     });
   }
 </script>
+<script src="assets/site.js"></script>
 </body>
 </html>

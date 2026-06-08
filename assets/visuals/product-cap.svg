@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300" viewBox="0 0 400 300" role="img" aria-label="DNM Cap">
+  <rect width="400" height="300" fill="#0F2E1A"/>
+  <path d="M106 160c17-58 70-86 142-66 40 11 65 36 75 70H106z" fill="#A7B3AA"/>
+  <path d="M207 160c41 2 73 12 103 32 17 11 4 32-17 25-57-18-105-26-187-18v-39z" fill="#3FAE5A"/>
+  <text x="200" y="142" text-anchor="middle" fill="#0F2E1A" font-family="Arial, sans-serif" font-size="28" font-weight="700">DNM</text>
+  <text x="200" y="264" text-anchor="middle" fill="#A7B3AA" font-family="Arial, sans-serif" font-size="26" font-weight="700">DNM Cap</text>
+</svg>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 80 80" role="img" aria-label="Research">
+  <rect width="80" height="80" fill="#1F6B3A"/>
+  <circle cx="40" cy="29" r="15" fill="#E8F5EC"/>
+  <path d="M16 75c4-19 15-29 24-29s20 10 24 29" fill="#3FAE5A"/>
+  <text x="40" y="51" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="28" font-weight="700">N</text>
+</svg>
