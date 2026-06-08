@@ -30,6 +30,15 @@
     .stat-pill{display:inline-flex;align-items:center;gap:0.4rem;background:#E8F5EC;color:#1F6B3A;font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.35rem 0.85rem;border-radius:50px;}
     .source-link{color:#1F6B3A;text-decoration:none;font-weight:600;}
     .source-link:hover{color:#0F2E1A;text-decoration:none;}
+    .trend-desc{color:#4F5D52;font-family:'Roboto',sans-serif;font-size:0.9rem;line-height:1.7;margin-top:1.25rem;transition:opacity 0.15s ease;}
+    .trend-desc strong{color:#1F6B3A;font-weight:700;}
+    @media (prefers-reduced-motion: reduce){.trend-desc{transition:none;}}
+    .movement-cta{display:inline-flex;align-items:center;gap:0.55rem;margin-top:1.15rem;background:#3FAE5A;color:#0F2E1A;font-family:'Roboto',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;padding:0.85rem 1.7rem;border-radius:9px;box-shadow:0 4px 16px rgba(63,174,90,0.38),0 1px 3px rgba(15,46,26,0.12);transition:background 0.2s ease,transform 0.18s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.2s ease;}
+    .movement-cta:hover{background:#4dcc6e;transform:translateY(-2px);box-shadow:0 10px 26px rgba(63,174,90,0.48),0 2px 6px rgba(15,46,26,0.16);}
+    .movement-cta:active{transform:translateY(0);box-shadow:0 3px 10px rgba(63,174,90,0.35);}
+    .movement-cta:focus-visible{outline:2px solid #1F6B3A;outline-offset:3px;}
+    .movement-cta .arrow{font-size:1.05rem;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);}
+    .movement-cta:hover .arrow{transform:translateX(4px);}
     .stats-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,0.85fr);gap:2rem;margin-bottom:2rem;align-items:start;}
     .drug-catalog{display:grid;gap:0.65rem;}
     .drug-option{width:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:0.75rem;border:1px solid #d1e8d8;background:#fff;color:#102418;border-radius:8px;padding:0.8rem 0.9rem;text-align:left;cursor:pointer;transition:background 0.2s ease,border-color 0.2s ease,transform 0.15s ease,box-shadow 0.2s ease;}
@@ -131,23 +140,17 @@
           <p id="substanceChartMeta" style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Methamphetamine usage trend index, 2018-2025</p>
         </div>
         <canvas id="chart1" height="190"></canvas>
+        <p class="trend-desc" id="trendDesc"><strong>Methamphetamine</strong> use in Phuket has risen by roughly <strong>125%</strong> on our index since 2018. This is where we come in — we work to prevent more people from using drugs and to stop addiction and death. Join our movement, whether through a small donation or becoming part of our team, to help us fight this growing problem.</p>
+        <a class="movement-cta" href="join.html">Join The Movement <span class="arrow" aria-hidden="true">&rarr;</span></a>
         <p style="color:#A7B3AA;font-size:0.72rem;margin-top:1rem;">Baseline sources: <a class="source-link" href="https://asean.org/wp-content/uploads/2023/11/Drug-Monitoring-Report-2021.pdf" target="_blank" rel="noopener">ASEAN Drug Monitoring Report 2021</a> and <a class="source-link" href="http://www.jmatonline.com/PDF/1281-7_N107.pdf" target="_blank" rel="noopener">JMAT study</a></p>
       </div>
 
       <div class="chart-card fade-in" style="transition-delay:0.1s;">
         <div style="margin-bottom:1.25rem;">
           <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#0F2E1A;">Substances</h3>
-          <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Click a substance to update the chart</p>
+          <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Pick a substance to update the chart and the trend below</p>
         </div>
         <div id="drugCatalog" class="drug-catalog" aria-label="Select substance"></div>
-      </div>
-    </div>
-
-    <div class="source-panel fade-in">
-      <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#0F2E1A;margin-bottom:0.75rem;">Sources</h3>
-      <div style="display:flex;flex-direction:column;gap:0.45rem;">
-        <a class="source-link" href="https://asean.org/wp-content/uploads/2023/11/Drug-Monitoring-Report-2021.pdf" target="_blank" rel="noopener">ASEAN Drug Monitoring Report 2021</a>
-        <a class="source-link" href="http://www.jmatonline.com/PDF/1281-7_N107.pdf" target="_blank" rel="noopener">J Med Assoc Thai: Drug Use Situation in Secondary School Students</a>
       </div>
     </div>
 
@@ -286,6 +289,32 @@
       catalogWrap.appendChild(button);
     });
 
+    const trendDesc = document.getElementById('trendDesc');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let trendFadeTimer;
+    let trendInitialized = false;
+    function buildTrendHtml(drug) {
+      const pct = Math.round((drug.values[drug.values.length - 1] - 100) / 5) * 5;
+      return `<strong>${drug.name}</strong> use in Phuket has risen by roughly <strong>${pct}%</strong> on our index since 2018. This is where we come in — we work to prevent more people from using drugs and to stop addiction and death. Join our movement, whether through a small donation or becoming part of our team, to help us fight this growing problem.`;
+    }
+    function updateTrendDesc(drug) {
+      if (!trendDesc) return;
+      const html = buildTrendHtml(drug);
+      clearTimeout(trendFadeTimer);
+      // First paint (matches the seed markup) and reduced-motion users: swap instantly, no fade.
+      if (!trendInitialized || reduceMotion.matches) {
+        trendInitialized = true;
+        trendDesc.innerHTML = html;
+        trendDesc.style.opacity = '1';
+        return;
+      }
+      trendDesc.style.opacity = '0';
+      trendFadeTimer = setTimeout(() => {
+        trendDesc.innerHTML = html;
+        trendDesc.style.opacity = '1';
+      }, 150);
+    }
+
     function updateDrugDetail(index) {
       const drug = drugCatalog[index];
       usageTrendChart.data.datasets[0].label = `${drug.name} usage index`;
@@ -294,6 +323,7 @@
       usageTrendChart.update();
       document.getElementById('substanceChartTitle').textContent = 'Usage Statistics';
       document.getElementById('substanceChartMeta').textContent = `${drug.name} usage trend index, 2018-2025`;
+      updateTrendDesc(drug);
       document.querySelectorAll('.drug-option').forEach((button, i) => {
         button.classList.toggle('active', i === index);
       });
