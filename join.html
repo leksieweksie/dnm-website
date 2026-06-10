@@ -180,7 +180,7 @@
             <button onclick="selectAmount(this,'custom')" id="customBtn" style="flex:1;min-width:80px;padding:0.6rem;border:1.5px solid #d1e8d8;border-radius:8px;font-family:'Roboto',sans-serif;font-size:0.875rem;font-weight:600;color:#1F6B3A;background:#fff;cursor:pointer;transition:all 0.2s ease;">Custom</button>
           </div>
           <p style="color:#A7B3AA;font-size:0.8rem;line-height:1.5;margin-bottom:1.5rem;">Secure payment processing. All donations support DNM programs in Phuket directly.</p>
-          <button onclick="dnmStartDonation()" style="display:block;width:100%;text-align:center;background:#3FAE5A;color:#0F2E1A;font-weight:700;font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.875rem;border-radius:6px;border:none;cursor:pointer;transition:background 0.2s ease,transform 0.15s ease;" onmouseover="this.style.background='#4dcc6e';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#3FAE5A';this.style.transform='translateY(0)'">Donate Now — PromptPay</button>
+          <button style="display:block;width:100%;text-align:center;background:#3FAE5A;color:#0F2E1A;font-weight:700;font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.875rem;border-radius:6px;border:none;cursor:pointer;transition:background 0.2s ease,transform 0.15s ease;" onmouseover="this.style.background='#4dcc6e';this.style.transform='translateY(-2px)'" onmouseout="this.style.background='#3FAE5A';this.style.transform='translateY(0)'">Donate Now</button>
         </div>
       </div>
     </div>
@@ -314,23 +314,11 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  let selectedAmount = 1000;
-
   function selectAmount(btn, val) {
     document.querySelectorAll('[onclick^="selectAmount"]').forEach(b => {
       b.style.background = '#fff'; b.style.color = '#1F6B3A'; b.style.borderColor = '#d1e8d8';
     });
     btn.style.background = '#1F6B3A'; btn.style.color = '#fff'; btn.style.borderColor = '#1F6B3A';
-    if (val === 'custom') {
-      const input = prompt('Enter donation amount in THB:');
-      selectedAmount = parseInt(input, 10) || 500;
-    } else {
-      selectedAmount = parseInt(val, 10);
-    }
-  }
-
-  function dnmStartDonation() {
-    dnmOpenCheckout({ type: 'donation', amount: selectedAmount });
   }
 
   function handleSubmit(e) {
@@ -339,7 +327,6 @@
     document.getElementById('formSuccess').style.display = 'block';
   }
 </script>
-<script src="assets/checkout.js"></script>
 <script src="assets/site.js?v=20260609-navgear2"></script>
 </body>
 </html>
