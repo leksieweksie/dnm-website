@@ -5,8 +5,10 @@
   "dependencies": {
     "@anthropic-ai/sdk": "^0.30.0",
     "@supabase/supabase-js": "^2.45.0",
-    "omise": "^0.9.3",
-    "puppeteer": "^21.11.0",
+    "omise": "^1.1.0",
     "resend": "^3.5.0"
+  },
+  "devDependencies": {
+    "puppeteer": "^21.11.0"
   }
 }
