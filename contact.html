@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/tailwind.css" />
-  <link rel="stylesheet" href="assets/site.css?v=20260608-4" />
+  <link rel="stylesheet" href="assets/site.css?v=20260609-navgear2" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
@@ -116,7 +116,7 @@
               </div>
               <div>
                 <div style="font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#1F6B3A;margin-bottom:0.25rem;">Email</div>
-                <a href="mailto:info@drugsnomore.org" style="color:#102418;font-size:0.875rem;text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#1F6B3A'" onmouseout="this.style.color='#102418'">info@drugsnomore.org</a>
+                <a href="mailto:deniel@robot.co" style="color:#102418;font-size:0.875rem;text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#1F6B3A'" onmouseout="this.style.color='#102418'">deniel@robot.co</a>
               </div>
             </div>
             <div class="info-item">
@@ -169,21 +169,25 @@
       <div class="lg:col-span-2">
         <div class="card fade-in p-8" style="transition-delay:0.1s;">
           <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.5rem;color:#0F2E1A;margin-bottom:0.5rem;">Send a Message</h2>
-          <p style="color:#A7B3AA;font-size:0.875rem;margin-bottom:2rem;">We reply to all enquiries within 1–2 business days.</p>
-          <form onsubmit="handleSubmit(event)">
+          <p style="color:#A7B3AA;font-size:0.875rem;margin-bottom:2rem;">You'll get an automatic confirmation email after sending your message.</p>
+          <form action="https://formsubmit.co/deniel@robot.co" method="POST">
+            <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" />
+            <input type="hidden" name="_subject" value="New DNM website message" />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_autoresponse" value="Hi, thank you for contacting DNM. We have received your message and will review it as soon as possible. If this is urgent or about immediate safety, please contact a trusted adult, local emergency services, or a health professional right away. - Drugs No More" />
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
               <div>
                 <label class="form-label">Full Name *</label>
-                <input type="text" class="form-input" placeholder="Your full name" required />
+                <input type="text" name="name" class="form-input" placeholder="Your full name" required />
               </div>
               <div>
                 <label class="form-label">Email Address *</label>
-                <input type="email" class="form-input" placeholder="you@email.com" required />
+                <input type="email" name="email" class="form-input" placeholder="you@email.com" required />
               </div>
             </div>
             <div class="mb-6">
               <label class="form-label">Subject *</label>
-              <select class="form-select" required>
+              <select name="subject" class="form-select" required>
                 <option value="">Select a subject...</option>
                 <option>General Enquiry</option>
                 <option>Volunteer / Join Us</option>
@@ -196,7 +200,7 @@
             </div>
             <div class="mb-8">
               <label class="form-label">Message *</label>
-              <textarea class="form-textarea" placeholder="Write your message here..." required></textarea>
+              <textarea name="message" class="form-textarea" placeholder="Write your message here..." required></textarea>
             </div>
             <button type="submit" class="btn-primary w-full justify-center">
               Send Message
@@ -245,7 +249,7 @@
         <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Contact</h4>
         <div style="display:flex;flex-direction:column;gap:0.6rem;">
           <span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">Phuket, Thailand</span>
-          <a href="mailto:info@drugsnomore.org" class="footer-link">info@drugsnomore.org</a>
+          <a href="mailto:deniel@robot.co" class="footer-link">deniel@robot.co</a>
           <a href="tel:+66947362815" class="footer-link">+66 94 736 2815</a>
         </div>
       </div>
@@ -262,12 +266,7 @@
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-  function handleSubmit(e) {
-    e.preventDefault();
-    e.target.style.display = 'none';
-    document.getElementById('formSuccess').style.display = 'block';
-  }
 </script>
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=20260609-navgear2"></script>
 </body>
 </html>

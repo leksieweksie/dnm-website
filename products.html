@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/tailwind.css" />
-  <link rel="stylesheet" href="assets/site.css?v=20260608-4" />
+  <link rel="stylesheet" href="assets/site.css?v=20260609-navgear2" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
@@ -23,25 +23,24 @@
     .mobile-menu.open{display:flex;}
     .fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.65s ease,transform 0.65s cubic-bezier(0.34,1.56,0.64,1);}
     .fade-in.visible{opacity:1;transform:translateY(0);}
-    .product-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 4px rgba(15,46,26,0.06),0 8px 24px rgba(15,46,26,0.08),0 0 0 1px rgba(15,46,26,0.04);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.25s ease;}
+    .product-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 4px rgba(15,46,26,0.06),0 8px 24px rgba(15,46,26,0.08),0 0 0 1px rgba(15,46,26,0.04);transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.25s ease;display:flex;flex-direction:column;}
     .product-card:hover{transform:translateY(-6px);box-shadow:0 8px 16px rgba(15,46,26,0.1),0 24px 48px rgba(15,46,26,0.14);}
     .product-img-wrap{position:relative;overflow:hidden;}
     .product-img-wrap img{display:block;width:100%;height:240px;object-fit:cover;transition:transform 0.4s ease;}
     .product-card:hover .product-img-wrap img{transform:scale(1.04);}
     .product-img-wrap .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(15,46,26,0.55) 0%,transparent 60%);mix-blend-mode:multiply;}
-    .add-to-cart{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;background:#1F6B3A;color:#fff;font-weight:700;font-size:0.825rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.8rem;border:none;cursor:pointer;transition:background 0.2s ease,transform 0.15s cubic-bezier(0.34,1.56,0.64,1);}
-    .add-to-cart:hover{background:#3FAE5A;color:#0F2E1A;transform:translateY(-1px);}
-    .add-to-cart:active{transform:translateY(0);}
-    .add-to-cart:focus-visible{outline:3px solid #3FAE5A;outline-offset:2px;}
+    .product-content{padding:1.25rem;display:flex;flex:1;flex-direction:column;}
+    .preview-link{display:flex;align-items:center;justify-content:center;gap:0.5rem;width:100%;background:#1F6B3A;color:#fff;font-weight:700;font-size:0.825rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.8rem;border:none;text-decoration:none;cursor:pointer;transition:background 0.2s ease,transform 0.15s cubic-bezier(0.34,1.56,0.64,1);}
+    .preview-link:hover{background:#3FAE5A;color:#0F2E1A;transform:translateY(-1px);}
+    .preview-link:active{transform:translateY(0);}
+    .preview-link:focus-visible{outline:3px solid #3FAE5A;outline-offset:2px;}
+    .coming-soon-note{margin-top:auto;color:#4a6b55;font-size:0.8rem;line-height:1.55;}
     .badge{display:inline-block;font-size:0.68rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:0.2rem 0.6rem;border-radius:50px;}
     .leaf-divider{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
     .leaf-divider::before,.leaf-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#3FAE5A,transparent);}
     footer{background:#0F2E1A;}
     .footer-link{color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.875rem;transition:color 0.2s ease;}
     .footer-link:hover{color:#3FAE5A;}
-    /* Mini cart notification */
-    .cart-pop{position:fixed;bottom:2rem;right:2rem;background:#0F2E1A;color:#fff;border-radius:10px;padding:0.9rem 1.4rem;box-shadow:0 8px 32px rgba(15,46,26,0.35);border:1px solid rgba(63,174,90,0.25);transform:translateY(100px);opacity:0;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),opacity 0.25s ease;z-index:200;font-size:0.875rem;display:flex;align-items:center;gap:0.75rem;}
-    .cart-pop.show{transform:translateY(0);opacity:1;}
   </style>
 </head>
 <body>
@@ -61,10 +60,6 @@
       <a href="contact.html" class="nav-link">Contact</a>
     </div>
     <div class="hidden md:flex items-center gap-4">
-      <button id="cartBtn" onclick="dnmOpenCartCheckout()" style="position:relative;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:0.5rem 0.9rem;color:#fff;cursor:pointer;display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;font-weight:600;transition:background 0.2s ease;" onmouseover="this.style.background='rgba(63,174,90,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
-        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        Checkout <span id="cartCount" style="background:#3FAE5A;color:#0F2E1A;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;">0</span>
-      </button>
       <a href="join.html" class="nav-cta">Join Us</a>
     </div>
     <button class="md:hidden text-white p-2" onclick="toggleMenu()">
@@ -91,10 +86,10 @@
       <span style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">Support the Mission</span>
     </div>
     <h1 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,5vw,4rem);color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:1rem;">DNM Shop</h1>
-    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;max-width:580px;line-height:1.75;">Wear the mission. Every purchase directly funds drug prevention programs across Phuket's schools and communities.</p>
+    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;max-width:580px;line-height:1.75;">DNM merchandise previews. These items are not available for checkout yet, but the designs are ready to view.</p>
     <div style="margin-top:1.5rem;display:inline-flex;align-items:center;gap:0.75rem;background:rgba(63,174,90,0.12);border:1px solid rgba(63,174,90,0.25);border-radius:8px;padding:0.75rem 1.25rem;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3FAE5A" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
-      <span style="color:#3FAE5A;font-size:0.85rem;font-weight:600;">100% of proceeds fund DNM programs in Phuket</span>
+      <span style="color:#3FAE5A;font-size:0.85rem;font-weight:600;">Coming soon to support DNM work in Phuket</span>
     </div>
   </div>
 </section>
@@ -105,14 +100,13 @@
     <button onclick="filterProducts('all',this)" class="filter-btn" style="background:#0F2E1A;color:#fff;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:all 0.2s ease;">All</button>
     <button onclick="filterProducts('clothing',this)" class="filter-btn" style="background:#E8F5EC;color:#1F6B3A;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:all 0.2s ease;">Clothing</button>
     <button onclick="filterProducts('accessories',this)" class="filter-btn" style="background:#E8F5EC;color:#1F6B3A;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:all 0.2s ease;">Accessories</button>
-    <button onclick="filterProducts('stationery',this)" class="filter-btn" style="background:#E8F5EC;color:#1F6B3A;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:all 0.2s ease;">Stationery</button>
   </div>
 </section>
 
 <!-- PRODUCT GRID -->
 <section style="padding:4rem 0 6rem;">
   <div class="max-w-7xl mx-auto px-6">
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7" id="productGrid">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7" id="productGrid">
 
       <!-- Product 1: T-Shirt -->
       <div class="product-card fade-in" data-cat="clothing">
@@ -120,183 +114,61 @@
           <img loading="lazy" decoding="async" src="assets/visuals/product-tshirt.svg" width="400" height="300" alt="DNM T-Shirt" />
           <div class="overlay"></div>
           <div style="position:absolute;top:0.75rem;left:0.75rem;">
-            <span class="badge" style="background:#3FAE5A;color:#0F2E1A;">Bestseller</span>
+            <span class="badge" style="background:#3FAE5A;color:#0F2E1A;">Coming Soon</span>
           </div>
         </div>
-        <div style="padding:1.25rem;">
+        <div class="product-content">
           <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Clothing</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Classic T-Shirt</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">100% organic cotton. DNM logo front, "Prevention through Education" back.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">฿390</span>
-            <div style="display:flex;gap:0.4rem;">
-              <div style="width:16px;height:16px;border-radius:50%;background:#0F2E1A;border:2px solid #E8F5EC;cursor:pointer;" title="Dark Green"></div>
-              <div style="width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid #d1e8d8;cursor:pointer;" title="White"></div>
-            </div>
-          </div>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Performance Long Sleeve T-Shirt</h3>
+          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Green DNM shirt design preview from CustomInk. Checkout is not open yet.</p>
+          <p class="coming-soon-note">Preview only. Not purchaseable yet.</p>
         </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Classic T-Shirt')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
+        <a class="preview-link" href="https://www.customink.com/designs/tuff/ghb0-00d2-jgdj/share?pc=EMAIL-40778&utm_campaign=shared%20design&utm_source=share%20link&utm_medium=shared%20design&utm_content=shared%20desktop" target="_blank" rel="noopener">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          Preview Design
+        </a>
       </div>
 
-      <!-- Product 2: Wristband -->
+      <!-- Product 2: Hat -->
       <div class="product-card fade-in" data-cat="accessories" style="transition-delay:0.06s;">
         <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-wristband.svg" width="400" height="300" alt="DNM Wristband" />
-          <div class="overlay"></div>
-        </div>
-        <div style="padding:1.25rem;">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Accessories</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">Green Awareness Wristband</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Silicone wristband with embossed DNM logo. Available in packs of 3.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">฿120</span>
-            <span style="font-size:0.75rem;color:#A7B3AA;">Pack of 3</span>
-          </div>
-        </div>
-        <button class="add-to-cart" onclick="addToCart('Green Awareness Wristband')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
-      </div>
-
-      <!-- Product 3: Tote Bag -->
-      <div class="product-card fade-in" data-cat="accessories" style="transition-delay:0.12s;">
-        <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-tote-bag.svg" width="400" height="300" alt="DNM Tote Bag" />
-          <div class="overlay"></div>
-        </div>
-        <div style="padding:1.25rem;">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Accessories</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Canvas Tote Bag</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Natural canvas tote with DNM logo print. Reusable and sturdy for everyday use.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">฿280</span>
-            <span class="badge" style="background:#E8F5EC;color:#1F6B3A;">Eco-friendly</span>
-          </div>
-        </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Canvas Tote Bag')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
-      </div>
-
-      <!-- Product 4: Cap -->
-      <div class="product-card fade-in" data-cat="clothing" style="transition-delay:0.18s;">
-        <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-cap.svg" width="400" height="300" alt="DNM Cap" />
-          <div class="overlay"></div>
-        </div>
-        <div style="padding:1.25rem;">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Clothing</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Embroidered Cap</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Adjustable cotton cap with embroidered DNM logo. One size fits all.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">฿450</span>
-            <div style="display:flex;gap:0.4rem;">
-              <div style="width:16px;height:16px;border-radius:50%;background:#0F2E1A;border:2px solid #E8F5EC;cursor:pointer;"></div>
-              <div style="width:16px;height:16px;border-radius:50%;background:#1F6B3A;border:2px solid #d1e8d8;cursor:pointer;"></div>
-            </div>
-          </div>
-        </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Embroidered Cap')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
-      </div>
-
-      <!-- Product 5: Sticker Pack -->
-      <div class="product-card fade-in" data-cat="stationery" style="transition-delay:0.24s;">
-        <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-sticker-pack.svg" width="400" height="300" alt="DNM Sticker Pack" />
+          <img loading="lazy" decoding="async" src="assets/visuals/product-cap.svg" width="400" height="300" alt="DNM Hat" />
           <div class="overlay"></div>
           <div style="position:absolute;top:0.75rem;left:0.75rem;">
-            <span class="badge" style="background:#0F2E1A;color:#3FAE5A;">New</span>
+            <span class="badge" style="background:#3FAE5A;color:#0F2E1A;">Coming Soon</span>
           </div>
         </div>
-        <div style="padding:1.25rem;">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Stationery</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Sticker Pack</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">6 premium vinyl stickers with DNM motifs, leaf designs, and prevention slogans.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">฿80</span>
-            <span style="font-size:0.75rem;color:#A7B3AA;">6 stickers</span>
-          </div>
+        <div class="product-content">
+          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Accessories</div>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Hat</h3>
+          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">DNM hat design preview from CustomInk. Checkout is not open yet.</p>
+          <p class="coming-soon-note">Preview only. Not purchaseable yet.</p>
         </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Sticker Pack')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
+        <a class="preview-link" href="https://www.customink.com/designs/hat/ghb0-00d2-jgg0/share?pc=EMAIL-40778&utm_campaign=shared%20design&utm_source=share%20link&utm_medium=shared%20design&utm_content=shared%20desktop" target="_blank" rel="noopener">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          Preview Design
+        </a>
       </div>
 
-      <!-- Product 6: Water Bottle -->
-      <div class="product-card fade-in" data-cat="accessories" style="transition-delay:0.3s;">
+      <!-- Product 3: Water Bottle -->
+      <div class="product-card fade-in" data-cat="accessories" style="transition-delay:0.12s;">
         <div class="product-img-wrap">
           <img loading="lazy" decoding="async" src="assets/visuals/product-water-bottle.svg" width="400" height="300" alt="DNM Water Bottle" />
           <div class="overlay"></div>
-        </div>
-        <div style="padding:1.25rem;">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Accessories</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Insulated Water Bottle</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">500ml stainless steel, keeps drinks cold 24h. DNM logo laser-engraved.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">฿650</span>
-            <span class="badge" style="background:#E8F5EC;color:#1F6B3A;">Eco-friendly</span>
-          </div>
-        </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Insulated Water Bottle')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
-      </div>
-
-      <!-- Product 7: Hoodie -->
-      <div class="product-card fade-in" data-cat="clothing" style="transition-delay:0.36s;">
-        <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-hoodie.svg" width="400" height="300" alt="DNM Hoodie" />
-          <div class="overlay"></div>
           <div style="position:absolute;top:0.75rem;left:0.75rem;">
-            <span class="badge" style="background:#3FAE5A;color:#0F2E1A;">Popular</span>
+            <span class="badge" style="background:#3FAE5A;color:#0F2E1A;">Coming Soon</span>
           </div>
         </div>
-        <div style="padding:1.25rem;">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Clothing</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Forest Green Hoodie</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Heavyweight cotton blend. Embroidered chest logo and "Drugs No More" text on reverse.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">฿890</span>
-            <div style="display:flex;gap:0.4rem;">
-              <div style="width:16px;height:16px;border-radius:50%;background:#0F2E1A;border:2px solid #E8F5EC;cursor:pointer;"></div>
-            </div>
-          </div>
+        <div class="product-content">
+          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Accessories</div>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Water Bottle</h3>
+          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">DNM bottle design preview from CustomInk. Checkout is not open yet.</p>
+          <p class="coming-soon-note">Preview only. Not purchaseable yet.</p>
         </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Forest Green Hoodie')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
-      </div>
-
-      <!-- Product 8: Notebook -->
-      <div class="product-card fade-in" data-cat="stationery" style="transition-delay:0.42s;">
-        <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-notebook.svg" width="400" height="300" alt="DNM Notebook" />
-          <div class="overlay"></div>
-        </div>
-        <div style="padding:1.25rem;">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Stationery</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Recycled Notebook</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">A5 recycled-paper notebook, 120 pages, with DNM branding and leaf motif cover.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">฿180</span>
-            <span class="badge" style="background:#E8F5EC;color:#1F6B3A;">Recycled</span>
-          </div>
-        </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Recycled Notebook')">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
+        <a class="preview-link" href="https://www.customink.com/designs/bottle/ghb0-00d2-jghd/share?pc=EMAIL-40778&utm_campaign=shared%20design&utm_source=share%20link&utm_medium=shared%20design&utm_content=shared%20desktop" target="_blank" rel="noopener">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          Preview Design
+        </a>
       </div>
 
     </div>
@@ -310,16 +182,10 @@
       <path d="M20 36C20 36 4 28 4 16C4 8 11 2 20 2C29 2 36 8 36 16C36 28 20 36 20 36Z" fill="#3FAE5A" opacity="0.85"/>
       <path d="M20 36L20 2" stroke="#0F2E1A" stroke-width="2.5"/>
     </svg>
-    <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.5rem,3vw,2.25rem);color:#fff;margin-bottom:0.75rem;">Every Purchase Makes a Difference</h2>
-    <p style="color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.75;max-width:540px;margin:0 auto;">100% of DNM Shop proceeds fund school programs, outreach events, and support resources for Phuket families. Thank you for wearing the mission.</p>
+    <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.5rem,3vw,2.25rem);color:#fff;margin-bottom:0.75rem;">Merchandise Is Coming Soon</h2>
+    <p style="color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.75;max-width:540px;margin:0 auto;">These previews are early DNM product concepts. The shop will open when ordering and fulfilment are ready.</p>
   </div>
 </section>
-
-<!-- Cart popup -->
-<div id="cartPop" class="cart-pop">
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#3FAE5A" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
-  <span id="cartPopText">Added to cart!</span>
-</div>
 
 <!-- FOOTER -->
 <footer class="py-14">
@@ -352,7 +218,7 @@
         <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Contact</h4>
         <div style="display:flex;flex-direction:column;gap:0.6rem;">
           <span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">Phuket, Thailand</span>
-          <a href="mailto:info@drugsnomore.org" class="footer-link">info@drugsnomore.org</a>
+          <a href="mailto:deniel@robot.co" class="footer-link">deniel@robot.co</a>
           <a href="tel:+66947362815" class="footer-link">+66 94 736 2815</a>
         </div>
       </div>
@@ -370,43 +236,6 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  const PRICES = {
-    'DNM Classic T-Shirt': 390, 'Green Awareness Wristband': 120, 'DNM Canvas Tote Bag': 280,
-    'DNM Embroidered Cap': 450, 'DNM Sticker Pack': 80, 'DNM Insulated Water Bottle': 650,
-    'DNM Forest Green Hoodie': 890, 'DNM Recycled Notebook': 180,
-  };
-
-  let cart = JSON.parse(localStorage.getItem('dnm_cart') || '[]');
-  let popTimer;
-
-  function syncCartUI() {
-    const total = cart.reduce((s, i) => s + i.qty, 0);
-    document.getElementById('cartCount').textContent = total;
-  }
-  syncCartUI();
-
-  function addToCart(name) {
-    const price = PRICES[name];
-    const existing = cart.find(i => i.name === name);
-    if (existing) existing.qty++;
-    else cart.push({ name, qty: 1, price });
-    localStorage.setItem('dnm_cart', JSON.stringify(cart));
-    syncCartUI();
-    document.getElementById('cartPopText').textContent = `"${name}" added!`;
-    const pop = document.getElementById('cartPop');
-    pop.classList.add('show');
-    clearTimeout(popTimer);
-    popTimer = setTimeout(() => pop.classList.remove('show'), 2800);
-  }
-
-  function dnmOpenCartCheckout() {
-    if (cart.length === 0) {
-      alert('Your cart is empty — add some items first!');
-      return;
-    }
-    dnmOpenCheckout({ type: 'product', items: cart });
-  }
-
   function filterProducts(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => {
       b.style.background = '#E8F5EC'; b.style.color = '#1F6B3A';
@@ -419,7 +248,6 @@
     });
   }
 </script>
-<script src="assets/checkout.js"></script>
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=20260609-navgear2"></script>
 </body>
 </html>
