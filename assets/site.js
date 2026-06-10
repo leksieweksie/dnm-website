@@ -90,9 +90,9 @@
       }
 
       panel.style.width = `${panelWidth}px`;
-      panel.style.left = `${window.scrollX + left}px`;
+      panel.style.left = `${left}px`;
       panel.style.right = 'auto';
-      panel.style.top = `${window.scrollY + clamp(top, margin, window.innerHeight - panelHeight - margin)}px`;
+      panel.style.top = `${clamp(top, margin, window.innerHeight - panelHeight - margin)}px`;
     };
 
     const panel = document.createElement('section');
@@ -139,10 +139,6 @@
     window.addEventListener('resize', () => {
       if (panel.classList.contains('open')) positionPanel();
     }, { passive: true });
-    window.addEventListener('scroll', () => {
-      if (panel.classList.contains('open')) positionPanel();
-    }, { passive: true });
-
     const desktopJoinButton = document.querySelector('.navbar > div .nav-cta[href="join.html"]');
     if (desktopJoinButton?.parentElement) {
       desktopJoinButton.insertAdjacentElement('afterend', toggle);
