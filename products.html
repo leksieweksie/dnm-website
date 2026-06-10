@@ -42,6 +42,62 @@
     /* Mini cart notification */
     .cart-pop{position:fixed;bottom:2rem;right:2rem;background:#0F2E1A;color:#fff;border-radius:10px;padding:0.9rem 1.4rem;box-shadow:0 8px 32px rgba(15,46,26,0.35);border:1px solid rgba(63,174,90,0.25);transform:translateY(100px);opacity:0;transition:transform 0.35s cubic-bezier(0.34,1.56,0.64,1),opacity 0.25s ease;z-index:200;font-size:0.875rem;display:flex;align-items:center;gap:0.75rem;}
     .cart-pop.show{transform:translateY(0);opacity:1;}
+    /* Variant pickers */
+    .variant-row{margin-bottom:0.85rem;}
+    .variant-label{font-size:0.65rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#A7B3AA;margin-bottom:0.4rem;}
+    .size-pills,.color-swatches{display:flex;flex-wrap:wrap;gap:0.4rem;}
+    .size-pill{min-width:2.1rem;padding:0.3rem 0.55rem;border:1.5px solid #d1e8d8;border-radius:6px;background:#fff;color:#1F6B3A;font-family:'Roboto',sans-serif;font-size:0.78rem;font-weight:600;cursor:pointer;transition:background 0.15s ease,border-color 0.15s ease,color 0.15s ease;}
+    .size-pill:hover{border-color:#3FAE5A;}
+    .size-pill.selected{background:#1F6B3A;border-color:#1F6B3A;color:#fff;}
+    .size-pill:focus-visible{outline:2px solid #3FAE5A;outline-offset:2px;}
+    .color-swatch{width:22px;height:22px;border-radius:50%;border:2px solid #d1e8d8;cursor:pointer;padding:0;position:relative;transition:transform 0.15s ease,box-shadow 0.15s ease;}
+    .color-swatch:hover{transform:scale(1.1);}
+    .color-swatch.selected{box-shadow:0 0 0 2px #fff,0 0 0 4px #3FAE5A;}
+    .color-swatch:focus-visible{outline:2px solid #3FAE5A;outline-offset:3px;}
+    .add-to-cart:disabled{background:#cdd9d1;color:#fff;cursor:not-allowed;transform:none;}
+    .variant-nudge{font-size:0.7rem;color:#c0392b;margin-top:0.5rem;min-height:0.9rem;transition:opacity 0.2s ease;}
+    /* Cart drawer */
+    .cart-overlay{position:fixed;inset:0;background:rgba(15,46,26,0.5);opacity:0;visibility:hidden;transition:opacity 0.3s ease,visibility 0.3s ease;z-index:300;}
+    .cart-overlay.show{opacity:1;visibility:visible;}
+    .cart-drawer{position:fixed;top:0;right:0;height:100%;width:min(420px,92vw);background:#f9fafb;box-shadow:-12px 0 40px rgba(15,46,26,0.22);transform:translateX(100%);transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);z-index:301;display:flex;flex-direction:column;}
+    .cart-drawer.show{transform:translateX(0);}
+    .cart-drawer-head{display:flex;align-items:center;justify-content:space-between;padding:1.25rem 1.4rem;background:#0F2E1A;color:#fff;}
+    .cart-drawer-head h2{font-family:'Playfair Display',serif;font-weight:700;font-size:1.2rem;}
+    .cart-close{background:rgba(255,255,255,0.1);border:none;color:#fff;width:32px;height:32px;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s ease;}
+    .cart-close:hover{background:rgba(63,174,90,0.3);}
+    .cart-close:focus-visible{outline:2px solid #3FAE5A;outline-offset:2px;}
+    .cart-body{flex:1;overflow-y:auto;padding:1rem 1.4rem;}
+    .cart-line{display:grid;grid-template-columns:1fr auto;gap:0.5rem 0.75rem;padding:0.9rem 0;border-bottom:1px solid #e3ebe5;}
+    .cart-line-name{font-weight:700;font-size:0.9rem;color:#0F2E1A;}
+    .cart-line-variant{font-size:0.74rem;color:#A7B3AA;margin-top:0.15rem;}
+    .cart-line-price{font-weight:700;font-size:0.9rem;color:#1F6B3A;text-align:right;white-space:nowrap;}
+    .cart-line-controls{display:flex;align-items:center;gap:0.5rem;}
+    .qty-stepper{display:flex;align-items:center;border:1.5px solid #d1e8d8;border-radius:7px;overflow:hidden;}
+    .qty-btn{width:26px;height:26px;background:#fff;border:none;color:#1F6B3A;font-size:1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.15s ease;}
+    .qty-btn:hover{background:#E8F5EC;}
+    .qty-btn:focus-visible{outline:2px solid #3FAE5A;outline-offset:-2px;}
+    .qty-val{min-width:1.9rem;text-align:center;font-size:0.82rem;font-weight:600;color:#0F2E1A;}
+    .line-remove{background:none;border:none;color:#A7B3AA;cursor:pointer;font-size:0.72rem;text-decoration:underline;padding:0;transition:color 0.2s ease;}
+    .line-remove:hover{color:#c0392b;}
+    .cart-empty{text-align:center;padding:3rem 1rem;color:#A7B3AA;}
+    .cart-empty svg{margin:0 auto 1rem;opacity:0.5;}
+    .cart-foot{border-top:1px solid #e3ebe5;padding:1.1rem 1.4rem;background:#fff;}
+    .cart-subtotal{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.9rem;}
+    .cart-subtotal .lbl{font-size:0.8rem;color:#4a6b55;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;}
+    .cart-subtotal .amt{font-family:'Playfair Display',serif;font-weight:700;font-size:1.4rem;color:#0F2E1A;}
+    .cart-checkout{display:block;width:100%;text-align:center;background:#3FAE5A;color:#0F2E1A;font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.9rem;border-radius:8px;border:none;cursor:pointer;box-shadow:0 4px 14px rgba(63,174,90,0.32);transition:background 0.2s ease,transform 0.18s cubic-bezier(0.34,1.56,0.64,1);}
+    .cart-checkout:hover{background:#4dcc6e;transform:translateY(-2px);}
+    .cart-checkout:focus-visible{outline:2px solid #1F6B3A;outline-offset:2px;}
+    .cart-clear{display:block;width:100%;text-align:center;background:none;border:none;color:#A7B3AA;font-size:0.74rem;cursor:pointer;margin-top:0.6rem;padding:0.3rem;transition:color 0.2s ease;}
+    .cart-clear:hover{color:#c0392b;}
+    .cart-contact-msg{background:#E8F5EC;border-radius:10px;padding:1rem;font-size:0.84rem;color:#0F2E1A;line-height:1.6;margin-bottom:0.9rem;}
+    .cart-contact-msg a{color:#1F6B3A;font-weight:700;text-decoration:none;}
+    .cart-contact-msg a:hover{text-decoration:underline;}
+    .cart-contact-btn{display:block;width:100%;text-align:center;background:#1F6B3A;color:#fff;font-weight:700;font-size:0.85rem;letter-spacing:0.06em;text-transform:uppercase;padding:0.85rem;border-radius:8px;text-decoration:none;transition:background 0.2s ease;}
+    .cart-contact-btn:hover{background:#3FAE5A;color:#0F2E1A;}
+    @media (prefers-reduced-motion: reduce){
+      .cart-overlay,.cart-drawer,.cart-pop,.cart-checkout{transition:none;}
+    }
   </style>
 </head>
 <body>
@@ -63,13 +119,19 @@
     <div class="hidden md:flex items-center gap-4">
       <button id="cartBtn" style="position:relative;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:0.5rem 0.9rem;color:#fff;cursor:pointer;display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;font-weight:600;transition:background 0.2s ease;" onmouseover="this.style.background='rgba(63,174,90,0.15)'" onmouseout="this.style.background='rgba(255,255,255,0.08)'">
         <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-        Cart <span id="cartCount" style="background:#3FAE5A;color:#0F2E1A;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;">0</span>
+        Cart <span id="cartCount" class="cart-count" style="background:#3FAE5A;color:#0F2E1A;border-radius:50%;width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;">0</span>
       </button>
       <a href="join.html" class="nav-cta">Join Us</a>
     </div>
-    <button class="md:hidden text-white p-2" onclick="toggleMenu()">
-      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
-    </button>
+    <div class="md:hidden flex items-center gap-2">
+      <button id="cartBtnMobile" aria-label="Open cart" onclick="openCart()" style="position:relative;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:8px;padding:0.45rem 0.6rem;color:#fff;cursor:pointer;display:flex;align-items:center;gap:0.35rem;font-size:0.8rem;font-weight:600;">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="cart-count" style="background:#3FAE5A;color:#0F2E1A;border-radius:50%;min-width:18px;height:18px;display:flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;padding:0 4px;">0</span>
+      </button>
+      <button class="text-white p-2" onclick="toggleMenu()" aria-label="Menu">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+    </div>
   </div>
   <div id="mobileMenu" class="mobile-menu md:hidden flex-col px-6 pb-4 gap-3 border-t border-white/10">
     <a href="index.html" class="nav-link py-2">Home</a>
@@ -127,15 +189,28 @@
           <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Clothing</div>
           <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Classic T-Shirt</h3>
           <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">100% organic cotton. DNM logo front, "Prevention through Education" back.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+          <div style="margin-bottom:1rem;">
             <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">฿390</span>
-            <div style="display:flex;gap:0.4rem;">
-              <div style="width:16px;height:16px;border-radius:50%;background:#0F2E1A;border:2px solid #E8F5EC;cursor:pointer;" title="Dark Green"></div>
-              <div style="width:16px;height:16px;border-radius:50%;background:#fff;border:2px solid #d1e8d8;cursor:pointer;" title="White"></div>
+          </div>
+          <div class="variant-row">
+            <div class="variant-label">Size</div>
+            <div class="size-pills">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
             </div>
           </div>
+          <div class="variant-row">
+            <div class="variant-label">Color</div>
+            <div class="color-swatches">
+              <button type="button" class="color-swatch" data-color="Dark Green" title="Dark Green" style="background:#0F2E1A;"></button>
+              <button type="button" class="color-swatch" data-color="White" title="White" style="background:#fff;"></button>
+            </div>
+          </div>
+          <p class="variant-nudge" data-nudge></p>
         </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Classic T-Shirt')">
+        <button class="add-to-cart" data-id="tshirt" data-name="DNM Classic T-Shirt" data-price="390" data-needs="size,color" onclick="addToCart(this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Add to Cart
         </button>
@@ -156,7 +231,7 @@
             <span style="font-size:0.75rem;color:#A7B3AA;">Pack of 3</span>
           </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart('Green Awareness Wristband')">
+        <button class="add-to-cart" data-id="wristband" data-name="Green Awareness Wristband" data-price="120" onclick="addToCart(this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Add to Cart
         </button>
@@ -177,7 +252,7 @@
             <span class="badge" style="background:#E8F5EC;color:#1F6B3A;">Eco-friendly</span>
           </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Canvas Tote Bag')">
+        <button class="add-to-cart" data-id="tote" data-name="DNM Canvas Tote Bag" data-price="280" onclick="addToCart(this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Add to Cart
         </button>
@@ -193,15 +268,19 @@
           <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Clothing</div>
           <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Embroidered Cap</h3>
           <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Adjustable cotton cap with embroidered DNM logo. One size fits all.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+          <div style="margin-bottom:1rem;">
             <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">฿450</span>
-            <div style="display:flex;gap:0.4rem;">
-              <div style="width:16px;height:16px;border-radius:50%;background:#0F2E1A;border:2px solid #E8F5EC;cursor:pointer;"></div>
-              <div style="width:16px;height:16px;border-radius:50%;background:#1F6B3A;border:2px solid #d1e8d8;cursor:pointer;"></div>
+          </div>
+          <div class="variant-row">
+            <div class="variant-label">Color</div>
+            <div class="color-swatches">
+              <button type="button" class="color-swatch" data-color="Dark Green" title="Dark Green" style="background:#0F2E1A;"></button>
+              <button type="button" class="color-swatch" data-color="Green" title="Green" style="background:#1F6B3A;"></button>
             </div>
           </div>
+          <p class="variant-nudge" data-nudge></p>
         </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Embroidered Cap')">
+        <button class="add-to-cart" data-id="cap" data-name="DNM Embroidered Cap" data-price="450" data-needs="color" onclick="addToCart(this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Add to Cart
         </button>
@@ -225,7 +304,7 @@
             <span style="font-size:0.75rem;color:#A7B3AA;">6 stickers</span>
           </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Sticker Pack')">
+        <button class="add-to-cart" data-id="stickers" data-name="DNM Sticker Pack" data-price="80" onclick="addToCart(this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Add to Cart
         </button>
@@ -246,7 +325,7 @@
             <span class="badge" style="background:#E8F5EC;color:#1F6B3A;">Eco-friendly</span>
           </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Insulated Water Bottle')">
+        <button class="add-to-cart" data-id="bottle" data-name="DNM Insulated Water Bottle" data-price="650" onclick="addToCart(this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Add to Cart
         </button>
@@ -265,14 +344,27 @@
           <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Clothing</div>
           <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Forest Green Hoodie</h3>
           <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Heavyweight cotton blend. Embroidered chest logo and "Drugs No More" text on reverse.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+          <div style="margin-bottom:1rem;">
             <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">฿890</span>
-            <div style="display:flex;gap:0.4rem;">
-              <div style="width:16px;height:16px;border-radius:50%;background:#0F2E1A;border:2px solid #E8F5EC;cursor:pointer;"></div>
+          </div>
+          <div class="variant-row">
+            <div class="variant-label">Size</div>
+            <div class="size-pills">
+              <button type="button" class="size-pill" data-size="S">S</button>
+              <button type="button" class="size-pill" data-size="M">M</button>
+              <button type="button" class="size-pill" data-size="L">L</button>
+              <button type="button" class="size-pill" data-size="XL">XL</button>
             </div>
           </div>
+          <div class="variant-row">
+            <div class="variant-label">Color</div>
+            <div class="color-swatches">
+              <button type="button" class="color-swatch selected" data-color="Forest Green" title="Forest Green" style="background:#0F2E1A;"></button>
+            </div>
+          </div>
+          <p class="variant-nudge" data-nudge></p>
         </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Forest Green Hoodie')">
+        <button class="add-to-cart" data-id="hoodie" data-name="DNM Forest Green Hoodie" data-price="890" data-needs="size,color" onclick="addToCart(this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Add to Cart
         </button>
@@ -293,7 +385,7 @@
             <span class="badge" style="background:#E8F5EC;color:#1F6B3A;">Recycled</span>
           </div>
         </div>
-        <button class="add-to-cart" onclick="addToCart('DNM Recycled Notebook')">
+        <button class="add-to-cart" data-id="notebook" data-name="DNM Recycled Notebook" data-price="180" onclick="addToCart(this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Add to Cart
         </button>
@@ -314,6 +406,19 @@
     <p style="color:rgba(255,255,255,0.65);font-size:1rem;line-height:1.75;max-width:540px;margin:0 auto;">100% of DNM Shop proceeds fund school programs, outreach events, and support resources for Phuket families. Thank you for wearing the mission.</p>
   </div>
 </section>
+
+<!-- Cart drawer -->
+<div id="cartOverlay" class="cart-overlay"></div>
+<aside id="cartDrawer" class="cart-drawer" role="dialog" aria-modal="true" aria-label="Shopping cart" aria-hidden="true">
+  <div class="cart-drawer-head">
+    <h2>Your Cart</h2>
+    <button id="cartCloseBtn" class="cart-close" aria-label="Close cart">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+  <div id="cartBody" class="cart-body"></div>
+  <div id="cartFoot" class="cart-foot"></div>
+</aside>
 
 <!-- Cart popup -->
 <div id="cartPop" class="cart-pop">
@@ -352,7 +457,7 @@
         <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Contact</h4>
         <div style="display:flex;flex-direction:column;gap:0.6rem;">
           <span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">Phuket, Thailand</span>
-          <a href="mailto:info@drugsnomore.org" class="footer-link">info@drugsnomore.org</a>
+          <a href="mailto:info@dnmphuket.org" class="footer-link">info@dnmphuket.org</a>
           <a href="tel:+66947362815" class="footer-link">+66 94 736 2815</a>
         </div>
       </div>
@@ -370,17 +475,168 @@
   }, { threshold: 0.08 });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-  let cartCount = 0;
+  /* ===== Cart system ===== */
+  const CART_KEY = 'dnm_cart';
+  const popEl = document.getElementById('cartPop');
+  const popText = document.getElementById('cartPopText');
+  const cartBody = document.getElementById('cartBody');
+  const cartFoot = document.getElementById('cartFoot');
+  const overlay = document.getElementById('cartOverlay');
+  const drawer = document.getElementById('cartDrawer');
   let popTimer;
-  function addToCart(name) {
-    cartCount++;
-    document.getElementById('cartCount').textContent = cartCount;
-    document.getElementById('cartPopText').textContent = `"${name}" added to cart!`;
-    const pop = document.getElementById('cartPop');
-    pop.classList.add('show');
-    clearTimeout(popTimer);
-    popTimer = setTimeout(() => pop.classList.remove('show'), 2800);
+
+  const readCart = () => { try { return JSON.parse(localStorage.getItem(CART_KEY)) || []; } catch (e) { return []; } };
+  const writeCart = (c) => localStorage.setItem(CART_KEY, JSON.stringify(c));
+  const lineKey = (l) => `${l.id}|${l.size || ''}|${l.color || ''}`;
+  const totalQty = (c) => c.reduce((n, l) => n + l.qty, 0);
+  const totalPrice = (c) => c.reduce((n, l) => n + l.price * l.qty, 0);
+  const fmt = (n) => '฿' + n.toLocaleString();
+  const clearNudge = (card) => { const n = card && card.querySelector('[data-nudge]'); if (n) n.textContent = ''; };
+
+  // Variant selection via delegation
+  document.addEventListener('click', (e) => {
+    const pill = e.target.closest('.size-pill');
+    if (pill) {
+      pill.closest('.size-pills').querySelectorAll('.size-pill').forEach(p => p.classList.remove('selected'));
+      pill.classList.add('selected');
+      const card = pill.closest('.product-card');
+      card.dataset.selSize = pill.dataset.size;
+      clearNudge(card);
+      return;
+    }
+    const sw = e.target.closest('.color-swatch');
+    if (sw) {
+      sw.closest('.color-swatches').querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+      sw.classList.add('selected');
+      const card = sw.closest('.product-card');
+      card.dataset.selColor = sw.dataset.color;
+      clearNudge(card);
+    }
+  });
+
+  function addToCart(btn) {
+    const card = btn.closest('.product-card');
+    const needs = (btn.dataset.needs || '').split(',').filter(Boolean);
+    if (card) {
+      const pre = card.querySelector('.color-swatch.selected');
+      if (pre && !card.dataset.selColor) card.dataset.selColor = pre.dataset.color;
+    }
+    const size = card ? card.dataset.selSize : '';
+    const color = card ? card.dataset.selColor : '';
+    const missing = [];
+    if (needs.includes('size') && !size) missing.push('a size');
+    if (needs.includes('color') && !color) missing.push('a colour');
+    if (missing.length) {
+      const n = card.querySelector('[data-nudge]');
+      if (n) n.textContent = 'Please select ' + missing.join(' and ') + '.';
+      return;
+    }
+    const line = {
+      id: btn.dataset.id, name: btn.dataset.name, price: Number(btn.dataset.price),
+      size: needs.includes('size') ? size : '', color: needs.includes('color') ? color : '', qty: 1
+    };
+    const cart = readCart();
+    const existing = cart.find(l => lineKey(l) === lineKey(line));
+    if (existing) existing.qty++; else cart.push(line);
+    writeCart(cart);
+    syncCart();
+    showPop(`"${btn.dataset.name}" added to cart!`);
   }
+
+  function showPop(msg) {
+    popText.textContent = msg;
+    popEl.classList.add('show');
+    clearTimeout(popTimer);
+    popTimer = setTimeout(() => popEl.classList.remove('show'), 2800);
+  }
+
+  function setQty(key, delta) {
+    let cart = readCart();
+    const l = cart.find(x => lineKey(x) === key);
+    if (!l) return;
+    l.qty += delta;
+    if (l.qty <= 0) cart = cart.filter(x => lineKey(x) !== key);
+    writeCart(cart);
+    syncCart();
+  }
+  function removeLine(key) { writeCart(readCart().filter(x => lineKey(x) !== key)); syncCart(); }
+  function clearCart() { writeCart([]); syncCart(); }
+
+  function syncCart() {
+    const cart = readCart();
+    const n = totalQty(cart);
+    document.querySelectorAll('.cart-count').forEach(el => el.textContent = n);
+    renderDrawer(cart);
+  }
+
+  function renderDrawer(cart) {
+    if (!cart.length) {
+      cartBody.innerHTML = `<div class="cart-empty">
+        <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#A7B3AA" stroke-width="1.5"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <p style="font-weight:600;color:#4a6b55;margin-bottom:0.3rem;">Your cart is empty</p>
+        <p style="font-size:0.8rem;">Browse the products and add something you love.</p>
+      </div>`;
+      cartFoot.innerHTML = '';
+      cartFoot.style.display = 'none';
+      return;
+    }
+    cartFoot.style.display = 'block';
+    cartBody.innerHTML = cart.map(l => {
+      const key = lineKey(l);
+      const variant = [l.size, l.color].filter(Boolean).join(' · ');
+      return `<div class="cart-line">
+        <div>
+          <div class="cart-line-name">${l.name}</div>
+          ${variant ? `<div class="cart-line-variant">${variant}</div>` : ''}
+          <div class="cart-line-controls">
+            <div class="qty-stepper">
+              <button class="qty-btn" aria-label="Decrease quantity" onclick="setQty('${key}',-1)">&minus;</button>
+              <span class="qty-val">${l.qty}</span>
+              <button class="qty-btn" aria-label="Increase quantity" onclick="setQty('${key}',1)">+</button>
+            </div>
+            <button class="line-remove" onclick="removeLine('${key}')">Remove</button>
+          </div>
+        </div>
+        <div class="cart-line-price">${fmt(l.price * l.qty)}</div>
+      </div>`;
+    }).join('');
+    cartFoot.innerHTML = `
+      <div class="cart-subtotal"><span class="lbl">Subtotal</span><span class="amt">${fmt(totalPrice(cart))}</span></div>
+      <button class="cart-checkout" onclick="checkout()">Checkout</button>
+      <button class="cart-clear" onclick="clearCart()">Clear cart</button>`;
+  }
+
+  function checkout() {
+    cartFoot.innerHTML = `
+      <div class="cart-contact-msg"><strong>Almost there!</strong> We don't take card payments online yet &mdash; to complete your order, just reach out and we'll sort out payment &amp; delivery:<br>
+        <a href="mailto:info@dnmphuket.org">info@dnmphuket.org</a><br>
+        <a href="tel:+66947362815">+66 94 736 2815</a>
+      </div>
+      <a class="cart-contact-btn" href="contact.html">Contact us to order</a>
+      <button class="cart-clear" onclick="syncCart()">&larr; Back to cart</button>`;
+  }
+
+  // Drawer open/close
+  function openCart() {
+    syncCart();
+    overlay.classList.add('show');
+    drawer.classList.add('show');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('cartCloseBtn').focus();
+  }
+  function closeCart() {
+    overlay.classList.remove('show');
+    drawer.classList.remove('show');
+    drawer.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+  document.getElementById('cartBtn').addEventListener('click', openCart);
+  document.getElementById('cartCloseBtn').addEventListener('click', closeCart);
+  overlay.addEventListener('click', closeCart);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && drawer.classList.contains('show')) closeCart(); });
+
+  syncCart(); // init badge + drawer from storage
 
   function filterProducts(cat, btn) {
     document.querySelectorAll('.filter-btn').forEach(b => {
