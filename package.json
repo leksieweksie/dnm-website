@@ -2,7 +2,7 @@
   "name": "dnm-website",
   "version": "1.0.0",
   "type": "module",
-  "dependencies": {
+  "devDependencies": {
     "puppeteer": "^21.11.0"
   }
 }

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/tailwind.css" />
-  <link rel="stylesheet" href="assets/site.css?v=20260608-4" />
+  <link rel="stylesheet" href="assets/site.css?v=20260610-settingsscroll4" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
@@ -30,15 +30,20 @@
     .stat-pill{display:inline-flex;align-items:center;gap:0.4rem;background:#E8F5EC;color:#1F6B3A;font-size:0.75rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.35rem 0.85rem;border-radius:50px;}
     .source-link{color:#1F6B3A;text-decoration:none;font-weight:600;}
     .source-link:hover{color:#0F2E1A;text-decoration:none;}
-    .trend-desc{color:#4F5D52;font-family:'Roboto',sans-serif;font-size:0.9rem;line-height:1.7;margin-top:1.25rem;transition:opacity 0.15s ease;}
-    .trend-desc strong{color:#1F6B3A;font-weight:700;}
-    @media (prefers-reduced-motion: reduce){.trend-desc{transition:none;}}
+    .stat-note{color:#4F5D52;font-family:'Roboto',sans-serif;font-size:0.9rem;line-height:1.7;margin-top:1.25rem;transition:opacity 0.15s ease;}
+    .stat-note strong{color:#1F6B3A;font-weight:700;}
+    .trend-banner{background:#E8F5EC;border-left:4px solid #1F6B3A;border-radius:10px;padding:0.95rem 1rem;margin:1rem 0 1.25rem;color:#102418;font-size:0.88rem;line-height:1.65;}
+    .trend-banner strong{color:#0F2E1A;}
+    .typewriter-cursor::after{content:'|';display:inline-block;margin-left:2px;color:#3FAE5A;font-weight:700;animation:cursorBlink 0.85s steps(1,end) infinite;}
+    @keyframes cursorBlink{50%{opacity:0;}}
+    @media (prefers-reduced-motion: reduce){.stat-note{transition:none;}.typewriter-cursor::after{display:none;animation:none;}}
     .movement-cta{display:inline-flex;align-items:center;gap:0.55rem;margin-top:1.15rem;background:#3FAE5A;color:#0F2E1A;font-family:'Roboto',sans-serif;font-size:0.9rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;padding:0.85rem 1.7rem;border-radius:9px;box-shadow:0 4px 16px rgba(63,174,90,0.38),0 1px 3px rgba(15,46,26,0.12);transition:background 0.2s ease,transform 0.18s cubic-bezier(0.34,1.56,0.64,1),box-shadow 0.2s ease;}
     .movement-cta:hover{background:#4dcc6e;transform:translateY(-2px);box-shadow:0 10px 26px rgba(63,174,90,0.48),0 2px 6px rgba(15,46,26,0.16);}
     .movement-cta:active{transform:translateY(0);box-shadow:0 3px 10px rgba(63,174,90,0.35);}
     .movement-cta:focus-visible{outline:2px solid #1F6B3A;outline-offset:3px;}
     .movement-cta .arrow{font-size:1.05rem;transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1);}
     .movement-cta:hover .arrow{transform:translateX(4px);}
+    .chart-frame{height:320px;position:relative;}
     .stats-layout{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,0.85fr);gap:2rem;margin-bottom:2rem;align-items:start;}
     .drug-catalog{display:grid;gap:0.65rem;}
     .drug-option{width:100%;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:0.75rem;border:1px solid #d1e8d8;background:#fff;color:#102418;border-radius:8px;padding:0.8rem 0.9rem;text-align:left;cursor:pointer;transition:background 0.2s ease,border-color 0.2s ease,transform 0.15s ease,box-shadow 0.2s ease;}
@@ -53,6 +58,7 @@
     .footer-link{color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.875rem;transition:color 0.2s ease;}
     .footer-link:hover{color:#3FAE5A;}
     @media (max-width:1024px){.stats-layout{grid-template-columns:1fr;}}
+    @media (max-width:640px){.chart-frame{height:380px;}}
   </style>
 </head>
 <body>
@@ -96,11 +102,11 @@
       <span style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">Data & Research</span>
     </div>
     <h1 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,5vw,4rem);color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:1rem;">Statistics</h1>
-    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;max-width:620px;line-height:1.75;">Source-backed public data from the ASEAN Drug Monitoring Report 2021 and a Thai secondary-school drug-use study.</p>
+    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;max-width:720px;line-height:1.75;">Current 2024 data shows Thailand and ASEAN are still facing major drug pressure, especially from YABA, ICE, and other synthetic drugs.</p>
     <div style="display:flex;flex-wrap:wrap;gap:0.75rem;margin-top:1.5rem;">
-      <span class="stat-pill">ASEAN Report 2021</span>
+      <span class="stat-pill">ASEAN Report 2024</span>
+      <span class="stat-pill">UNODC 2025</span>
       <span class="stat-pill">JMAT Study</span>
-      <span class="stat-pill">Thailand Data</span>
     </div>
   </div>
 </section>
@@ -110,20 +116,20 @@
   <div class="max-w-7xl mx-auto px-6">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
       <div>
-        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:2.25rem;color:#fff;line-height:1;">2026</div>
-        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Year of establishment</div>
+        <div class="counter-num" data-target="1172.86" data-decimals="1" data-suffix="M">0M</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">YABA tablets seized in Thailand, 2024</div>
       </div>
       <div>
-        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:2.25rem;color:#fff;line-height:1;">78.78%</div>
-        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Yaba among treatment drugs</div>
+        <div class="counter-num" data-target="34622" data-suffix=" kg">0 kg</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">ICE seized in Thailand, 2024</div>
       </div>
       <div>
-        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:2.25rem;color:#fff;line-height:1;">4</div>
-        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Founding team members</div>
+        <div class="counter-num" data-target="239074" data-suffix=" kg">0 kg</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">ATS seized across ASEAN, 2024</div>
       </div>
       <div>
-        <div style="font-family:'Playfair Display',serif;font-weight:900;font-size:2.25rem;color:#fff;line-height:1;">1</div>
-        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">Island, 1 community</div>
+        <div class="counter-num" data-target="121490" data-suffix=" kg">0 kg</div>
+        <div style="color:rgba(255,255,255,0.65);font-size:0.8rem;letter-spacing:0.06em;text-transform:uppercase;margin-top:0.4rem;">ATS seized in first half of 2024</div>
       </div>
     </div>
   </div>
@@ -136,19 +142,20 @@
     <div class="stats-layout">
       <div class="chart-card fade-in">
         <div style="margin-bottom:1.25rem;">
-          <h3 id="substanceChartTitle" style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;">Usage Statistics</h3>
-          <p id="substanceChartMeta" style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Methamphetamine usage trend index, 2018-2025</p>
+          <h3 id="substanceChartTitle" style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;">Usage Trends</h3>
+          <p id="substanceChartMeta" style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Methamphetamine: Thailand YABA seizures, 2020-2024</p>
         </div>
-        <canvas id="chart1" height="190"></canvas>
-        <p class="trend-desc" id="trendDesc"><strong>Methamphetamine</strong> use in Phuket has risen by roughly <strong>125%</strong> on our index since 2018. This is where we come in — we work to prevent more people from using drugs and to stop addiction and death. Join our movement, whether through a small donation or becoming part of our team, to help us fight this growing problem.</p>
+        <p class="trend-banner"><strong>Why this matters:</strong> Thailand's 2024 YABA seizures reached a five-year high, and ASEAN says methamphetamine made up 97.1% of all ATS seizures.</p>
+        <div class="chart-frame"><canvas id="chart1"></canvas></div>
+        <p class="stat-note" id="statNote"><strong>Methamphetamine</strong> now uses Thailand seizure data from 2020-2024, with 2024 reaching 1,172.86 million YABA tablets and 34,622 kg of ICE.</p>
         <a class="movement-cta" href="join.html">Join The Movement <span class="arrow" aria-hidden="true">&rarr;</span></a>
-        <p style="color:#A7B3AA;font-size:0.72rem;margin-top:1rem;">Baseline sources: <a class="source-link" href="https://asean.org/wp-content/uploads/2023/11/Drug-Monitoring-Report-2021.pdf" target="_blank" rel="noopener">ASEAN Drug Monitoring Report 2021</a> and <a class="source-link" href="http://www.jmatonline.com/PDF/1281-7_N107.pdf" target="_blank" rel="noopener">JMAT study</a></p>
+        <p id="chartSource" style="color:#A7B3AA;font-size:0.72rem;margin-top:1rem;">Source: <a class="source-link" href="https://aseannarco.oncb.go.th/uploads/Ebook/pdf/1850470172236778.pdf" target="_blank" rel="noopener">ASEAN Drug Monitoring Report 2024</a> and <a class="source-link" href="https://www.unodc.org/roseap/uploads/documents/Publications/2025/Synthetic_Drugs_in_East_and_Southeast_Asia_2025.pdf" target="_blank" rel="noopener">UNODC Synthetic Drugs Report 2025</a>.</p>
       </div>
 
       <div class="chart-card fade-in" style="transition-delay:0.1s;">
         <div style="margin-bottom:1.25rem;">
           <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#0F2E1A;">Substances</h3>
-          <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Pick a substance to update the chart and the trend below</p>
+          <p style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Pick a substance to update the bar chart</p>
         </div>
         <div id="drugCatalog" class="drug-catalog" aria-label="Select substance"></div>
       </div>
@@ -188,7 +195,7 @@
         <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Contact</h4>
         <div style="display:flex;flex-direction:column;gap:0.6rem;">
           <span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">Phuket, Thailand</span>
-          <a href="mailto:info@drugsnomore.org" class="footer-link">info@drugsnomore.org</a>
+          <a href="mailto:deniel@robot.co" class="footer-link">deniel@robot.co</a>
           <a href="tel:+66947362815" class="footer-link">+66 94 736 2815</a>
         </div>
       </div>
@@ -199,7 +206,7 @@
   </div>
 </footer>
 
-<script src="assets/chart.umd.min.js"></script>
+<script src="assets/chart.umd.min.js?v=20260610-trends"></script>
 <script>
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 40), { passive: true });
@@ -215,7 +222,7 @@
       return;
     }
     const script = document.createElement('script');
-    script.src = 'assets/chart.umd.min.js';
+    script.src = 'assets/chart.umd.min.js?v=20260610-trends';
     script.onload = callback;
     document.head.appendChild(script);
   }
@@ -227,52 +234,128 @@
       brown: '#8A4F2A', purple: '#6A4FA3', teal: '#2F7C8F', olive: '#6FAA75', blue: '#3D6FA8'
     };
     const formatNumber = value => Number(value).toLocaleString();
+    const formatValue = (value, unit) => {
+      if (unit === '%') return `${Number(value).toFixed(value < 10 ? 2 : 1)}%`;
+      if (unit === 'million tablets') return `${Number(value).toLocaleString(undefined, { maximumFractionDigits: 2 })}M tablets`;
+      if (unit === 'metric tons') return `${Number(value).toLocaleString(undefined, { maximumFractionDigits: 2 })} metric tons`;
+      if (unit === 'kg') return `${formatNumber(value)} kg`;
+      if (unit === 'tablets') return `${formatNumber(value)} tablets`;
+      if (unit === 'cases') return `${formatNumber(value)} cases`;
+      if (unit === 'people') return `${formatNumber(value)} people`;
+      return formatNumber(value);
+    };
+    const formatAxisValue = (value, unit) => {
+      const number = Number(value);
+      if (unit === '%') return `${number}%`;
+      if (unit === 'million tablets') return `${number}M`;
+      if (unit === 'metric tons') return `${number}t`;
+      if (unit === 'kg') return number >= 1000 ? `${Math.round(number / 1000)}k kg` : `${number} kg`;
+      if (unit === 'tablets') return number >= 1000 ? `${Math.round(number / 1000)}k` : `${number}`;
+      return formatNumber(number);
+    };
+    const wrapAxisLabel = (label) => {
+      const text = String(label);
+      if (text.length <= 18) return text;
+      const words = text.split(' ');
+      const lines = [];
+      let line = '';
+      words.forEach((word) => {
+        const next = line ? `${line} ${word}` : word;
+        if (next.length > 18 && line) {
+          lines.push(line);
+          line = word;
+        } else {
+          line = next;
+        }
+      });
+      if (line) lines.push(line);
+      return lines.slice(0, 3);
+    };
+    const suggestedMaxFor = (drug) => {
+      if (drug.unit === '%') return 100;
+      const max = Math.max(...drug.values);
+      return Math.ceil(max * 1.15);
+    };
     const tooltip = {
       backgroundColor: '#0F2E1A', titleColor: '#3FAE5A',
       bodyColor: '#fff', borderColor: '#1F6B3A', borderWidth: 1, cornerRadius: 8,
-      callbacks: { label: ctx => ` ${ctx.dataset.label || 'Value'}: ${formatNumber(ctx.raw)}` }
+      callbacks: { label: ctx => ` ${ctx.dataset.label || 'Value'}: ${formatValue(ctx.raw, ctx.dataset.unit)}` }
     };
 
-    const drugYears = ['2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'];
-    const drugCatalog = [
-      { name: 'Methamphetamine', subtitle: 'Yaba / Ice / Crystal Meth', color: G.forest, values: [100, 112, 128, 142, 158, 176, 198, 225] },
-      { name: 'Cannabis', subtitle: 'Marijuana / Weed', color: G.primary, values: [100, 108, 116, 132, 164, 181, 196, 214] },
-      { name: 'Heroin', subtitle: 'Opioid / Depressant', color: G.blue, values: [100, 106, 118, 132, 149, 164, 181, 199] },
-      { name: 'Kratom', subtitle: 'Mitragyna speciosa', color: G.accent, values: [100, 103, 108, 115, 126, 138, 151, 166] },
-      { name: 'Alcohol', subtitle: 'Depressant', color: G.brown, values: [100, 101, 103, 106, 110, 115, 121, 128] },
-      { name: 'Inhalants', subtitle: 'Solvents / Aerosols', color: G.olive, values: [100, 104, 109, 117, 126, 137, 149, 162] },
-      { name: 'MDMA / Ecstasy', subtitle: 'Party drug / Stimulant', color: '#EC4899', values: [100, 102, 105, 112, 122, 134, 148, 164] },
-      { name: 'Cocaine', subtitle: 'Stimulant', color: '#14B8A6', values: [100, 105, 112, 123, 135, 149, 164, 181] },
-      { name: 'Benzodiazepines', subtitle: 'Sedatives', color: G.purple, values: [100, 107, 116, 129, 144, 160, 178, 198] },
+    const ASEAN2024_URL = 'https://aseannarco.oncb.go.th/uploads/Ebook/pdf/1850470172236778.pdf';
+    const UNODC2025_URL = 'https://www.unodc.org/roseap/uploads/documents/Publications/2025/Synthetic_Drugs_in_East_and_Southeast_Asia_2025.pdf';
+    const NSO2025_URL = 'https://www.nso.go.th/public/e-book/Statistical-Yearbook/SYB-2025/228/';
+    const JMAT_URL = 'http://www.jmatonline.com/PDF/1281-7_N107.pdf';
+    const asean2024Source = { label: 'ASEAN Drug Monitoring Report 2024', href: ASEAN2024_URL };
+    const unodc2025Source = { label: 'UNODC Synthetic Drugs Report 2025', href: UNODC2025_URL };
+    const nso2025Source = { label: 'Thailand Statistical Yearbook 2025', href: NSO2025_URL };
+    const jmatSource = { label: 'JMAT student drug-use study', href: JMAT_URL };
+    const substanceStats = [
+      { name: 'Methamphetamine', subtitle: 'Thailand YABA 2020-2024', color: G.forest, labels: ['2020', '2021', '2022', '2023', '2024'], values: [380.17, 598.82, 552.34, 648.59, 1172.86], unit: 'million tablets', metric: 'Thailand YABA seizures', sources: [asean2024Source, unodc2025Source], note: 'ASEAN 2024 reports Thailand YABA seizures rising from 380.17 million tablets in 2020 to 1,172.86 million tablets in 2024. UNODC 2025 also reports Thailand alone seized one billion methamphetamine tablets in 2024.' },
+      { name: 'Cannabis', subtitle: 'ASEAN treatment rebound', color: G.primary, labels: ['2022', '2023', '2024'], values: [8999, 12525, 15428], unit: 'people', metric: 'ASEAN cannabis users in treatment', sources: [asean2024Source], note: 'ASEAN 2024 reports cannabis treatment figures rebounding from 8,999 users in 2022 to 12,525 in 2023 and 15,428 in 2024, the highest figure since 2019.' },
+      { name: 'Heroin', subtitle: 'Thailand 2020-2024', color: G.blue, labels: ['2020', '2021', '2022', '2023', '2024'], values: [1829.47, 3439.82, 850.01, 1098.20, 2050.98], unit: 'kg', metric: 'Thailand heroin seizures', sources: [asean2024Source], note: 'ASEAN 2024 reports Thailand heroin seizures at 2,050.98 kg in 2024, higher than 2022 and 2023, after a five-year peak in 2021.' },
+      { name: 'Kratom', subtitle: 'NPS growth driven by kratom', color: G.accent, labels: ['2017', '2021', '2024'], values: [125, 495, 125], unit: 'metric tons', metric: 'ASEAN NPS seizures', sources: [asean2024Source], note: 'ASEAN 2024 says total NPS seizures rose from 125 metric tons in 2017 to 495 metric tons in 2021, with the rise predominantly driven by kratom. In 2024, kratom still made up about 117 metric tons, or 93.2% of all NPS seizures.' },
+      { name: 'Alcohol', subtitle: 'Thailand youth drinking', color: G.brown, labels: ['2021', '2024'], values: [9.0, 9.6], unit: '%', metric: 'Thailand alcohol consumption, age 15-19', sources: [nso2025Source], note: 'Thailand Statistical Yearbook 2025 reports alcohol consumption behaviour by age group for 2021 and 2024. For ages 15-19, the charted value rises from 9.0% in 2021 to 9.6% in 2024.' },
+      { name: 'Inhalants', subtitle: 'ASEAN treated users', color: G.olive, labels: ['2017', '2018'], values: [1227, 1262], unit: 'people', metric: 'ASEAN inhalant users in treatment', sources: [asean2024Source, jmatSource], note: 'ASEAN 2024 reports inhalants as the most prevalent hallucinogenic substance in treatment data, with 1,227 treated users in 2017 and a peak of 1,262 in 2018. JMAT is kept as the Thai youth source for inhalant context.' },
+      { name: 'MDMA / Ecstasy', subtitle: 'Regional 2023-2024 spike', color: '#EC4899', labels: ['2015-2022 high', '2023', '2024'], values: [7, 26.7, 16.7], unit: 'million tablets', metric: 'East and Southeast Asia ecstasy seizures', sources: [unodc2025Source, asean2024Source], note: 'UNODC 2025 reports ecstasy seizures previously hovered between 3 and 7 million tablets yearly, then reached the equivalent of 26.7 million tablets in 2023 and 16.7 million in 2024.' },
+      { name: 'Cocaine', subtitle: 'ASEAN 2020-2024', color: '#14B8A6', labels: ['2020', '2021', '2022', '2023', '2024'], values: [48.3, 52.9, 149.3, 380.5, 258.8], unit: 'kg', metric: 'ASEAN cocaine seizures', sources: [asean2024Source], note: 'ASEAN 2024 reports cocaine seizures rising from 48.3 kg in 2020 to 380.5 kg in 2023, then remaining elevated at 258.8 kg in 2024.' },
+      { name: 'Benzodiazepines', subtitle: 'ASEAN treatment growth', color: G.purple, labels: ['2017 H1', '2024 H2'], values: [16, 309], unit: 'people', metric: 'ASEAN benzodiazepine treatment cases', sources: [asean2024Source], note: 'ASEAN 2024 reports benzodiazepine-related treatment cases increasing from 16 in the first half of 2017 to 309 in the second half of 2024, with benzodiazepines the most frequently reported CNS depressants.' },
     ];
 
     Chart.defaults.font.family = 'Roboto';
 
-    const usageTrendChart = new Chart(document.getElementById('chart1'), {
+    const usageChart = new Chart(document.getElementById('chart1'), {
       type: 'bar',
       data: {
-        labels: drugYears,
+        labels: substanceStats[0].labels,
         datasets: [{
-          label: 'Methamphetamine usage index',
-          data: drugCatalog[0].values,
-          backgroundColor: drugCatalog[0].color,
+          label: substanceStats[0].metric,
+          unit: substanceStats[0].unit,
+          data: substanceStats[0].values,
+          backgroundColor: substanceStats[0].color,
+          barThickness: 28,
+          maxBarThickness: 32,
           borderRadius: 8,
           borderSkipped: false
         }]
       },
       options: {
         responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: { top: 4, right: 10, bottom: 2, left: 4 } },
         animation: { duration: 650, easing: 'easeOutQuart' },
-        plugins: { legend: { display: false }, tooltip: { ...tooltip, callbacks: { label: ctx => ` Usage index: ${ctx.raw}` } } },
+        plugins: { legend: { display: false }, tooltip },
         scales: {
-          x: { grid: { display: false }, ticks: { color: '#102418', font: { size: 12 } } },
-          y: { grid: { color: 'rgba(0,0,0,0.04)' }, ticks: { color: G.muted, font: { size: 11 } }, beginAtZero: true, suggestedMax: 240 }
+          x: {
+            grid: { display: false },
+            ticks: {
+              color: '#102418',
+              font: { size: 12 },
+              autoSkip: false,
+              maxRotation: 0,
+              padding: 8,
+              callback: function(value) {
+                return wrapAxisLabel(this.getLabelForValue(value));
+              }
+            }
+          },
+          y: {
+            beginAtZero: true,
+            suggestedMax: suggestedMaxFor(substanceStats[0]),
+            grid: { color: 'rgba(0,0,0,0.04)' },
+            ticks: {
+              color: G.muted,
+              font: { size: 11 },
+              maxTicksLimit: 5,
+              callback: value => formatAxisValue(value, substanceStats[0].unit)
+            }
+          }
         }
       }
     });
 
     const catalogWrap = document.getElementById('drugCatalog');
-    drugCatalog.forEach((drug, index) => {
+    substanceStats.forEach((drug, index) => {
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'drug-option';
@@ -289,41 +372,74 @@
       catalogWrap.appendChild(button);
     });
 
-    const trendDesc = document.getElementById('trendDesc');
+    const statNote = document.getElementById('statNote');
+    const chartMeta = document.getElementById('substanceChartMeta');
+    const chartSource = document.getElementById('chartSource');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let trendFadeTimer;
-    let trendInitialized = false;
-    function buildTrendHtml(drug) {
-      const pct = Math.round((drug.values[drug.values.length - 1] - 100) / 5) * 5;
-      return `<strong>${drug.name}</strong> use in Phuket has risen by roughly <strong>${pct}%</strong> on our index since 2018. This is where we come in — we work to prevent more people from using drugs and to stop addiction and death. Join our movement, whether through a small donation or becoming part of our team, to help us fight this growing problem.`;
+    function escapeHtml(text) {
+      return text.replace(/[&<>"']/g, char => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[char]);
     }
-    function updateTrendDesc(drug) {
-      if (!trendDesc) return;
-      const html = buildTrendHtml(drug);
-      clearTimeout(trendFadeTimer);
-      // First paint (matches the seed markup) and reduced-motion users: swap instantly, no fade.
-      if (!trendInitialized || reduceMotion.matches) {
-        trendInitialized = true;
-        trendDesc.innerHTML = html;
-        trendDesc.style.opacity = '1';
+    function typeText(el, text, options = {}) {
+      if (!el) return;
+      const { speed = 14, step = 2, boldPrefix = '' } = options;
+      const version = (el.dataset.typewriterVersion = String(Number(el.dataset.typewriterVersion || 0) + 1));
+      let index = 0;
+      const render = () => {
+        const typed = text.slice(0, index);
+        if (!boldPrefix) {
+          el.textContent = typed;
+          return;
+        }
+        if (typed.length <= boldPrefix.length) {
+          el.innerHTML = `<strong>${escapeHtml(typed)}</strong>`;
+          return;
+        }
+        el.innerHTML = `<strong>${escapeHtml(boldPrefix)}</strong>${escapeHtml(typed.slice(boldPrefix.length))}`;
+      };
+      if (reduceMotion.matches || document.documentElement.classList.contains('dnm-reduce-motion')) {
+        index = text.length;
+        render();
+        el.classList.remove('typewriter-cursor');
         return;
       }
-      trendDesc.style.opacity = '0';
-      trendFadeTimer = setTimeout(() => {
-        trendDesc.innerHTML = html;
-        trendDesc.style.opacity = '1';
-      }, 150);
+      el.classList.add('typewriter-cursor');
+      render();
+      const tick = () => {
+        if (el.dataset.typewriterVersion !== version) return;
+        index = Math.min(index + step, text.length);
+        render();
+        if (index < text.length) {
+          window.setTimeout(tick, speed);
+        } else {
+          el.classList.remove('typewriter-cursor');
+        }
+      };
+      window.setTimeout(tick, speed);
+    }
+    function updateStatNote(drug) {
+      if (!statNote) return;
+      typeText(statNote, `${drug.name}: ${drug.note}`, { boldPrefix: drug.name, speed: 24, step: 1 });
     }
 
     function updateDrugDetail(index) {
-      const drug = drugCatalog[index];
-      usageTrendChart.data.datasets[0].label = `${drug.name} usage index`;
-      usageTrendChart.data.datasets[0].data = drug.values;
-      usageTrendChart.data.datasets[0].backgroundColor = drug.color;
-      usageTrendChart.update();
-      document.getElementById('substanceChartTitle').textContent = 'Usage Statistics';
-      document.getElementById('substanceChartMeta').textContent = `${drug.name} usage trend index, 2018-2025`;
-      updateTrendDesc(drug);
+      const drug = substanceStats[index];
+      usageChart.data.labels = drug.labels;
+      usageChart.data.datasets[0].label = drug.metric;
+      usageChart.data.datasets[0].unit = drug.unit;
+      usageChart.data.datasets[0].data = drug.values;
+      usageChart.data.datasets[0].backgroundColor = drug.color;
+      usageChart.options.scales.y.ticks.callback = value => formatAxisValue(value, drug.unit);
+      usageChart.options.scales.y.suggestedMax = suggestedMaxFor(drug);
+      usageChart.update();
+      document.getElementById('substanceChartTitle').textContent = 'Usage Trends';
+      typeText(chartMeta, `${drug.name}: ${drug.metric}`, { speed: 36, step: 1 });
+      if (chartSource) {
+        const sourceLinks = drug.sources.map(source => `<a class="source-link" href="${source.href}" target="_blank" rel="noopener">${source.label}</a>`);
+        chartSource.innerHTML = `Source: ${sourceLinks.join(', ')}.`;
+      }
+      updateStatNote(drug);
       document.querySelectorAll('.drug-option').forEach((button, i) => {
         button.classList.toggle('active', i === index);
       });
@@ -343,6 +459,6 @@
     loadChartScript(initStatisticsChart);
   }
 </script>
-<script src="assets/site.js"></script>
+<script src="assets/site.js?v=20260610-settingsscroll4"></script>
 </body>
 </html>

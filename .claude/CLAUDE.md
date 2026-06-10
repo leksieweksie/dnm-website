@@ -56,3 +56,7 @@
 
 ## Git Push
 - Do not push changes to Git Hub unless you're explicitly told to. When making changes only update the local host website. Only after you are told to push these changes to Git Hub when told to.
+
+## Live Website
+- Production domain: **https://dnm-website-nine.vercel.app**
+- Hosted on Vercel, deploys automatically from the `main` branch on GitHub.
