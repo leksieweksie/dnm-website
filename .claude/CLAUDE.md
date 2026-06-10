@@ -3,6 +3,10 @@
 ## Always Do First
 - **Invoke the `frontend-design` skill** before writing any frontend code, every session, no exceptions.
 
+## Asking Questions
+- **Ask whenever there is any uncertainty, no matter how small.** Never assume — if there is ambiguity about scope, design direction, content, behavior, or preference, stop and ask before proceeding.
+- This applies even mid-task: if something unexpected comes up, pause and check with the user rather than making a judgment call silently.
+
 ## Reference Images
 - If a reference image is provided: match layout, spacing, typography, and color exactly. Swap in placeholder content (images via `https://placehold.co/`, generic copy). Do not improve or add to the design.
 - If no reference image: design from scratch with high craft (see guardrails below).
