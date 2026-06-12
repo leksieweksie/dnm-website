@@ -206,9 +206,70 @@
     counters.forEach((el) => counterObserver.observe(el));
   }
 
+  function mountImageLightbox() {
+    const triggers = document.querySelectorAll('[data-dnm-lightbox]');
+    if (!triggers.length || document.getElementById('dnmImageLightbox')) return;
+
+    const overlay = document.createElement('div');
+    overlay.id = 'dnmImageLightbox';
+    overlay.className = 'dnm-image-lightbox';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Image viewer');
+    overlay.innerHTML = `
+      <button type="button" class="dnm-image-lightbox-close" aria-label="Close image">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+      <img alt="" />
+      <span class="dnm-image-lightbox-caption"></span>
+    `;
+
+    const img = overlay.querySelector('img');
+    const caption = overlay.querySelector('.dnm-image-lightbox-caption');
+
+    const close = () => {
+      overlay.classList.remove('open');
+      document.body.style.overflow = '';
+    };
+    const open = (trigger) => {
+      const src = trigger.dataset.dnmLightbox;
+      const label = trigger.dataset.dnmCaption || '';
+      if (!src) return;
+      img.src = src;
+      img.alt = label;
+      caption.textContent = label;
+      caption.style.display = label ? 'block' : 'none';
+      overlay.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    };
+
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay || event.target.closest('.dnm-image-lightbox-close')) close();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && overlay.classList.contains('open')) close();
+    });
+
+    triggers.forEach((trigger) => {
+      trigger.classList.add('dnm-lightbox-trigger');
+      trigger.setAttribute('tabindex', '0');
+      trigger.setAttribute('role', 'button');
+      trigger.addEventListener('click', () => open(trigger));
+      trigger.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          open(trigger);
+        }
+      });
+    });
+
+    document.body.appendChild(overlay);
+  }
+
   function mountSharedUi() {
     mountSettingsPanel();
     mountCounters();
+    mountImageLightbox();
   }
 
   if (document.readyState === 'loading') {

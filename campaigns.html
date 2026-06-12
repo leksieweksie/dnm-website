@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/tailwind.css" />
-  <link rel="stylesheet" href="assets/site.css?v=20260612-campaigns" />
+  <link rel="stylesheet" href="assets/site.css?v=20260612-photo-lightbox" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
@@ -40,6 +40,9 @@
     .campaign-image{height:230px;background:linear-gradient(135deg,#f7fbf8 0%,#E8F5EC 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
     .campaign-image::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid rgba(63,174,90,0.28);}
     .campaign-image::after{content:'';position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(63,174,90,0.12);filter:blur(7px);}
+    .campaign-image.has-photo::before,.campaign-image.has-photo::after{display:none;}
+    .campaign-photo{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.4s ease;}
+    .campaign-image.has-photo:hover .campaign-photo{transform:scale(1.02);}
     .campaign-placeholder{position:relative;z-index:2;color:#1F6B3A;font-size:0.74rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;text-align:center;}
     .campaign-content{padding:1.6rem;}
     .campaign-date{display:inline-flex;align-items:center;background:#E8F5EC;color:#1F6B3A;border-radius:999px;padding:0.35rem 0.8rem;font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.9rem;}
@@ -122,8 +125,8 @@
           <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
         </div>
         <div style="text-align:left;">
-          <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;line-height:1;">3</div>
-          <div style="font-size:0.75rem;color:#A7B3AA;margin-top:0.15rem;">campaign placeholders</div>
+          <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;line-height:1;">1</div>
+          <div style="font-size:0.75rem;color:#A7B3AA;margin-top:0.15rem;">campaign</div>
         </div>
       </div>
     </div>
@@ -132,35 +135,13 @@
       <article class="campaign-step">
         <div class="campaign-node" aria-hidden="true"></div>
         <div class="campaign-card fade-in">
-          <div class="campaign-image"><span class="campaign-placeholder">Image coming soon</span></div>
+          <div class="campaign-image has-photo" data-dnm-lightbox="assets/visuals/dnm-community-campaign.jpg" data-dnm-caption="BISP Campaign in 2026">
+            <img class="campaign-photo" loading="lazy" decoding="async" src="assets/visuals/dnm-community-campaign.jpg" width="1600" height="1200" alt="BISP Campaign in 2026" />
+          </div>
           <div class="campaign-content">
             <div class="campaign-date">2026</div>
             <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.45rem;color:#0F2E1A;margin-bottom:0.65rem;">BISP Campaign in 2026</h3>
-            <p class="campaign-summary">A placeholder for the first DNM campaign at British International School Phuket. Photos and campaign details will be added here later.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="campaign-step">
-        <div class="campaign-node" aria-hidden="true"></div>
-        <div class="campaign-card fade-in">
-          <div class="campaign-image"><span class="campaign-placeholder">Image coming soon</span></div>
-          <div class="campaign-content">
-            <div class="campaign-date">Coming Soon</div>
-            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.45rem;color:#0F2E1A;margin-bottom:0.65rem;">School Awareness Campaign</h3>
-            <p class="campaign-summary">A future campaign placeholder for school-based awareness activities, student conversations, and prevention resources.</p>
-          </div>
-        </div>
-      </article>
-
-      <article class="campaign-step">
-        <div class="campaign-node" aria-hidden="true"></div>
-        <div class="campaign-card fade-in">
-          <div class="campaign-image"><span class="campaign-placeholder">Image coming soon</span></div>
-          <div class="campaign-content">
-            <div class="campaign-date">Coming Soon</div>
-            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.45rem;color:#0F2E1A;margin-bottom:0.65rem;">Community Outreach Campaign</h3>
-            <p class="campaign-summary">A placeholder for future Phuket community outreach once DNM is ready to document real events and results.</p>
+            <p class="campaign-summary">DNM's first school campaign at British International School Phuket, focused on raising awareness, sharing prevention resources, and starting student-led conversations about safer choices.</p>
           </div>
         </div>
       </article>
@@ -223,6 +204,6 @@
 
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
-<script src="assets/site.js?v=20260612-campaigns"></script>
+<script src="assets/site.js?v=20260612-photo-lightbox"></script>
 </body>
 </html>
