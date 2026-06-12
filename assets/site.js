@@ -141,6 +141,7 @@
     }, { passive: true });
     const desktopJoinButton = document.querySelector('.navbar > div .nav-cta[href="join.html"]');
     if (desktopJoinButton?.parentElement) {
+      desktopJoinButton.parentElement.classList.add('dnm-settings-cluster');
       desktopJoinButton.insertAdjacentElement('afterend', toggle);
     } else {
       document.body.appendChild(toggle);
