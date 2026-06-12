@@ -165,10 +165,10 @@
 <!-- FILTER BAR -->
 <section style="background:#fff;border-bottom:1px solid #E8F5EC;padding:1rem 0;position:sticky;top:64px;z-index:50;">
   <div class="max-w-7xl mx-auto px-6 flex items-center gap-3 overflow-x-auto">
-    <button onclick="filterProducts('all',this)" class="filter-btn" style="background:#0F2E1A;color:#fff;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:background 0.2s ease,color 0.2s ease;">All</button>
-    <button onclick="filterProducts('clothing',this)" class="filter-btn" style="background:#E8F5EC;color:#1F6B3A;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:background 0.2s ease,color 0.2s ease;">Clothing</button>
-    <button onclick="filterProducts('accessories',this)" class="filter-btn" style="background:#E8F5EC;color:#1F6B3A;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:background 0.2s ease,color 0.2s ease;">Accessories</button>
-    <button onclick="filterProducts('stationery',this)" class="filter-btn" style="background:#E8F5EC;color:#1F6B3A;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:background 0.2s ease,color 0.2s ease;">Stationery</button>
+    <button onclick="filterProducts('all',this)" class="filter-btn" style="background:#0F2E1A;color:#fff;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:all 0.2s ease;">All</button>
+    <button onclick="filterProducts('shirts',this)" class="filter-btn" style="background:#E8F5EC;color:#1F6B3A;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:all 0.2s ease;">Shirts</button>
+    <button onclick="filterProducts('stickers',this)" class="filter-btn" style="background:#E8F5EC;color:#1F6B3A;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:all 0.2s ease;">Stickers</button>
+    <button onclick="filterProducts('coming-soon',this)" class="filter-btn" style="background:#E8F5EC;color:#1F6B3A;border:none;border-radius:50px;padding:0.45rem 1.1rem;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.04em;white-space:nowrap;cursor:pointer;transition:all 0.2s ease;">Coming Soon</button>
   </div>
 </section>
 
@@ -177,19 +177,19 @@
   <div class="max-w-7xl mx-auto px-6">
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-7" id="productGrid">
 
-      <!-- Product 1: T-Shirt -->
-      <div class="product-card fade-in" data-cat="clothing">
+      <!-- Product 1: Shirt -->
+      <div class="product-card fade-in" data-cat="shirts">
         <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-tshirt.svg" width="400" height="300" alt="DNM T-Shirt" />
+          <img id="shirtProductImage" loading="lazy" decoding="async" src="assets/visuals/product-tshirt.svg" width="400" height="300" alt="DNM Long Sleeve T-Shirt" />
           <div class="overlay"></div>
           <div style="position:absolute;top:0.75rem;left:0.75rem;">
             <span class="badge" style="background:#3FAE5A;color:#0F2E1A;">Bestseller</span>
           </div>
         </div>
         <div class="product-content">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Clothing</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Classic T-Shirt</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">100% organic cotton. DNM logo front, "Prevention through Education" back.</p>
+          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Shirts</div>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Long Sleeve T-Shirt</h3>
+          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Choose a shirt color and size before adding it to your cart.</p>
           <div style="margin-bottom:1rem;">
             <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">&#3647;390</span>
           </div>
@@ -203,192 +203,60 @@
             </div>
           </div>
           <div class="variant-row">
-            <div class="variant-label">Color</div>
+            <div id="shirtColorLabel" class="variant-label">Color: Green</div>
             <div class="color-swatches">
-              <button type="button" class="color-swatch" data-color="Dark Green" title="Dark Green" style="background:#0F2E1A;"></button>
-              <button type="button" class="color-swatch" data-color="White" title="White" style="background:#fff;"></button>
+              <button type="button" class="color-swatch selected" data-color="Green" onclick="setShirtColor('green', this)" title="Green" style="background:#3FAE5A;"></button>
+              <button type="button" class="color-swatch" data-color="Black" onclick="setShirtColor('black', this)" title="Black" style="background:#0F2E1A;"></button>
+              <button type="button" class="color-swatch" data-color="White" onclick="setShirtColor('white', this)" title="White" style="background:#fff;"></button>
             </div>
           </div>
           <p class="variant-nudge" data-nudge></p>
         </div>
-        <button class="add-to-cart" data-id="tshirt" data-name="DNM Classic T-Shirt" data-price="390" data-needs="size,color" onclick="addToCart(this)">
+        <button class="add-to-cart" data-id="tshirt" data-name="DNM Long Sleeve T-Shirt" data-price="390" data-needs="size,color" onclick="addToCart(this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Add to Cart
         </button>
       </div>
 
-      <!-- Product 2: Wristband -->
-      <div class="product-card fade-in" data-cat="accessories" style="transition-delay:0.06s;">
+      <!-- Product 2: Sticker Pack -->
+      <div class="product-card fade-in" data-cat="stickers" style="transition-delay:0.08s;">
         <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-wristband.svg" width="400" height="300" alt="DNM Wristband" />
+          <img loading="lazy" decoding="async" src="assets/dnmlogo.png" width="400" height="300" alt="DNM Icon Sticker Pack" style="background:#E8F5EC;padding:66px;object-fit:contain;" />
           <div class="overlay"></div>
         </div>
         <div class="product-content">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Accessories</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">Green Awareness Wristband</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Silicone wristband with embossed DNM logo. Available in packs of 3.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">&#3647;120</span>
-            <span style="font-size:0.75rem;color:#A7B3AA;">Pack of 3</span>
-          </div>
-        </div>
-        <button class="add-to-cart" data-id="wristband" data-name="Green Awareness Wristband" data-price="120" onclick="addToCart(this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
-      </div>
-
-      <!-- Product 3: Tote Bag -->
-      <div class="product-card fade-in" data-cat="accessories" style="transition-delay:0.12s;">
-        <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-tote-bag.svg" width="400" height="300" alt="DNM Tote Bag" />
-          <div class="overlay"></div>
-        </div>
-        <div class="product-content">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Accessories</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Canvas Tote Bag</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Natural canvas tote with DNM logo print. Reusable and sturdy for everyday use.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">&#3647;280</span>
-            <span class="badge" style="background:#E8F5EC;color:#1F6B3A;">Eco-friendly</span>
-          </div>
-        </div>
-        <button class="add-to-cart" data-id="tote" data-name="DNM Canvas Tote Bag" data-price="280" onclick="addToCart(this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
-      </div>
-
-      <!-- Product 4: Cap -->
-      <div class="product-card fade-in" data-cat="clothing" style="transition-delay:0.18s;">
-        <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-cap.svg" width="400" height="300" alt="DNM Cap" />
-          <div class="overlay"></div>
-        </div>
-        <div class="product-content">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Clothing</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Embroidered Cap</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Adjustable cotton cap with embroidered DNM logo. One size fits all.</p>
-          <div style="margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">&#3647;450</span>
-          </div>
-          <div class="variant-row">
-            <div class="variant-label">Color</div>
-            <div class="color-swatches">
-              <button type="button" class="color-swatch" data-color="Dark Green" title="Dark Green" style="background:#0F2E1A;"></button>
-              <button type="button" class="color-swatch" data-color="Green" title="Green" style="background:#1F6B3A;"></button>
-            </div>
-          </div>
-          <p class="variant-nudge" data-nudge></p>
-        </div>
-        <button class="add-to-cart" data-id="cap" data-name="DNM Embroidered Cap" data-price="450" data-needs="color" onclick="addToCart(this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
-      </div>
-
-      <!-- Product 5: Sticker Pack -->
-      <div class="product-card fade-in" data-cat="stationery" style="transition-delay:0.24s;">
-        <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-sticker-pack.svg" width="400" height="300" alt="DNM Sticker Pack" />
-          <div class="overlay"></div>
-          <div style="position:absolute;top:0.75rem;left:0.75rem;">
-            <span class="badge" style="background:#0F2E1A;color:#3FAE5A;">New</span>
-          </div>
-        </div>
-        <div class="product-content">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Stationery</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Sticker Pack</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">6 premium vinyl stickers with DNM motifs, leaf designs, and prevention slogans.</p>
+          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Stickers</div>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Icon Sticker Pack</h3>
+          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Logo-based sticker pack concept made for campus campaigns.</p>
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
             <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">&#3647;80</span>
-            <span style="font-size:0.75rem;color:#A7B3AA;">6 stickers</span>
+            <span style="font-size:0.75rem;color:#A7B3AA;">Sticker pack</span>
           </div>
         </div>
-        <button class="add-to-cart" data-id="stickers" data-name="DNM Sticker Pack" data-price="80" onclick="addToCart(this)">
+        <button class="add-to-cart" data-id="stickers" data-name="DNM Icon Sticker Pack" data-price="80" onclick="addToCart(this)">
           <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
           Add to Cart
         </button>
       </div>
 
-      <!-- Product 6: Water Bottle -->
-      <div class="product-card fade-in" data-cat="accessories" style="transition-delay:0.3s;">
+      <!-- Product 3: Water Bottle -->
+      <div class="product-card fade-in" data-cat="coming-soon" style="transition-delay:0.16s;">
         <div class="product-img-wrap">
           <img loading="lazy" decoding="async" src="assets/visuals/product-water-bottle.svg" width="400" height="300" alt="DNM Water Bottle" />
           <div class="overlay"></div>
-        </div>
-        <div class="product-content">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Accessories</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Insulated Water Bottle</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">500ml stainless steel, keeps drinks cold 24h. DNM logo laser-engraved.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">&#3647;650</span>
-            <span class="badge" style="background:#E8F5EC;color:#1F6B3A;">Eco-friendly</span>
-          </div>
-        </div>
-        <button class="add-to-cart" data-id="bottle" data-name="DNM Insulated Water Bottle" data-price="650" onclick="addToCart(this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
-      </div>
-
-      <!-- Product 7: Hoodie -->
-      <div class="product-card fade-in" data-cat="clothing" style="transition-delay:0.36s;">
-        <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-hoodie.svg" width="400" height="300" alt="DNM Hoodie" />
-          <div class="overlay"></div>
           <div style="position:absolute;top:0.75rem;left:0.75rem;">
-            <span class="badge" style="background:#3FAE5A;color:#0F2E1A;">Popular</span>
+            <span class="badge" style="background:#3FAE5A;color:#0F2E1A;">Coming Soon</span>
           </div>
         </div>
         <div class="product-content">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Clothing</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Forest Green Hoodie</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">Heavyweight cotton blend. Embroidered chest logo and "Drugs No More" text on reverse.</p>
-          <div style="margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">&#3647;890</span>
-          </div>
-          <div class="variant-row">
-            <div class="variant-label">Size</div>
-            <div class="size-pills">
-              <button type="button" class="size-pill" data-size="S">S</button>
-              <button type="button" class="size-pill" data-size="M">M</button>
-              <button type="button" class="size-pill" data-size="L">L</button>
-              <button type="button" class="size-pill" data-size="XL">XL</button>
-            </div>
-          </div>
-          <div class="variant-row">
-            <div class="variant-label">Color</div>
-            <div class="color-swatches">
-              <button type="button" class="color-swatch selected" data-color="Forest Green" title="Forest Green" style="background:#0F2E1A;"></button>
-            </div>
-          </div>
-          <p class="variant-nudge" data-nudge></p>
+          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Coming Soon</div>
+          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Water Bottle</h3>
+          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">The water bottle preview is delayed and stays coming soon until production is ready.</p>
+          <p class="coming-soon-note">Coming soon to launch next.</p>
         </div>
-        <button class="add-to-cart" data-id="hoodie" data-name="DNM Forest Green Hoodie" data-price="890" data-needs="size,color" onclick="addToCart(this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
-        </button>
-      </div>
-
-      <!-- Product 8: Notebook -->
-      <div class="product-card fade-in" data-cat="stationery" style="transition-delay:0.42s;">
-        <div class="product-img-wrap">
-          <img loading="lazy" decoding="async" src="assets/visuals/product-notebook.svg" width="400" height="300" alt="DNM Notebook" />
-          <div class="overlay"></div>
-        </div>
-        <div class="product-content">
-          <div style="font-size:0.7rem;color:#A7B3AA;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0.35rem;">Stationery</div>
-          <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.05rem;color:#0F2E1A;margin-bottom:0.5rem;">DNM Recycled Notebook</h3>
-          <p style="color:#4a6b55;font-size:0.8rem;line-height:1.55;margin-bottom:1rem;">A5 recycled-paper notebook, 120 pages, with DNM branding and leaf motif cover.</p>
-          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
-            <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;">&#3647;180</span>
-            <span class="badge" style="background:#E8F5EC;color:#1F6B3A;">Recycled</span>
-          </div>
-        </div>
-        <button class="add-to-cart" data-id="notebook" data-name="DNM Recycled Notebook" data-price="180" onclick="addToCart(this)">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-          Add to Cart
+        <button class="add-to-cart" disabled>
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+          Coming Soon
         </button>
       </div>
 
@@ -635,6 +503,36 @@
       card.style.display = match ? 'flex' : 'none';
       card.style.flexDirection = 'column';
     });
+  }
+
+  function setShirtColor(color, btn) {
+    const image = document.getElementById('shirtProductImage');
+    const label = document.getElementById('shirtColorLabel');
+    const swatches = btn && btn.closest('.color-swatches') ? btn.closest('.color-swatches').querySelectorAll('.color-swatch') : [];
+    const filters = {
+      green: 'none',
+      black: 'brightness(0.45) saturate(0.4)',
+      white: 'brightness(1.45) saturate(0.35)'
+    };
+    const labels = {
+      green: 'Green',
+      black: 'Black',
+      white: 'White'
+    };
+
+    image.style.filter = filters[color] || 'none';
+    if (label) label.textContent = `Color: ${labels[color] || 'Green'}`;
+
+    swatches.forEach((button) => {
+      const selected = button === btn;
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', selected ? 'true' : 'false');
+    });
+  }
+
+  const firstShirtColor = document.querySelector('.product-card[data-cat="shirts"] .color-swatch.selected');
+  if (firstShirtColor) {
+    setShirtColor('green', firstShirtColor);
   }
 </script>
 <script src="assets/site.js?v=20260610-settingsscroll4"></script>
