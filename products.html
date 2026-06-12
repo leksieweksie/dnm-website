@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/tailwind.css" />
-  <link rel="stylesheet" href="assets/site.css?v=20260610-settingsscroll4" />
+  <link rel="stylesheet" href="assets/site.css?v=20260612-campaigns" />
   <style>
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     html{scroll-behavior:smooth;}
@@ -112,6 +112,7 @@
     <div class="hidden md:flex items-center gap-8">
       <a href="index.html" class="nav-link">Home</a>
       <a href="about.html" class="nav-link">About</a>
+      <a href="campaigns.html" class="nav-link">Campaigns</a>
       <a href="statistics.html" class="nav-link">Statistics</a>
       <a href="drugs-effects.html" class="nav-link">Drugs & Effects</a>
       <a href="products.html" class="nav-link active">Shop</a>
@@ -137,7 +138,8 @@
   <div id="mobileMenu" class="mobile-menu md:hidden flex-col px-6 pb-4 gap-3 border-t border-white/10">
     <a href="index.html" class="nav-link py-2">Home</a>
     <a href="about.html" class="nav-link py-2">About</a>
-    <a href="statistics.html" class="nav-link py-2">Statistics</a>
+    <a href="campaigns.html" class="nav-link py-2">Campaigns</a>
+      <a href="statistics.html" class="nav-link py-2">Statistics</a>
     <a href="drugs-effects.html" class="nav-link py-2">Drugs & Effects</a>
     <a href="products.html" class="nav-link active py-2">Shop</a>
     <a href="contact.html" class="nav-link py-2">Contact</a>
@@ -313,6 +315,7 @@
         <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Pages</h4>
         <div style="display:flex;flex-direction:column;gap:0.6rem;">
           <a href="about.html" class="footer-link">About DNM</a>
+          <a href="campaigns.html" class="footer-link">Campaigns</a>
           <a href="statistics.html" class="footer-link">Statistics</a>
           <a href="drugs-effects.html" class="footer-link">Drugs &amp; Effects</a>
           <a href="join.html" class="footer-link">Join Us</a>
@@ -326,7 +329,7 @@
         <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Contact</h4>
         <div style="display:flex;flex-direction:column;gap:0.6rem;">
           <span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">Phuket, Thailand</span>
-          <a href="mailto:info@dnmphuket.org" class="footer-link">info@dnmphuket.org</a>
+          <a href="mailto:deniel@robot.co" class="footer-link">deniel@robot.co</a>
           <a href="tel:+66947362815" class="footer-link">+66 94 736 2815</a>
         </div>
       </div>
@@ -466,7 +469,7 @@
   function checkout() {
     cartFoot.innerHTML =
       '<div class="cart-contact-msg"><strong>Almost there!</strong> We don\'t take card payments online yet &mdash; to complete your order, just reach out and we\'ll sort out payment &amp; delivery:<br>' +
-      '<a href="mailto:info@dnmphuket.org">info@dnmphuket.org</a><br>' +
+      '<a href="mailto:deniel@robot.co">deniel@robot.co</a><br>' +
       '<a href="tel:+66947362815">+66 94 736 2815</a></div>' +
       '<a class="cart-contact-btn" href="contact.html">Contact us to order</a>' +
       '<button class="cart-clear" onclick="syncCart()">&larr; Back to cart</button>';
@@ -535,6 +538,6 @@
     setShirtColor('green', firstShirtColor);
   }
 </script>
-<script src="assets/site.js?v=20260610-settingsscroll4"></script>
+<script src="assets/site.js?v=20260612-campaigns"></script>
 </body>
 </html>

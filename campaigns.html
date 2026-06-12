@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Campaigns - DNM Drugs No More | Phuket</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/tailwind.css" />
+  <link rel="stylesheet" href="assets/site.css?v=20260612-campaigns" />
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Roboto',sans-serif;color:#102418;background:#fff;}
+    .noise::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");background-repeat:repeat;background-size:200px;pointer-events:none;z-index:1;}
+    .navbar{position:sticky;top:0;z-index:100;background:#0F2E1A;border-bottom:1px solid rgba(63,174,90,0.15);}
+    .nav-link{color:rgba(255,255,255,0.75);font-family:'Roboto',sans-serif;font-size:0.875rem;font-weight:500;letter-spacing:0.04em;text-transform:uppercase;text-decoration:none;padding:0.25rem 0;border-bottom:2px solid transparent;transition:color 0.2s ease,border-color 0.2s ease;}
+    .nav-link:hover,.nav-link.active{color:#3FAE5A;border-bottom-color:#3FAE5A;}
+    .nav-cta{background:#1F6B3A;color:#fff;font-family:'Roboto',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0.6rem 1.4rem;border-radius:4px;text-decoration:none;border:1px solid #3FAE5A;transition:background 0.2s ease,transform 0.15s ease;}
+    .nav-cta:hover{background:#3FAE5A;transform:translateY(-1px);}
+    .mobile-menu{display:none;}
+    .mobile-menu.open{display:flex;}
+    .fade-in{opacity:0;transform:translateY(34px) scale(0.98);transition:opacity 0.75s ease,transform 0.75s cubic-bezier(0.34,1.56,0.64,1);}
+    .fade-in.visible{opacity:1;transform:translateY(0) scale(1);}
+    .leaf-divider{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
+    .leaf-divider::before,.leaf-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#3FAE5A,transparent);}
+    .campaign-hero{background:#0F2E1A;padding:5rem 0 4rem;position:relative;overflow:hidden;}
+    .campaign-band{background:#E8F5EC;padding:5rem 0 2rem;position:relative;overflow:hidden;}
+    .campaign-band::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 15% 8%,rgba(63,174,90,0.22),transparent 34%),radial-gradient(circle at 86% 22%,rgba(31,107,58,0.12),transparent 32%);pointer-events:none;}
+    .campaign-intro{max-width:760px;margin:0 auto 4.5rem;text-align:center;position:relative;z-index:2;}
+    .campaign-timeline{position:relative;max-width:1120px;margin:0 auto;z-index:2;}
+    .campaign-timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;transform:translateX(-50%);background:linear-gradient(to bottom,rgba(63,174,90,0),#3FAE5A 8%,#1F6B3A 50%,#3FAE5A 92%,rgba(63,174,90,0));border-radius:999px;}
+    .campaign-step{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 72px minmax(0,1fr);align-items:center;min-height:96vh;padding:3rem 0;}
+    .campaign-step:nth-child(odd) .campaign-card{grid-column:1;}
+    .campaign-step:nth-child(even) .campaign-card{grid-column:3;}
+    .campaign-node{grid-column:2;grid-row:1;justify-self:center;width:28px;height:28px;border-radius:50%;background:#fff;border:6px solid #3FAE5A;box-shadow:0 0 0 8px rgba(31,107,58,0.18),0 10px 28px rgba(15,46,26,0.18);z-index:3;}
+    .campaign-card{position:relative;background:#fff;border-radius:16px;box-shadow:0 2px 4px rgba(15,46,26,0.06),0 10px 28px rgba(15,46,26,0.1),0 0 0 1px rgba(15,46,26,0.05);overflow:hidden;}
+    .campaign-card:hover{box-shadow:0 8px 18px rgba(15,46,26,0.12),0 24px 60px rgba(15,46,26,0.16),0 0 0 1px rgba(15,46,26,0.06);}
+    .campaign-image{height:230px;background:linear-gradient(135deg,#f7fbf8 0%,#E8F5EC 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+    .campaign-image::before{content:'';position:absolute;width:180px;height:180px;border-radius:50%;border:1px solid rgba(63,174,90,0.28);}
+    .campaign-image::after{content:'';position:absolute;width:110px;height:110px;border-radius:50%;background:rgba(63,174,90,0.12);filter:blur(7px);}
+    .campaign-placeholder{position:relative;z-index:2;color:#1F6B3A;font-size:0.74rem;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;text-align:center;}
+    .campaign-content{padding:1.6rem;}
+    .campaign-date{display:inline-flex;align-items:center;background:#E8F5EC;color:#1F6B3A;border-radius:999px;padding:0.35rem 0.8rem;font-size:0.72rem;font-weight:800;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.9rem;}
+    .campaign-summary{color:#4a6b55;font-size:0.95rem;line-height:1.75;}
+    .campaign-mini-card{background:#fff;border-radius:14px;padding:1.15rem 1.3rem;box-shadow:0 2px 4px rgba(15,46,26,0.06),0 8px 24px rgba(15,46,26,0.08),0 0 0 1px rgba(15,46,26,0.04);display:inline-flex;align-items:center;gap:0.8rem;margin-top:1.6rem;}
+    footer{background:#0F2E1A;}
+    .footer-link{color:rgba(255,255,255,0.55);text-decoration:none;font-size:0.875rem;transition:color 0.2s ease;}
+    .footer-link:hover{color:#3FAE5A;}
+    @media (max-width:900px){
+      .campaign-timeline::before{left:1rem;}
+      .campaign-step{grid-template-columns:36px minmax(0,1fr);min-height:auto;padding:2rem 0;}
+      .campaign-step:nth-child(odd) .campaign-card,.campaign-step:nth-child(even) .campaign-card{grid-column:2;}
+      .campaign-node{grid-column:1;}
+    }
+    @media (max-width:640px){
+      .campaign-band{padding-top:4rem;}
+      .campaign-image{height:200px;}
+      .campaign-content{padding:1.25rem;}
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-16">
+    <a href="index.html" class="flex items-center gap-3" style="text-decoration:none;">
+      <img src="assets/dnmlogo.png" alt="DNM Logo" width="44" height="44" decoding="async" fetchpriority="high" style="height:44px;width:44px;object-fit:contain;" />
+      <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.1rem;color:#fff;">Drugs No More</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="campaigns.html" class="nav-link active">Campaigns</a>
+      <a href="statistics.html" class="nav-link">Statistics</a>
+      <a href="drugs-effects.html" class="nav-link">Drugs & Effects</a>
+      <a href="products.html" class="nav-link">Shop</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </div>
+    <div class="hidden md:flex items-center gap-4">
+      <a href="join.html" class="nav-cta">Join Us</a>
+    </div>
+    <button class="md:hidden text-white p-2" onclick="toggleMenu()" aria-label="Menu">
+      <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobileMenu" class="mobile-menu md:hidden flex-col px-6 pb-4 gap-3 border-t border-white/10">
+    <a href="index.html" class="nav-link py-2">Home</a>
+    <a href="about.html" class="nav-link py-2">About</a>
+    <a href="campaigns.html" class="nav-link active py-2">Campaigns</a>
+    <a href="statistics.html" class="nav-link py-2">Statistics</a>
+    <a href="drugs-effects.html" class="nav-link py-2">Drugs & Effects</a>
+    <a href="products.html" class="nav-link py-2">Shop</a>
+    <a href="contact.html" class="nav-link py-2">Contact</a>
+    <a href="join.html" class="nav-cta self-start mt-2">Join Us</a>
+  </div>
+</nav>
+
+<section class="campaign-hero noise">
+  <div style="position:absolute;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(31,107,58,0.35) 0%,transparent 70%);top:-150px;right:-100px;filter:blur(60px);pointer-events:none;"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div style="display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
+      <span style="color:#3FAE5A;font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;">Campaign Timeline</span>
+    </div>
+    <h1 style="font-family:'Playfair Display',serif;font-weight:900;font-size:clamp(2.5rem,5vw,4rem);color:#fff;letter-spacing:-0.03em;line-height:1.1;margin-bottom:1rem;">Campaigns</h1>
+    <p style="color:rgba(255,255,255,0.65);font-size:1.1rem;max-width:620px;line-height:1.75;">A clean archive for DNM school campaigns, community events, and awareness projects as they launch across Phuket.</p>
+  </div>
+</section>
+
+<section class="campaign-band">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="campaign-intro fade-in">
+      <div class="leaf-divider" style="justify-content:center;">
+        <svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
+      </div>
+      <h2 style="font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(1.9rem,4vw,3rem);color:#0F2E1A;letter-spacing:-0.03em;margin-bottom:0.9rem;">Campaign Timeline</h2>
+      <p style="color:#4a6b55;font-size:1rem;line-height:1.75;max-width:620px;margin:0 auto;">Each campaign will appear here as DNM grows. The cards reveal as you scroll so the page feels more focused and less crowded.</p>
+      <div class="campaign-mini-card">
+        <div style="width:42px;height:42px;border-radius:10px;background:#E8F5EC;display:flex;align-items:center;justify-content:center;flex:0 0 auto;">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 18C10 18 2 14 2 8C2 4 6 1 10 1C14 1 18 4 18 8C18 14 10 18 10 18Z" fill="#3FAE5A"/><path d="M10 18L10 1" stroke="#1F6B3A" stroke-width="1.5"/></svg>
+        </div>
+        <div style="text-align:left;">
+          <div style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.25rem;color:#0F2E1A;line-height:1;">3</div>
+          <div style="font-size:0.75rem;color:#A7B3AA;margin-top:0.15rem;">campaign placeholders</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="campaign-timeline">
+      <article class="campaign-step">
+        <div class="campaign-node" aria-hidden="true"></div>
+        <div class="campaign-card fade-in">
+          <div class="campaign-image"><span class="campaign-placeholder">Image coming soon</span></div>
+          <div class="campaign-content">
+            <div class="campaign-date">2026</div>
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.45rem;color:#0F2E1A;margin-bottom:0.65rem;">BISP Campaign in 2026</h3>
+            <p class="campaign-summary">A placeholder for the first DNM campaign at British International School Phuket. Photos and campaign details will be added here later.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="campaign-step">
+        <div class="campaign-node" aria-hidden="true"></div>
+        <div class="campaign-card fade-in">
+          <div class="campaign-image"><span class="campaign-placeholder">Image coming soon</span></div>
+          <div class="campaign-content">
+            <div class="campaign-date">Coming Soon</div>
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.45rem;color:#0F2E1A;margin-bottom:0.65rem;">School Awareness Campaign</h3>
+            <p class="campaign-summary">A future campaign placeholder for school-based awareness activities, student conversations, and prevention resources.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="campaign-step">
+        <div class="campaign-node" aria-hidden="true"></div>
+        <div class="campaign-card fade-in">
+          <div class="campaign-image"><span class="campaign-placeholder">Image coming soon</span></div>
+          <div class="campaign-content">
+            <div class="campaign-date">Coming Soon</div>
+            <h3 style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.45rem;color:#0F2E1A;margin-bottom:0.65rem;">Community Outreach Campaign</h3>
+            <p class="campaign-summary">A placeholder for future Phuket community outreach once DNM is ready to document real events and results.</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<footer class="py-14">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-10">
+      <div class="md:col-span-2">
+        <a href="index.html" class="flex items-center gap-3 mb-4" style="text-decoration:none;">
+          <img loading="lazy" decoding="async" src="assets/dnmlogo.png" alt="DNM Logo" width="48" height="48" style="height:48px;width:48px;object-fit:contain;" />
+          <div>
+            <div style="font-family:'Playfair Display',serif;font-weight:700;color:#fff;font-size:1.1rem;">Drugs No More</div>
+            <div style="color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;">Phuket, Thailand</div>
+          </div>
+        </a>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;line-height:1.7;max-width:320px;">DNM is a non-profit organisation founded by a group of students learning at British International School Phuket. We aim to reduce drug use and make Phuket a safer place for everyone!</p>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Pages</h4>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <a href="about.html" class="footer-link">About DNM</a>
+          <a href="campaigns.html" class="footer-link">Campaigns</a>
+          <a href="statistics.html" class="footer-link">Statistics</a>
+          <a href="drugs-effects.html" class="footer-link">Drugs &amp; Effects</a>
+          <a href="join.html" class="footer-link">Join Us</a>
+          <a href="products.html" class="footer-link">Shop</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+          <a href="privacy.html" class="footer-link">Privacy Policy</a>
+          <a href="terms.html" class="footer-link">Terms &amp; Conditions</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="color:#fff;font-size:0.75rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;margin-bottom:1rem;">Contact</h4>
+        <div style="display:flex;flex-direction:column;gap:0.6rem;">
+          <span style="color:rgba(255,255,255,0.5);font-size:0.875rem;">Phuket, Thailand</span>
+          <a href="mailto:deniel@robot.co" class="footer-link">deniel@robot.co</a>
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.1);padding-top:1.5rem;">
+      <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;">&copy; 2026 Drugs No More (DNM). All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.38, rootMargin: '0px 0px -12% 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+<script src="assets/site.js?v=20260612-campaigns"></script>
+</body>
+</html>

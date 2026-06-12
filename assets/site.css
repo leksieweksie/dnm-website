@@ -109,6 +109,15 @@ html.dnm-theme-dark {
   position: relative;
 }
 
+.navbar .gap-8 {
+  gap: clamp(1rem, 1.55vw, 2rem);
+}
+
+.dnm-settings-cluster {
+  align-items: center;
+  gap: 1rem;
+}
+
 .counter-num {
   font-family: 'Playfair Display', serif;
   font-weight: 900;
