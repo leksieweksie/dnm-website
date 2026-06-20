@@ -23,7 +23,7 @@
     .mobile-menu{display:none;}
     .mobile-menu.open{display:flex;}
     .chart-card{background:#fff;border-radius:14px;padding:1.75rem;box-shadow:0 2px 4px rgba(15,46,26,0.06),0 8px 24px rgba(15,46,26,0.08),0 0 0 1px rgba(15,46,26,0.04);}
-    .fade-in{opacity:0;transform:translateY(28px);transition:opacity 0.7s ease,transform 0.7s cubic-bezier(0.34,1.56,0.64,1);}
+    .fade-in{opacity:0;transform:translateY(28px);transition:opacity 0.35s ease,transform 0.35s cubic-bezier(0.34,1.56,0.64,1);}
     .fade-in.visible{opacity:1;transform:translateY(0);}
     .leaf-divider{display:flex;align-items:center;gap:0.75rem;margin-bottom:1rem;}
     .leaf-divider::before,.leaf-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,#3FAE5A,transparent);}
@@ -151,7 +151,7 @@
           <h3 id="substanceChartTitle" style="font-family:'Playfair Display',serif;font-weight:700;font-size:1.15rem;color:#0F2E1A;">Usage Trends</h3>
           <p id="substanceChartMeta" style="color:#A7B3AA;font-size:0.8rem;margin-top:0.25rem;">Methamphetamine: Thailand YABA seizures, 2020-2024</p>
         </div>
-        <p class="trend-banner"><strong>Why this matters:</strong> Thailand's 2024 YABA seizures reached a five-year high, and ASEAN says methamphetamine made up 97.1% of all ATS seizures.</p>
+        <p class="trend-banner"><strong>Why this matters:</strong> <span id="trendBannerText">Thailand's 2024 YABA seizures reached a five-year high, and ASEAN says methamphetamine made up 97.1% of all ATS seizures.</span></p>
         <div class="chart-frame"><canvas id="chart1"></canvas></div>
         <p class="stat-note" id="statNote"><strong>Methamphetamine</strong> now uses Thailand seizure data from 2020-2024, with 2024 reaching 1,172.86 million YABA tablets and 34,622 kg of ICE.</p>
         <a class="movement-cta" href="join.html">Join The Movement <span class="arrow" aria-hidden="true">&rarr;</span></a>
@@ -430,15 +430,15 @@
     const nso2025Source = { label: 'Thailand Statistical Yearbook 2025', href: NSO2025_URL };
     const jmatSource = { label: 'JMAT student drug-use study', href: JMAT_URL };
     const substanceStats = [
-      { name: 'Methamphetamine', subtitle: 'Thailand YABA 2020-2024', color: G.forest, labels: ['2020', '2021', '2022', '2023', '2024'], values: [380.17, 598.82, 552.34, 648.59, 1172.86], unit: 'million tablets', metric: 'Thailand YABA seizures', sources: [asean2024Source, unodc2025Source], note: 'ASEAN 2024 reports Thailand YABA seizures rising from 380.17 million tablets in 2020 to 1,172.86 million tablets in 2024. UNODC 2025 also reports Thailand alone seized one billion methamphetamine tablets in 2024.' },
-      { name: 'Cannabis', subtitle: 'ASEAN treatment rebound', color: G.primary, labels: ['2022', '2023', '2024'], values: [8999, 12525, 15428], unit: 'people', metric: 'ASEAN cannabis users in treatment', sources: [asean2024Source], note: 'ASEAN 2024 reports cannabis treatment figures rebounding from 8,999 users in 2022 to 12,525 in 2023 and 15,428 in 2024, the highest figure since 2019.' },
-      { name: 'Heroin', subtitle: 'Thailand 2020-2024', color: G.blue, labels: ['2020', '2021', '2022', '2023', '2024'], values: [1829.47, 3439.82, 850.01, 1098.20, 2050.98], unit: 'kg', metric: 'Thailand heroin seizures', sources: [asean2024Source], note: 'ASEAN 2024 reports Thailand heroin seizures at 2,050.98 kg in 2024, higher than 2022 and 2023, after a five-year peak in 2021.' },
-      { name: 'Kratom', subtitle: 'NPS growth driven by kratom', color: G.accent, labels: ['2017', '2021', '2024'], values: [125, 495, 125], unit: 'metric tons', metric: 'ASEAN NPS seizures', sources: [asean2024Source], note: 'ASEAN 2024 says total NPS seizures rose from 125 metric tons in 2017 to 495 metric tons in 2021, with the rise predominantly driven by kratom. In 2024, kratom still made up about 117 metric tons, or 93.2% of all NPS seizures.' },
-      { name: 'Alcohol', subtitle: 'Thailand youth drinking', color: G.brown, labels: ['2021', '2024'], values: [9.0, 9.6], unit: '%', metric: 'Thailand alcohol consumption, age 15-19', sources: [nso2025Source], note: 'Thailand Statistical Yearbook 2025 reports alcohol consumption behaviour by age group for 2021 and 2024. For ages 15-19, the charted value rises from 9.0% in 2021 to 9.6% in 2024.' },
-      { name: 'Inhalants', subtitle: 'ASEAN treated users', color: G.olive, labels: ['2017', '2018'], values: [1227, 1262], unit: 'people', metric: 'ASEAN inhalant users in treatment', sources: [asean2024Source, jmatSource], note: 'ASEAN 2024 reports inhalants as the most prevalent hallucinogenic substance in treatment data, with 1,227 treated users in 2017 and a peak of 1,262 in 2018. JMAT is kept as the Thai youth source for inhalant context.' },
-      { name: 'MDMA / Ecstasy', subtitle: 'Regional 2023-2024 spike', color: '#EC4899', labels: ['2015-2022 high', '2023', '2024'], values: [7, 26.7, 16.7], unit: 'million tablets', metric: 'East and Southeast Asia ecstasy seizures', sources: [unodc2025Source, asean2024Source], note: 'UNODC 2025 reports ecstasy seizures previously hovered between 3 and 7 million tablets yearly, then reached the equivalent of 26.7 million tablets in 2023 and 16.7 million in 2024.' },
-      { name: 'Cocaine', subtitle: 'ASEAN 2020-2024', color: '#14B8A6', labels: ['2020', '2021', '2022', '2023', '2024'], values: [48.3, 52.9, 149.3, 380.5, 258.8], unit: 'kg', metric: 'ASEAN cocaine seizures', sources: [asean2024Source], note: 'ASEAN 2024 reports cocaine seizures rising from 48.3 kg in 2020 to 380.5 kg in 2023, then remaining elevated at 258.8 kg in 2024.' },
-      { name: 'Benzodiazepines', subtitle: 'ASEAN treatment growth', color: G.purple, labels: ['2017 H1', '2024 H2'], values: [16, 309], unit: 'people', metric: 'ASEAN benzodiazepine treatment cases', sources: [asean2024Source], note: 'ASEAN 2024 reports benzodiazepine-related treatment cases increasing from 16 in the first half of 2017 to 309 in the second half of 2024, with benzodiazepines the most frequently reported CNS depressants.' },
+      { name: 'Methamphetamine', subtitle: 'Thailand YABA 2020-2024', color: G.forest, labels: ['2020', '2021', '2022', '2023', '2024'], values: [380.17, 598.82, 552.34, 648.59, 1172.86], unit: 'million tablets', metric: 'Thailand YABA seizures', sources: [asean2024Source, unodc2025Source], whyItMatters: "Thailand's 2024 YABA seizures reached a five-year high, and ASEAN says methamphetamine made up 97.1% of all ATS seizures.", note: 'ASEAN 2024 reports Thailand YABA seizures rising from 380.17 million tablets in 2020 to 1,172.86 million tablets in 2024. UNODC 2025 also reports Thailand alone seized one billion methamphetamine tablets in 2024.' },
+      { name: 'Cannabis', subtitle: 'ASEAN treatment rebound', color: G.primary, labels: ['2022', '2023', '2024'], values: [8999, 12525, 15428], unit: 'people', metric: 'ASEAN cannabis users in treatment', sources: [asean2024Source], whyItMatters: "Treatment demand is rebounding since legalization — cannabis cases in treatment rose 71% between 2022 and 2024, reversing an earlier decline.", note: 'ASEAN 2024 reports cannabis treatment figures rebounding from 8,999 users in 2022 to 12,525 in 2023 and 15,428 in 2024, the highest figure since 2019.' },
+      { name: 'Heroin', subtitle: 'Thailand 2020-2024', color: G.blue, labels: ['2020', '2021', '2022', '2023', '2024'], values: [1829.47, 3439.82, 850.01, 1098.20, 2050.98], unit: 'kg', metric: 'Thailand heroin seizures', sources: [asean2024Source], whyItMatters: "Heroin seizures in Thailand spiked to 2,050.98 kg in 2024, higher than either of the two preceding years, signalling renewed trafficking pressure from the Golden Triangle.", note: 'ASEAN 2024 reports Thailand heroin seizures at 2,050.98 kg in 2024, higher than 2022 and 2023, after a five-year peak in 2021.' },
+      { name: 'Kratom', subtitle: 'NPS growth driven by kratom', color: G.accent, labels: ['2017', '2021', '2024'], values: [125, 495, 125], unit: 'metric tons', metric: 'ASEAN NPS seizures', sources: [asean2024Source], whyItMatters: "Despite legalization, kratom still dominates 93.2% of all NPS seizures in ASEAN in 2024 — its volume dwarfs every other novel substance combined.", note: 'ASEAN 2024 says total NPS seizures rose from 125 metric tons in 2017 to 495 metric tons in 2021, with the rise predominantly driven by kratom. In 2024, kratom still made up about 117 metric tons, or 93.2% of all NPS seizures.' },
+      { name: 'Alcohol', subtitle: 'Thailand youth drinking', color: G.brown, labels: ['2021', '2024'], values: [9.0, 9.6], unit: '%', metric: 'Thailand alcohol consumption, age 15-19', sources: [nso2025Source], whyItMatters: "Even a small rise — from 9.0% to 9.6% — means tens of thousands more Thai teenagers are drinking. Alcohol is consistently the first substance used before harder drug experimentation begins.", note: 'Thailand Statistical Yearbook 2025 reports alcohol consumption behaviour by age group for 2021 and 2024. For ages 15-19, the charted value rises from 9.0% in 2021 to 9.6% in 2024.' },
+      { name: 'Inhalants', subtitle: 'ASEAN treated users', color: G.olive, labels: ['2017', '2018'], values: [1227, 1262], unit: 'people', metric: 'ASEAN inhalant users in treatment', sources: [asean2024Source, jmatSource], whyItMatters: "Inhalants are the most common hallucinogenic substance in ASEAN treatment data. Their low cost and household availability make them especially hard to intercept before harm occurs.", note: 'ASEAN 2024 reports inhalants as the most prevalent hallucinogenic substance in treatment data, with 1,227 treated users in 2017 and a peak of 1,262 in 2018. JMAT is kept as the Thai youth source for inhalant context.' },
+      { name: 'MDMA / Ecstasy', subtitle: 'Regional 2023-2024 spike', color: '#EC4899', labels: ['2015-2022 high', '2023', '2024'], values: [7, 26.7, 16.7], unit: 'million tablets', metric: 'East and Southeast Asia ecstasy seizures', sources: [unodc2025Source, asean2024Source], whyItMatters: "After years below 7 million tablets, ecstasy seizures jumped to 26.7 million in 2023 — a near-fourfold leap — signalling a major regional supply shift.", note: 'UNODC 2025 reports ecstasy seizures previously hovered between 3 and 7 million tablets yearly, then reached the equivalent of 26.7 million tablets in 2023 and 16.7 million in 2024.' },
+      { name: 'Cocaine', subtitle: 'ASEAN 2020-2024', color: '#14B8A6', labels: ['2020', '2021', '2022', '2023', '2024'], values: [48.3, 52.9, 149.3, 380.5, 258.8], unit: 'kg', metric: 'ASEAN cocaine seizures', sources: [asean2024Source], whyItMatters: "Cocaine was at very low levels in ASEAN before 2022. Its rise to 380.5 kg in 2023 marks a fundamental change in regional trafficking routes reaching Southeast Asia.", note: 'ASEAN 2024 reports cocaine seizures rising from 48.3 kg in 2020 to 380.5 kg in 2023, then remaining elevated at 258.8 kg in 2024.' },
+      { name: 'Benzodiazepines', subtitle: 'ASEAN treatment growth', color: G.purple, labels: ['2017 H1', '2024 H2'], values: [16, 309], unit: 'people', metric: 'ASEAN benzodiazepine treatment cases', sources: [asean2024Source], whyItMatters: "Benzodiazepine treatment cases rose from 16 in 2017 to 309 in 2024 — a near-20× increase — making it the most frequently reported CNS depressant concern across the region.", note: 'ASEAN 2024 reports benzodiazepine-related treatment cases increasing from 16 in the first half of 2017 to 309 in the second half of 2024, with benzodiazepines the most frequently reported CNS depressants.' },
     ];
 
     Chart.defaults.font.family = 'Roboto';
@@ -514,6 +514,7 @@
     const statNote = document.getElementById('statNote');
     const chartMeta = document.getElementById('substanceChartMeta');
     const chartSource = document.getElementById('chartSource');
+    const trendBannerText = document.getElementById('trendBannerText');
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
     function escapeHtml(text) {
       return text.replace(/[&<>"']/g, char => ({
@@ -559,7 +560,7 @@
     }
     function updateStatNote(drug) {
       if (!statNote) return;
-      typeText(statNote, `${drug.name}: ${drug.note}`, { boldPrefix: drug.name, speed: 24, step: 1 });
+      typeText(statNote, `${drug.name}: ${drug.note}`, { boldPrefix: drug.name, speed: 10, step: 3 });
     }
 
     function updateDrugDetail(index) {
@@ -573,7 +574,8 @@
       usageChart.options.scales.y.suggestedMax = suggestedMaxFor(drug);
       usageChart.update();
       document.getElementById('substanceChartTitle').textContent = 'Usage Trends';
-      typeText(chartMeta, `${drug.name}: ${drug.metric}`, { speed: 36, step: 1 });
+      typeText(chartMeta, `${drug.name}: ${drug.metric}`, { speed: 12, step: 3 });
+      if (trendBannerText) trendBannerText.textContent = drug.whyItMatters;
       if (chartSource) {
         const sourceLinks = drug.sources.map(source => `<a class="source-link" href="${source.href}" target="_blank" rel="noopener">${source.label}</a>`);
         chartSource.innerHTML = `Source: ${sourceLinks.join(', ')}.`;
